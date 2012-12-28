@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="MasterPage" template="/templates/main-template.jsp">
+        <put-attribute name="title" value="Master Page" />
+        <put-attribute name="header" value="/pages/layout/header.jsp" />
+        <put-attribute name="navigation" value="/pages/layout/navigation.jsp" />
+        <put-attribute name="footer" value="/pages/layout/footer.jsp" />
+    </definition>   
+    <definition name="toy" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/toy-lib.jsp" />
+        <put-attribute name="title" value="Danh sách đồ chơi" />
+        <put-attribute name="content" value="/pages/content/toy-content.jsp"/>
+    </definition>
+    <definition name="add-toy" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/add-toy-lib.jsp" />
+        <put-attribute name="title" value="Thêm đồ chơi" />
+        <put-attribute name="content" value="/pages/content/add-toy-content.jsp"/>
+    </definition>
+    <definition name="detail-toy" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-toy-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết đồ chơi" />
+        <put-attribute name="content" value="/pages/content/detail-toy-content.jsp"/>
+    </definition>
+    <definition name="category" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/category-lib.jsp" />
+        <put-attribute name="title" value="Danh sách loại đồ chơi" />
+        <put-attribute name="content" value="/pages/content/category-content.jsp"/>
+    </definition>
+    <definition name="detail-category" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-category-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết loại đồ chơi" />
+        <put-attribute name="content" value="/pages/content/detail-category-content.jsp"/>
+    </definition>
+    <definition name="add-category" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/add-category-lib.jsp" />
+        <put-attribute name="title" value="Thêm loại đồ chơi" />
+        <put-attribute name="content" value="/pages/content/add-category-content.jsp"/>
+    </definition>
+    <definition name="manufacturer" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/manufacturer-lib.jsp" />
+        <put-attribute name="title" value="Danh sách nhà sản xuất" />
+        <put-attribute name="content" value="/pages/content/manufacturer-content.jsp"/>
+    </definition>
+    <definition name="detail-manufacturer" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-manufacturer-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết nhà sản xuất" />
+        <put-attribute name="content" value="/pages/content/detail-manufacturer-content.jsp"/>
+    </definition>
+    <definition name="add-manufacturer" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/add-manufacturer-lib.jsp" />
+        <put-attribute name="title" value="Thêm nhà sản xuất" />
+        <put-attribute name="content" value="/pages/content/add-manufacturer-content.jsp"/>
+    </definition>
+    <definition name="account" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/account-lib.jsp" />
+        <put-attribute name="title" value="Danh sách tài khoản" />
+        <put-attribute name="content" value="/pages/content/account-content.jsp"/>
+    </definition>
+    <definition name="add-account" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/add-account-lib.jsp" />
+        <put-attribute name="title" value="Thêm tài khoản" />
+        <put-attribute name="content" value="/pages/content/add-account-content.jsp"/>
+    </definition>
+    <definition name="detail-account" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-account-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết tài khoản" />
+        <put-attribute name="content" value="/pages/content/detail-account-content.jsp"/>
+    </definition>
+    <definition name="cart" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/cart-lib.jsp" />
+        <put-attribute name="title" value="Danh sách hóa đơn" />
+        <put-attribute name="content" value="/pages/content/cart-content.jsp"/>
+    </definition>
+    <definition name="detail-cart" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-cart-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết hóa đơn" />
+        <put-attribute name="content" value="/pages/content/detail-cart-content.jsp"/>
+    </definition>
+    <definition name="comment" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/comment-lib.jsp" />
+        <put-attribute name="title" value="Danh sách bình luận" />
+        <put-attribute name="content" value="/pages/content/comment-content.jsp"/>
+    </definition>
+    <definition name="detail-comment" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-comment-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết bình luận" />
+        <put-attribute name="content" value="/pages/content/detail-comment-content.jsp"/>
+    </definition>
+     <definition name="report" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/report-lib.jsp" />
+        <put-attribute name="title" value="Báo cáo thống kê" />
+        <put-attribute name="content" value="/pages/content/report-content.jsp"/>
+    </definition>
+    <definition name="dashboard" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/dashboard-lib.jsp" />
+        <put-attribute name="title" value="Dashboard" />
+        <put-attribute name="content" value="/pages/content/dashboard-content.jsp"/>
+    </definition>
+    <definition name="advertisement" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/advertisement-lib.jsp" />
+        <put-attribute name="title" value="Danh sách quảng cáo" />
+        <put-attribute name="content" value="/pages/content/advertisement-content.jsp"/>
+    </definition>
+    <definition name="detail-advertisement" extends="MasterPage">
+        <put-attribute name="lib" value="/pages/lib/detail-advertisement-lib.jsp" />
+        <put-attribute name="title" value="Chi tiết quảng cáo" />
+        <put-attribute name="content" value="/pages/content/detail-advertisement-content.jsp"/>
+    </definition>
+</tiles-definitions>

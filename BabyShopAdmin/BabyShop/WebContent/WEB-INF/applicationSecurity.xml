@@ -1,0 +1,37 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+ 
+	<http use-expressions="true">
+		<intercept-url pattern="/authentication/login" access="permitAll" />
+		<intercept-url pattern="/authentication/*" access="permitAll" />
+		<intercept-url pattern="/dashboard/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/toy/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/category/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/manufacturer/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/account/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/cart/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/comment/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/report/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/dashboard/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/advertisement/**" access="hasRole('ROLE_ADMIN')" />
+		
+		<form-login login-page="/authentication/login/"
+			default-target-url="/dashboard/welcome"
+			authentication-failure-url="/authentication/login/failed" login-processing-url="/authentication/login/j_spring_security_check"/>
+		<logout logout-success-url="/authentication/login/" logout-url="/authentication/logout"/>
+	</http>
+ 
+	<authentication-manager>
+	  <authentication-provider>
+		<user-service>
+			<user name="mvkkhanh" password="123456" authorities="ROLE_ADMIN" />
+		</user-service>
+	  </authentication-provider>
+	</authentication-manager>
+ 
+</beans:beans>

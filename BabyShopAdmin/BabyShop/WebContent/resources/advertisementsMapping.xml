@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advertisements>
+	<advertisement>
+		<position>LEFT</position>
+		<link>http://khanhhuong.jcapt.com/img1/store/Diembao/2010_1/SongHyeKyo_2.jpg</link>
+		<expired-date>2012-12-31</expired-date>
+		<show>true</show>
+	</advertisement>
+	<advertisement>
+		<position>RIGHT</position>
+		<link>http://nhanhmua.vn/media/Images/2012/thang12/A_1142/dau_xa_clear_04.jpg</link>
+		<expired-date>2012-12-31</expired-date>
+		<show>true</show>
+	</advertisement>
+	<advertisement>
+		<position>BANNER</position>
+		<link>http://pagead2.googlesyndication.com/simgad/1633952052947808874</link>
+		<expired-date>2012-12-31</expired-date>
+		<show>true</show>
+	</advertisement>
+</advertisements>

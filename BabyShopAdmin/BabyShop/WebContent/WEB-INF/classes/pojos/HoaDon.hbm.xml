@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="pojos.HoaDon" table="hoa_don">
+        <id name="maHoaDon" type="long">
+            <column name="ma_hoa_don" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="taiKhoan" class="pojos.TaiKhoan">
+            <column name="tai_khoan" length="50" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trangThaiDonHang" class="pojos.TrangThaiDonHang" lazy="false">
+            <column name="trang_thai_don_hang" not-null="true" />
+        </many-to-one>
+        <property name="ngayLap" type="date">
+            <column name="ngay_lap" length="13" not-null="true" />
+        </property>
+        <property name="tenKhachHang" type="string">
+            <column name="ten_khach_hang" length="50" not-null="true" />
+        </property>
+        <property name="diaChiGiaoHang" type="string">
+            <column name="dia_chi_giao_hang" length="50" not-null="true" />
+        </property>
+        <property name="tongTien" type="big_decimal">
+            <column name="tong_tien" precision="131089" scale="0" />
+        </property>
+        <property name="ngayCapNhat" type="date">
+            <column name="ngay_cap_nhat" length="13" />
+        </property>
+        <property name="daThanhToan" type="java.lang.Boolean">
+            <column name="da_thanh_toan" />
+        </property>
+        <property name="daXoa" type="boolean">
+            <column name="da_xoa" not-null="true" />
+        </property>
+        <set name="chiTietHoaDons" table="chi_tiet_hoa_don" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ma_hoa_don" not-null="true" />
+            </key>
+            <one-to-many class="pojos.ChiTietHoaDon" />
+        </set>
+    </class>
+</hibernate-mapping>

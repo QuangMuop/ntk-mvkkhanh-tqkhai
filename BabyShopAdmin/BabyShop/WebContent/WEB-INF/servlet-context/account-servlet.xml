@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<context:component-scan base-package="controllers" />
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/list">accountController</prop>
+				<prop key="/delete">accountController</prop>
+				<prop key="/reshow">accountController</prop>
+				<prop key="/multiDelete">accountController</prop>
+				<prop key="/ban">accountController</prop>
+				<prop key="/unban">accountController</prop>
+				<prop key="/multiBan">accountController</prop>
+				<prop key="/search">accountController</prop>
+				<prop key="/add">accountController</prop>
+				<prop key="/submit">accountController</prop>
+				<prop key="/detail">accountController</prop>
+				<prop key="/update">accountController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="accountController" class="controllers.AccountController" />
+</beans>

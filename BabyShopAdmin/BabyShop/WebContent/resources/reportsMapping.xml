@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reports>
+	<report>
+		<name>top_do_choi_ban_chay</name>
+		<display-name>Top 10 đồ chơi bán chạy</display-name>
+		<link>babyshop/top_do_choi_ban_chay</link>
+	</report>
+	<report>
+		<name>top_do_choi_moi_nhat</name>
+		<display-name>Top 10 đồ chơi mới nhất</display-name>
+		<link>babyshop/top_do_choi_moi_nhat</link>
+	</report>
+</reports>
