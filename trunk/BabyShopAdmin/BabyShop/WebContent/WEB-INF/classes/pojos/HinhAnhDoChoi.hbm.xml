@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="pojos.HinhAnhDoChoi" table="hinh_anh_do_choi">
+        <id name="maHinhAnh" type="long">
+            <column name="ma_hinh_anh" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="doChoi" class="pojos.DoChoi" fetch="select">
+            <column name="do_choi" />
+        </many-to-one>
+        <property name="hinhAnh" type="string">
+            <column name="hinh_anh" length="4000" />
+        </property>
+        <property name="daXoa" type="java.lang.Boolean">
+            <column name="da_xoa" />
+        </property>
+    </class>
+</hibernate-mapping>

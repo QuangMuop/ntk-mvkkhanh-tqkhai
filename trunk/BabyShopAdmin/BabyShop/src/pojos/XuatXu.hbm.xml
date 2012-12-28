@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="pojos.XuatXu" table="xuat_xu">
+        <id name="maXuatXu" type="long">
+            <column name="ma_xuat_xu" />
+            <generator class="assigned" />
+        </id>
+        <property name="tenXuatXu" type="string">
+            <column name="ten_xuat_xu" length="50" />
+        </property>
+        <property name="daXoa" type="java.lang.Boolean">
+            <column name="da_xoa" />
+        </property>
+        <set name="doChois" table="do_choi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="xuat_xu" />
+            </key>
+            <one-to-many class="pojos.DoChoi" />
+        </set>
+    </class>
+</hibernate-mapping>
