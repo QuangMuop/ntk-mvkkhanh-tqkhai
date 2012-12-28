@@ -49,11 +49,19 @@ public class GlobalFilter implements Filter
                 .getResourceAsStream("/WEB-INF/config/global-config.properties");
         Properties _prop = new Properties();
         _prop.load(configStream);
+        
+        //Đường dẫn tới thư mục chứa hình ảnh đồ chơi và avatar
         String toyImagesFolder = _prop.getProperty("ToyImagesFolder");
         String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
-
         request.setAttribute("ToyImagesFolder", toyImagesFolder);
         request.setAttribute("AvatarImagesFolder", avatarImagesFolder);
+        
+        //Cấu hình tên controller
+        String homeController = _prop.getProperty("HomeController");
+        String toysController = _prop.getProperty("ToysController");
+        request.setAttribute("HomeController", homeController);
+        request.setAttribute("ToysController", toysController);
+        
         
         // pass the request along the filter chain
         chain.doFilter(request, response);
