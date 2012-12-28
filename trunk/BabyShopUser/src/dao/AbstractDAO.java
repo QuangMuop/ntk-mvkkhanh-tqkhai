@@ -143,7 +143,13 @@ public abstract class AbstractDAO<T, P extends Serializable>
         List<T> results;
         Session session = openSession();
         Criteria crit = session.createCriteria(getPOJOClass());
-        crit.add(Restrictions.ilike(col, "%" + name + "%"));
+        //crit.add(Restrictions.ilike(col, "%" + name + "%"));
+        Disjunction or = Restrictions.disjunction();
+    	or.add(Restrictions.ilike(col, "%" + name + "%"));
+    	or.add(Restrictions.ilike(col, name + "%"));
+    	or.add(Restrictions.ilike(col, "%" + name  ));
+    	or.add(Restrictions.ilike(col, name));
+        crit.add(or);
         crit.setFirstResult((page - 1) * nRecordsPerPage);
         crit.setMaxResults(nRecordsPerPage);
         results = crit.list();
