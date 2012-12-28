@@ -16,11 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pojos.BinhLuan;
 import pojos.DoChoi;
+import pojos.HinhAnhDoChoi;
 import pojos.LoaiDoChoi;
 import pojos.NhaSanXuat;
 import util.PagingHelper;
 import dao.BinhLuanDAO;
 import dao.DoChoiDAO;
+import dao.HinhAnhDoChoiDAO;
 import dao.LoaiDoChoiDAO;
 import dao.NhaSanXuatDAO;
 
@@ -28,7 +30,8 @@ import dao.NhaSanXuatDAO;
 public class ToyController {
 	private DoChoiDAO doChoiDAO = new DoChoiDAO();
     private BinhLuanDAO binhLuanDao = new BinhLuanDAO();
-
+    private HinhAnhDoChoiDAO hinhAnhDoChoiDAO = new HinhAnhDoChoiDAO();
+    
 	@RequestMapping(method = GET, value = "/detail", params = { "id" })
 	protected ModelAndView detail(
 			@RequestParam(value = "id") String strId,
@@ -47,10 +50,12 @@ public class ToyController {
         DoChoi doChoi = doChoiDAO.get(maDoChoi);
         List<BinhLuan> dsBinhLuan = binhLuanDao.getDsBinhLuanTheoMaDoChoi(maDoChoi);
         List<DoChoi> dsDoChoiLienQuan = doChoiDAO.getRelatedDoChois(doChoi, 5);
+        List<HinhAnhDoChoi> dsHinhAnhDoChoi = hinhAnhDoChoiDAO.getDsHinhAnhTheoMaDoChoi(maDoChoi);
         
         modelAndView.addObject("doChoi", doChoi);
         modelAndView.addObject("dsBinhLuan", dsBinhLuan);
         modelAndView.addObject("dsDoChoiLienQuan", dsDoChoiLienQuan);
+        modelAndView.addObject("dsHinhAnhDoChoi", dsHinhAnhDoChoi);
         
 		return modelAndView;
 	}
