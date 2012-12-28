@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+	<class name="pojos.TaiKhoan" table="tai_khoan">
+		<id name="maTaiKhoan" type="string">
+			<column name="ma_tai_khoan" length="50" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one name="loaiTaiKhoan" class="pojos.LoaiTaiKhoan"
+			lazy="false">
+			<column name="ma_loai_tai_khoan" not-null="true" />
+		</many-to-one>
+		<property name="matKhau" type="string">
+			<column name="mat_khau" length="50" not-null="true" />
+		</property>
+		<property name="avatar" type="string">
+			<column name="avatar" length="500" />
+		</property>
+		<property name="hoTen" type="string">
+			<column name="ho_ten" length="50" />
+		</property>
+		<property name="ngaySinh" type="timestamp">
+			<column name="ngay_sinh" length="29" />
+		</property>
+		<property name="thanhPho" type="string">
+			<column name="thanh_pho" length="50" />
+		</property>
+		<property name="dienThoai" type="string">
+			<column name="dien_thoai" length="50" />
+		</property>
+		<property name="gioiTinh" type="java.lang.Boolean">
+			<column name="gioi_tinh" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" length="50" />
+		</property>
+		<property name="ngayCapNhat" type="date">
+			<column name="ngay_cap_nhat" length="13" />
+		</property>
+		<property name="daXoa" type="java.lang.Boolean">
+			<column name="da_xoa" />
+		</property>
+		<property name="daBan" type="java.lang.Boolean">
+			<column name="da_ban" />
+		</property>
+		<set name="binhLuans" table="binh_luan" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="ma_tai_khoan" length="50" not-null="true" />
+			</key>
+			<one-to-many class="pojos.BinhLuan" />
+		</set>
+		<set name="hoaDons" table="hoa_don" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="tai_khoan" length="50" not-null="true" />
+			</key>
+			<one-to-many class="pojos.HoaDon" />
+		</set>
+	</class>
+</hibernate-mapping>

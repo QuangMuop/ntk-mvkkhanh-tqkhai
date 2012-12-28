@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="pojos.BinhLuan" table="binh_luan">
+        <id name="maBinhLuan" type="long">
+            <column name="ma_binh_luan" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="doChoi" class="pojos.DoChoi" fetch="select" lazy="false">
+            <column name="ma_do_choi" not-null="true" />
+        </many-to-one>
+        <many-to-one name="taiKhoan" class="pojos.TaiKhoan" fetch="select" lazy="false">
+            <column name="ma_tai_khoan" length="50" not-null="true" />
+        </many-to-one>
+        <property name="ngayBinhLuan" type="date">
+            <column name="ngay_binh_luan" length="13" not-null="true" />
+        </property>
+        <property name="noiDung" type="string">
+            <column name="noi_dung" length="4000" not-null="true" />
+        </property>
+        <property name="kiemDuyet" type="boolean">
+            <column name="kiem_duyet" not-null="true" />
+        </property>
+        <property name="daXoa" type="boolean">
+            <column name="da_xoa" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

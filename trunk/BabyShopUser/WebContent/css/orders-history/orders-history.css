@@ -1,0 +1,19 @@
+/* CSS Document */
+#orders-history{
+	width:100%;
+	margin:20px 0px;
+}
+#cart-totals{
+	width:50%;
+	margin-bottom:50px;
+}
+#orders-history .product-remove{
+	width:15px;
+}
+
+#orders-history .product-thumbnail{
+	width: 100px;
+}
+#orders-history .product-quantity{
+	width: 60px;
+}

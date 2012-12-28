@@ -1,0 +1,17 @@
+/* CSS Document */
+.div-update-member-info {
+    padding: 0 20px;
+    width: 720px;
+	margin: 0 auto;
+}
+
+td {
+    padding: 5px 5px;
+}
+
+.myh3 {
+    color: #256BB1 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    padding-left: 8px !important;
+}

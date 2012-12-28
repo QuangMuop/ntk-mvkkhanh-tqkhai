@@ -1,0 +1,119 @@
+/* CSS Document */
+
+/* BEGIN Product in a horizontal list*/
+.horizontal-product-list li{
+	float:left;
+	width: 150px;
+	height: 250px;
+	margin: 7px;
+	margin-bottom:35px;
+	margin-right:35px;
+}
+.horizontal-product-list li .thumbnail{
+	position:relative;
+}
+
+.horizontal-product-list li span.on-sale{
+    left: auto;
+    margin: -3px -6px 0 0;
+    right: 0;
+    top: 0;
+}
+span.on-sale {
+    background: none repeat scroll 0 0 #F93;
+    border-radius: 20px 20px 20px 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 32px;
+    min-height: 32px;
+    min-width: 32px;
+    padding: 4px;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+	font-weight:bold;
+}
+
+.horizontal-product-list img{
+	width:150px;
+	height:150px;
+}
+
+.horizontal-product-list span{
+	display:block;
+	text-align:center;
+}
+
+.horizontal-product-list span.product-name{
+	display:block;
+	text-align:center;
+	color:black;
+}
+.horizontal-product-list span.product-price{
+	color:#06F;
+}
+/* END Product in a list*/
+
+/* BEGIN TITLES*/
+.highlighted-title{
+	font-size:20px;
+	text-transform:uppercase;
+	margin-bottom:20px;
+	background:#6CF;
+	padding:5px;
+	border-radius:10px;
+}
+/* END TITLES*/
+
+/*BEGIN PAGINATION*/
+.pagination {
+    clear: both;
+    color: #313031;
+    display: block;
+    margin: 20px auto 5px;
+    padding: 4px 17px 4px 0;
+    text-align: center;
+    width: 615px;
+}
+
+.pagination span.disabled {
+    border: 1px solid #E0E0E0;
+    color: #E0E0E0;
+    margin: 0 3px;
+    padding: 3px 7px;
+}
+.pagination span.selected {
+    background-color: #CCCCCC;
+    border: 1px solid #BBBBBB;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 0 3px;
+    padding: 3px 7px;
+}
+
+.pagination a {
+    border: 1px solid #BBBBBB;
+    color: #777777;
+    margin: 0 3px;
+    padding: 3px 7px;
+    text-decoration: none;
+}
+.pagination a:hover, .pagination a:active {
+    background-color: #F5F5F5;
+    border: 1px solid #BBBBBB;
+    color: #777777;
+}
+/*END PAGINATION*/
+
+/*BEGIN BUTTON*/
+button.button.alt, input.button.alt{
+    background: none repeat scroll 0 0 #7FA92D;
+    border-color: #7FA92D;
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+}
+/*END BUTTON*/
+
+input.input280{
+	width:280px !important;
+}

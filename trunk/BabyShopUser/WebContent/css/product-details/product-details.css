@@ -1,0 +1,105 @@
+/* CSS Document */
+
+div.product {
+    position: relative;
+	margin-bottom: 20px;
+}
+
+.product div.images {
+    float: left;
+    margin-bottom: 10px;
+    position: relative;
+	border: 1px solid #DDDDDD;
+}
+
+.product div.images div.thumbnails{
+	width: 500px;
+}
+
+.product .images img{
+	width: 100%;
+}
+
+.product div.summary {
+    width: 44.375%;
+}
+div.product div.summary {
+    float: left;
+    margin-left: 2.0833%;
+}
+
+.product .summary .product-title {
+	text-transform:uppercase;
+	font-size:20px;
+}
+.product .summary h2{
+	font-size:18px;
+	font-weight:bold;
+}
+.product .summary h3{
+	font-size:13px;
+	font-weight:bold;
+}
+.product .summary .discount{
+	font-size: 18px;
+	font-weight:normal;
+	color:red;
+	text-decoration:line-through;
+}
+
+.product .summary .amount{
+	font-size: 18px;
+	font-weight:normal;
+	color:#9A6614;
+}
+
+form.cart {
+    clear: both;
+    float: none;
+    margin-bottom: 24px;
+    margin-top: 2em;
+}
+
+form.cart .rectangular-button.add-to-cart{
+	margin-left: 80px;
+}
+
+.avatar32x32 img{
+	width: 32px;
+	height: 32px;
+	border: 1px solid #DDDDDD;
+	padding: 3px;
+}
+
+.avatar32x32{
+	float: left;
+}
+#tabs{
+	font-size: 12px;
+}
+
+.comment-container{
+	font-size: 12px;
+	float: left;
+	border: 1px solid #DDDDDD;
+    border-radius: 5px 5px 5px 5px;
+    margin: 0 0 0 10px;
+    padding: 11px 11px 0;
+	width: 290px;
+}
+
+.commentlist li{
+	margin-bottom: 20px;
+}
+.comment-container span{
+	color:#999999;
+}
+
+.comment-container span.user{
+	font-weight:bold;
+}
+
+.comment-area{
+	overflow:scroll;
+	height:500px;
+}
