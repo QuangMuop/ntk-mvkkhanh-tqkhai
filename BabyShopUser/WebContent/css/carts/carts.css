@@ -1,0 +1,30 @@
+/* CSS Document */
+#cart-items{
+	width:100%;
+	margin:20px 0px;
+}
+#cart-totals{
+	width:50%;
+	margin-bottom:50px;
+}
+#cart-items .product-remove{
+	width:15px;
+}
+
+#cart-items .product-thumbnail{
+	width: 100px;
+}
+#cart-items .product-quantity{
+	width: 60px;
+}
+
+#cart-items .product-remove a{
+	color: #CCCCCC;
+}
+#cart-items .product-remove a:hover{
+	color: red;
+}
+#cart-items .table-controls input{
+	float: right;
+	margin: 5px 10px;
+}

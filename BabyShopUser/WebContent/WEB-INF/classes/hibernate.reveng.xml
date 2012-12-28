@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="BabyShopDB" match-schema="public"/>
+  <table-filter match-name="trang_thai_don_hang"/>
+  <table-filter match-name="hoa_don"/>
+  <table-filter match-name="binh_luan"/>
+  <table-filter match-name="tai_khoan"/>
+  <table-filter match-name="loai_do_choi"/>
+  <table-filter match-name="hinh_anh_do_choi"/>
+  <table-filter match-name="do_choi"/>
+  <table-filter match-name="tu_khoa_do_choi"/>
+  <table-filter match-name="xuat_xu"/>
+  <table-filter match-name="chi_tiet_hoa_don"/>
+  <table-filter match-name="loai_tai_khoan"/>
+  <table-filter match-name="nha_san_xuat"/>
+</hibernate-reverse-engineering>

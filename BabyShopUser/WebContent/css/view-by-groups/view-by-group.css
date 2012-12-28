@@ -1,0 +1,16 @@
+/* CSS Document */
+.products-by-group{
+	width:770px;
+	float: right;
+}
+.side-bar h3{
+	text-transform:uppercase;
+}
+.side-bar ul{
+	border-left:1px solid #D1CFCF;
+	margin: 10px 0;
+	padding-left:10px;
+}
+.side-bar ul.children .cat-item{
+	padding-left: 10px;
+}

@@ -1,0 +1,45 @@
+/* CSS Document */
+input.width150{
+	width:180px;
+}
+input.width325{
+	width:390px;
+}
+#receiver-info{
+	width: 500px;
+	float: left;
+}
+
+#receiver-info table td{
+	padding: 2px 5px;
+}
+
+#billing-and-shipping textarea{
+	max-width:440px;
+	max-height:400px;
+	width: 440px;
+	height: 180px;	
+}
+#cart-items{
+	width:100%;
+	margin:20px 0px;
+}
+#cart-totals{
+	width:50%;
+	margin-bottom:50px;
+}
+
+#cart-items .product-thumbnail{
+	width: 100px;
+}
+#cart-items .product-quantity{
+	width: 60px;
+}
+#payment{
+	float: right;
+}
+#proceed{
+	float:right;
+	margin-bottom:50px;
+	margin-top: 20px;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 29, 2012 10:41:25 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="pojos.TuKhoaDoChoi" table="tu_khoa_do_choi">
+        <id name="maTuKhoa" type="long">
+            <column name="ma_tu_khoa" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="doChoi" class="pojos.DoChoi" fetch="select">
+            <column name="do_choi" not-null="true" />
+        </many-to-one>
+        <property name="tuKhoa" type="string">
+            <column name="tu_khoa" length="4000" />
+        </property>
+        <property name="ngayCapNhat" type="date">
+            <column name="ngay_cap_nhat" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>

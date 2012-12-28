@@ -1,0 +1,13 @@
+/* CSS Document */
+#frmLogin table{
+	margin: 0 auto;
+	text-align:center;
+	font-size: 14px;
+}
+
+#frmLogin table td{
+	padding: 10px;
+}
+#frmLogin table td button{
+	margin: 0 auto;
+}

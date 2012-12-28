@@ -1,0 +1,16 @@
+/* CSS Document */
+.form-advanced-search{
+	margin: 20px 0px;
+}
+.form-advanced-search input.nice-textbox{
+	width: 300px;
+}
+
+#btnSearch{
+	margin: 20px auto;
+}
+
+.form-advanced-search div.div-product-name{
+	margin: 10px auto;
+	width:310px;
+}
