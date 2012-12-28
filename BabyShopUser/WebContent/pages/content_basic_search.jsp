@@ -14,6 +14,7 @@
 <c:set var="trang" value="${trang}"/>
 <c:set var="soLuongTrang" value="${soLuongTrang}"/>
 <c:set var="pageNumbers" value="${pageNumbers}"/>
+<c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
 <h2>Tìm kiếm đồ chơi</h2>
 <form action="#" method="get" id="search-form">
     <div class="search-div">
@@ -42,7 +43,7 @@
                     <li><a href="/BabyShopUser/toy/detail?id=${doChoi.maDoChoi}">
                             <div class="thumbnail">
                                 <c:if test="${doChoi.giamGia > 0}"><span class="on-sale"><c:out value="-${doChoi.giamGia} %"/></span></c:if>
-                                <img alt="IMG" src="${pageContext.request.contextPath}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
+                                <img alt="IMG" src="${pageContext.request.contextPath}${toyImagesFolder}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
                             <span class="product-price"><fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" /></span><span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span></a>
                     </li>
                 </c:forEach>
