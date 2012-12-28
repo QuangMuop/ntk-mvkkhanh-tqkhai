@@ -8,10 +8,13 @@
 
 <c:set var="dsLoaiDoChoi" value="${requestScope.dsLoaiDoChoi}" />
 <c:set var="dsNhaSanXuat" value="${requestScope.dsNhaSanXuat}" />
+<c:set var="homeController" value="${requestScope.HomeController}"/>
+<c:set var="toysController" value="${requestScope.ToysController}"/>
+
 <!-- TOPBAR -->
 <div id="top">
     <div class="topbar-left">
-        <p>Shop đồ chơi LEGO <a href="trang_chu.do">http://www.shoplego.vn</a> </p>
+        <p>Shop đồ chơi LEGO <a href="${homeController}/index">http://www.shoplego.vn</a> </p>
     </div>
     <!-- .topbar-left -->
     <div class="topbar-right">
@@ -27,7 +30,7 @@
 <!-- END TOPBAR -->
 <div class="group inner"> 
     <!-- START LOGO -->
-    <div id="logo" class="group" > <a href="trang_chu.do"> <img alt="Logo LEGO Shop" src="${pageContext.request.contextPath}/images/shared-images/logo/logo.png"> </a>
+    <div id="logo" class="group" > <a href="${homeController}/index"> <img alt="Logo LEGO Shop" src="${pageContext.request.contextPath}/images/shared-images/logo/logo.png"> </a>
         <p class="logo-description">Luôn dành sự yêu thương tốt nhất cho các bé</p>
     </div>
     <!-- END LOGO --> 
@@ -45,14 +48,13 @@
         		var searchText = $('#search-text').val();
         		var url = 'search?searchText=' + searchText + '&trang=' + trang;
         		document.location = url;
-        	
             }
         </script>
     <!-- END SEARCHFORM --> 
     <!-- START NAV -->
     <div class="group" id="nav">
         <ul class="level-1" id="menu-menu">
-            <li> <a href="/BabyShopUser/home/index">trang chủ</a> </li>
+            <li> <a href="${homeController}/index">trang chủ</a> </li>
             <li class="megamenu"> <a href="">mua sắm<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li> <a href="">loại đồ chơi</a>
@@ -60,7 +62,7 @@
                             <!--XUẤT DANH SÁCH LOẠI ĐỒ CHƠI-->
                             <c:forEach var="ldc" items="${dsLoaiDoChoi}">
                                 <li>
-                                    <a href="/BabyShopUser/toy/list?loaiDoChoi=${ldc.maLoaiDoChoi}">
+                                    <a href="${toysController}/list?loaiDoChoi=${ldc.maLoaiDoChoi}">
                                         <c:out value="${ldc.tenLoaiDoChoi}"/>
                                     </a>
                                 </li>
@@ -72,7 +74,7 @@
                             <!--XUẤT DANH SÁCH NHÀ SẢN XUẤT-->
                             <c:forEach var="nxs" items="${dsNhaSanXuat}">
                                 <li>
-                                    <a href="/BabyShopUser/toy/list?nhaSanXuat=${nxs.maNhaSanXuat}">
+                                    <a href="${toysController}/list?nhaSanXuat=${nxs.maNhaSanXuat}">
                                         <c:out value="${nxs.tenNhaSanXuat}"/>
                                     </a>
                                 </li>
@@ -89,14 +91,14 @@
                     </li>
                 </ul>
             </li>
-            <li> <a href="#">hướng dẫn<span class="sf-sub-indicator"> »</span></a>
+            <li> <a href="${homeController}/guide">hướng dẫn<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li><a href="#">sử dụng trang web</a></li>
                     <li><a href="#">mua hàng</a></li>
                     <li><a href="#">thanh toán</a></li>
                 </ul>
             </li>
-            <li> <a href="#">khuyến mãi<span class="sf-sub-indicator"> »</span></a>
+            <li> <a href="${homeController}/promotion">khuyến mãi<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li><a href="#">tin khuyến mãi</a></li>
                     <li><a href="#">đăng ký nhận tin</a></li>
@@ -111,7 +113,7 @@
                     <a href="#"> </a>
                 </ul>
             </li>
-            <li> <a href="#">liên hệ<span class="sf-sub-indicator"> »</span></a>
+            <li> <a href="${homeController}/contact">liên hệ<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li><a href="#">Điện thoại</a></li>
                     <li><a href="#">Địa chỉ</a></li>
