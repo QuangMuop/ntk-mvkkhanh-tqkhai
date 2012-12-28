@@ -10,11 +10,20 @@
 <c:set var="doChoi" value="${doChoi}" scope="page"/>
 <c:set var="dsBinhLuan" value="${dsBinhLuan}" scope="page"/>
 <c:set var="dsDoChoiLienQuan" value="${dsDoChoiLienQuan}" scope="page"/>
+<c:set var="dsHinhAnhDoChoi" value="${dsHinhAnhDoChoi}" scope="page"/>
 <c:set var="avatarImagesFolder" value="${requestScope.AvatarImagesFolder}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
 <div class="product">
     <div class="images">
-        <div class="thumbnails"> <img title="woman" alt="woman" src="${pageContext.request.contextPath}${toyImagesFolder}${doChoi.hinhAnhHienThiChinh}" style="opacity: 1;"/> </div>
+        <div class="thumbnails">
+        	<ul class='aviaslider' id="frontpage-slider">
+        		<c:forEach var="hinhAnhDoChoi" items="${dsHinhAnhDoChoi}" varStatus="status">
+	        		<li>
+	        			<a href="${pageContext.request.contextPath}${toyImagesFolder}${hinhAnhDoChoi.hinhAnh}" rel="prettyPhoto" class="thumbnail" title="Chi tiết" ><img alt="woman" src="${pageContext.request.contextPath}${toyImagesFolder}${hinhAnhDoChoi.hinhAnh}" style="opacity: 1;"/></a> 
+	        		</li>
+        		</c:forEach>
+        	</ul>
+        </div>
     </div>
     <div class="summary">
         <h1 class="product-title">
