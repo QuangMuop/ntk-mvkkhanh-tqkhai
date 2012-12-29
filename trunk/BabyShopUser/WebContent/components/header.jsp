@@ -55,7 +55,7 @@
     <div class="group" id="nav">
         <ul class="level-1" id="menu-menu">
             <li> <a href="${homeController}index">trang chủ</a> </li>
-            <li class="megamenu"> <a href="#">mua sắm<span class="sf-sub-indicator"> »</span></a>
+            <li class="megamenu"> <a href="">mua sắm<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li> <a href="#">loại đồ chơi</a>
                         <ul class="sub-menu">
@@ -69,7 +69,7 @@
                             </c:forEach>
                         </ul>
                     </li>
-                    <li> <a href="">nhà sản xuất</a>
+                    <li> <a href="#">nhà sản xuất</a>
                         <ul class="sub-menu">
                             <!--XUẤT DANH SÁCH NHÀ SẢN XUẤT-->
                             <c:forEach var="nxs" items="${dsNhaSanXuat}">
@@ -81,7 +81,7 @@
                             </c:forEach>
                         </ul>
                     </li>
-                    <li> <a href="do_choi.do?action=views_by_groups">giá</a>
+                    <li> <a href="#">giá</a>
                         <ul class="sub-menu">
                             <li><a href="do_choi.do?action=views_by_groups?minPrice=10000&maxPrice=99000">10,000đ - 99,000đ</a></li>
                             <li><a href="do_choi.do?action=views_by_groups?minPrice=100000&maxPrice=499000">100,000đ - 499,000đ</a></li>
