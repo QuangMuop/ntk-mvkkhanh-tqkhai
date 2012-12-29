@@ -53,19 +53,6 @@
 </script>
 <!--END .slider-->
 
-<div id="ad-left" align="center" style="width: 140px; height: 100%; position: fixed; top: 50px; left: 0px;">
-<a href="#" onClick="">
-	<img width="100px" src="/BabyShopUser/uploads/ads/ad5.jpg"/>
-</a>
-
-</div>
-<div id="ad-right" align="center" style="width: 140px; height: 100%; position: fixed; top: 50px; right: 0px;">
-<a href="#" onClick="">
-	<img width="100px" src="/BabyShopUser/uploads/ads/ad6.jpg"/>
-</a>
-
-</div>
-
 <div id="primary" class="layout-sidebar-no">
     <div class="inner group"> 
         <!-- START CONTENT -->

@@ -36,6 +36,7 @@
             </div>
             <!-- END COPYRIGHT --> 
         </div>
+        <%@include file="/components/advertisements.jsp" %>
         <!-- END WRAPPER -->
     </body>
 </html>
