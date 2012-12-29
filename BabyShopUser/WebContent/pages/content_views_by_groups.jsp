@@ -12,12 +12,13 @@
 <c:set var="loaiDoChoi" value="${requestScope.loaiDoChoi}"/>
 <c:set var="nhaSanXuat" value="${requestScope.nhaSanXuat}"/>
 <c:set var="dsDoChoi" value="${requestScope.dsDoChoi}"/>
-
 <c:set var="soLuongKetQua" value="${soLuongKetQua}"/>
 <c:set var="soLuongDoChoiTrenTrang" value="${soLuongDoChoiTrenTrang}"/>
 <c:set var="trang" value="${trang}"/>
 <c:set var="soLuongTrang" value="${soLuongTrang}"/>
 <c:set var="pageNumbers" value="${pageNumbers}"/>
+<c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
+
 <div id="primary" class="layout-sidebar-no">
     <div class="inner group"> 
         <!-- START CONTENT -->
