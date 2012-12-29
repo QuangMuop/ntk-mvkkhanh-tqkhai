@@ -19,5 +19,6 @@
 		<mapping resource="pojos/TuKhoaDoChoi.hbm.xml" />
 		<mapping resource="pojos/ChiTietHoaDon.hbm.xml" />
 		<mapping resource="pojos/TaiKhoan.hbm.xml" />
+		<mapping resource="pojos/QuangCao.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
