@@ -122,9 +122,5 @@
             </div>
         </div>
         <!-- END CONTENT --> 
-        <!-- START LATEST NEWS --> 
-        <!-- END LATEST NEWS --> 
-        <!-- START EXTRA CONTENT --> 
-        <!-- END EXTRA CONTENT --> 
     </div>
 </div>
