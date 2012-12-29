@@ -18,7 +18,6 @@
 <c:set var="soLuongTrang" value="${soLuongTrang}"/>
 <c:set var="pageNumbers" value="${pageNumbers}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
-
 <div id="primary" class="layout-sidebar-no">
     <div class="inner group"> 
         <!-- START CONTENT -->
@@ -36,7 +35,7 @@
                                         <c:if test="${doChoi.giamGia > 0}">
                                             <span class="on-sale"><c:out value="-${doChoi.giamGia} %"/></span>
                                         </c:if>
-                                        <img alt="IMG" src="${pageContext.request.contextPath}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
+                                        <img alt="IMG" src="${pageContext.request.contextPath}${toyImagesFolder}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
                                     <span class="product-price"><fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" /></span><span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span></a>
                             </li>
                         </c:forEach>
