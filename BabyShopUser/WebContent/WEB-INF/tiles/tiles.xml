@@ -3,40 +3,69 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-    <definition name="Page" template="/templates/main_template.jsp">
-        <put-attribute name="title" value="Page" />
-        <put-attribute name="header" value="/components/header.jsp" />
-        <put-attribute name="footer" value="/components/footer.jsp" />
-        <put-attribute name="copyright" value="/components/copyright.jsp" />
-    </definition>
-    <!--PAGE: index-->
-    <definition name="index" extends="Page">
-        <put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp"/>
-        <put-attribute name="title" value="Trang chủ - Shop LEGO" />
-        <put-attribute name="content" value="/pages/content_index.jsp"/>
-    </definition>
-    <!--PAGE: product_details-->
-    <definition name="product_details" extends="Page">
-        <put-attribute name="additional_css_and_js" value="/pages/css_and_js_product_details.jsp"/>
-        <put-attribute name="title" value="Xem chi tiết sản phẩm - LEGO Shop" />
-        <put-attribute name="content" value="/pages/content_product_details.jsp"/>
-    </definition>
-    <!--PAGE: views_by_groups-->
-    <definition name="views_by_groups" extends="Page">
-        <put-attribute name="additional_css_and_js" value="/pages/css_and_js_views_by_groups.jsp"/>
-        <put-attribute name="title" value="Xem theo danh mục - LEGO Shop" />
-        <put-attribute name="content" value="/pages/content_views_by_groups.jsp"/>
-    </definition>
-    <!--PAGE: basic_search-->
-    <definition name="basic_search" extends="Page">
-        <put-attribute name="additional_css_and_js" value="/pages/css_and_js_basic_search.jsp"/>
-        <put-attribute name="title" value="Tìm kiếm cơ bản - LEGO Shop" />
-        <put-attribute name="content" value="/pages/content_basic_search.jsp"/>
-    </definition>
-    <!--PAGE: advanced_search-->
-    <definition name="advanced_search" extends="Page">
-        <put-attribute name="additional_css_and_js" value="/pages/css_and_js_advanced_search.jsp"/>
-        <put-attribute name="title" value="Tìm kiếm nâng cao - LEGO Shop" />
-        <put-attribute name="content" value="/pages/content_advanced_search.jsp"/>
-    </definition>
+	<definition name="Page" template="/templates/main_template.jsp">
+		<put-attribute name="title" value="Page" />
+		<put-attribute name="header" value="/components/header.jsp" />
+		<put-attribute name="footer" value="/components/footer.jsp" />
+		<put-attribute name="copyright" value="/components/copyright.jsp" />
+	</definition>
+	<!--PAGE: index -->
+	<definition name="index" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title" value="Trang chủ - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_index.jsp" />
+	</definition>
+	<!--PAGE: order_guide -->
+	<definition name="order_guide" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title" value="Hướng dẫn đặt hàng - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_order_guide.jsp" />
+	</definition>
+	<!--PAGE: payment_guide -->
+	<definition name="payment_guide" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title" value="Hướng dẫn thanh toán - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_payment_guide.jsp" />
+	</definition>
+	<!--PAGE: promotion -->
+	<definition name="promotion" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title"
+			value="Đồ chơi đang khuyến mãi - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_promotion.jsp" />
+	</definition>
+	<!--PAGE: contact -->
+	<definition name="contact" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title"
+			value="Liên hệ - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_contact.jsp" />
+	</definition>
+	<!--PAGE: product_details -->
+	<definition name="product_details" extends="Page">
+		<put-attribute name="additional_css_and_js"
+			value="/pages/css_and_js_product_details.jsp" />
+		<put-attribute name="title" value="Xem chi tiết sản phẩm - LEGO Shop" />
+		<put-attribute name="content" value="/pages/content_product_details.jsp" />
+	</definition>
+	<!--PAGE: views_by_groups -->
+	<definition name="views_by_groups" extends="Page">
+		<put-attribute name="additional_css_and_js"
+			value="/pages/css_and_js_views_by_groups.jsp" />
+		<put-attribute name="title" value="Xem theo danh mục - LEGO Shop" />
+		<put-attribute name="content" value="/pages/content_views_by_groups.jsp" />
+	</definition>
+	<!--PAGE: basic_search -->
+	<definition name="basic_search" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_basic_search.jsp" />
+		<put-attribute name="title" value="Tìm kiếm cơ bản - LEGO Shop" />
+		<put-attribute name="content" value="/pages/content_basic_search.jsp" />
+	</definition>
+	<!--PAGE: advanced_search -->
+	<definition name="advanced_search" extends="Page">
+		<put-attribute name="additional_css_and_js"
+			value="/pages/css_and_js_advanced_search.jsp" />
+		<put-attribute name="title" value="Tìm kiếm nâng cao - LEGO Shop" />
+		<put-attribute name="content" value="/pages/content_advanced_search.jsp" />
+	</definition>
 </tiles-definitions>

@@ -91,17 +91,16 @@
                     </li>
                 </ul>
             </li>
-            <li> <a href="${homeController}guide">hướng dẫn<span class="sf-sub-indicator"> »</span></a>
+            <li> <a href="${homeController}orderGuide">hướng dẫn<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
-                    <li><a href="#">đặt hàg</a></li>
-                    <li><a href="#">mua hàng</a></li>
-                    <li><a href="#">thanh toán</a></li>
+                    <li><a href="${homeController}orderGuide">đặt hàng</a></li>
+                    <li><a href="${homeController}paymentGuide">thanh toán</a></li>
                 </ul>
             </li>
-            <li> <a href="${homeController}/promotion">khuyến mãi<span class="sf-sub-indicator"> »</span></a>
+            <li> <a href="${homeController}promotion">khuyến mãi<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
-                    <li><a href="#">sản phẩm khuyến mãi</a></li>
-                    <li><a href="#">đăng ký nhận tin</a></li>
+                    <li><a href="${homeController}promotion">sản phẩm khuyến mãi</a></li>
+                    <li><a href="#">đăng ký nhận tin (Chưa có hoặc sẽ bỏ)</a></li>
                 </ul>
             </li>
             <li> <a href="#">tài khoản<span class="sf-sub-indicator"> »</span></a>
@@ -113,12 +112,7 @@
                     <a href="#"> </a>
                 </ul>
             </li>
-            <li> <a href="${homeController}/contact">liên hệ<span class="sf-sub-indicator"> »</span></a>
-                <ul class="sub-menu">
-                    <li><a href="#">Điện thoại</a></li>
-                    <li><a href="#">Địa chỉ</a></li>
-                </ul>
-            </li>
+            <li> <a href="${homeController}/contact">liên hệ</a></li>
         </ul>
     </div>
     <!-- END NAV --> 

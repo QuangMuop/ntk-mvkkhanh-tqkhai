@@ -10,6 +10,10 @@
 		<property name="mappings">
 			<props>
 				<prop key="/index">homeController</prop>
+				<prop key="/orderGuide">homeController</prop>
+				<prop key="/paymentGuide">homeController</prop>
+				<prop key="/promotion">homeController</prop>
+				<prop key="/contact">homeController</prop>
 				<prop key="/search">homeController</prop>
 				<prop key="/goAdvancedSearch">homeController</prop>
 				<prop key="/advancedSearch">homeController</prop>
