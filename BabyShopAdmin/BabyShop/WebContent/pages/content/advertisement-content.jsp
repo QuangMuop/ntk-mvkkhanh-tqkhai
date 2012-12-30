@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <c:set var="listQuangCao" value="${requestScope.listQuangCao}"/>
+<c:set var="adImagesFolder" value="${requestScope.AdImagesFolder}"/>
 
 <!-- Main page container -->
 
@@ -21,29 +22,35 @@
 	                        <table class="datatable table table-striped table-bordered" id="example">
 	                                <thead>
 	                                    <tr>
-	                                        <th>STT</th>
-	                                        <th>Vị trí</th>
+	                                        <th>ID</th>
+	                                        <th>Tên</th>
 	                                        <th style="width:300px">Hình ảnh</th>
-	                                        <th>Ngày hết hạn</th>
-	                                        <th>Hiển thị</th>
+	                                        <th>Vị trí</th>
+	                                        <th>Ngày bắt đầu</th>
+	                                        <th>Ngày kết thúc</th>
+	                                        <th>Lượt click</th>
+	                                        <th>Hiệu lực</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 	                                 <c:if test="${listQuangCao.size() != 0 }" >
 	                                    <c:forEach var="quangCao" items="${listQuangCao}" varStatus="status">
 	                                        <tr class="odd gradeX">
-	                                            <td><c:out value="${status.index + 1}"/></td>
-	                                            <td><a href="detail?position=${quangCao.getPosition()}"><c:out value="${quangCao.getPosition()}"/></a></td>
+	                                            <td><c:out value="${quangCao.maQuangCao}"/></td>
+	                                            <td><a href="detail?id=${quangCao.maQuangCao}"><c:out value="${quangCao.tenQuangCao}"/></a></td>
 	                                            <td style="width:300px">
-	                                            	<a href="${quangCao.getLink()}" rel="prettyPhoto" class="thumbnail" title="Hình ảnh gốc"><img id="hinh_dai_dien" alt="" style="width:200px; height:150px" src="${quangCao.getLink()}" /></a>
+	                                            	<a href="${pageContext.request.contextPath}${adImagesFolder}${quangCao.hinhAnh}" rel="prettyPhoto" class="thumbnail" title="Hình ảnh gốc"><img id="hinh_dai_dien" alt="" style="width:200px; height:150px" src="${pageContext.request.contextPath}${adImagesFolder}${quangCao.hinhAnh}" /></a>
 	                                            </td>
-	                                            <td><fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.getExpiredDate()}' /></td>
+	                                            <td><c:out value="${quangCao.viTri}"/></td>	                                            
+	                                            <td><fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.batDau}' /></td>
+	                                            <td><fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.ketThuc}' /></td>
+	                                            <td><c:out value="${quangCao.soLuongClick}"/></td>	 
 	                                            <td>
-	                                                <c:if test="${quangCao.getIsShow() == true}">
-	                                                    <span style="color: red" id="isShow_${status.index + 1}"><c:out value="Có"/></span>
+	                                                <c:if test="${quangCao.coHieuLuc == true}">
+	                                                    <span style="color: red" id="isHieuLuc_${quangCao.maQuangCao}"><c:out value="Có"/></span>
 	                                                </c:if>
-	                                                <c:if test="${quangCao.getIsShow() == false}">
-	                                                    <span style="color: blue" id="isShow_${status.index + 1}"><c:out value="Không"/></span>
+	                                                <c:if test="${quangCao.coHieuLuc == false}">
+	                                                    <span style="color: blue" id="isHieuLuc_${quangCao.maQuangCao}"><c:out value="Không"/></span>
 	                                                </c:if>
 	                                            </td>
 	                                        </tr>

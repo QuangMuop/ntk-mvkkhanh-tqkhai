@@ -24,7 +24,8 @@
                                  $('#selectTrangThaiDonHang').attr('disabled', !$(this).is(':checked'));   
                                  $('#inputNgayCapNhat').attr('disabled', !$(this).is(':checked'));
                                  $('#chkDaThanhToan').attr('disabled', !$(this).is(':checked'));
-                                 $('#chkDaXoa').attr('disabled', !$(this).is(':checked'));                                                  
+                                 $('#chkDaXoa').attr('disabled', !$(this).is(':checked'));   
+                                 $('#btnLuu').attr('disabled', !$(this).is(':checked'));                                               
 			}
 		);
         });
@@ -35,6 +36,7 @@
     	 $('#selectTrangThaiDonHang').attr('disabled', true); 
     	 $('#inpuatNgayCapNhat').attr('disabled', true); 
          $('#chkDaThanhToan').attr('disabled', true);
-         $('#chkDaXoa').attr('disabled', true);                                                     
+         $('#chkDaXoa').attr('disabled', true);
+         $('#btnLuu').attr('disabled', true);                                                     
     }  
 </script>

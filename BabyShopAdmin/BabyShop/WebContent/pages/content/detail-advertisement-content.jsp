@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="quangCao" value="${requestScope.quangCao}"/>
+<c:set var="adImagesFolder" value="${requestScope.AdImagesFolder}"/>
 
 <!-- Main page container -->
     <!-- Right (content) side -->
@@ -32,39 +33,58 @@
                                                 <strong>Không cập nhật được quảng cáo !</strong>
                                             </div>
                                     </c:if>                                   
-                                    <form:form modelAttribute="quangCao" action="update" name="formUpdateAdvertisement" id="formUpdateAdvertisement" method="post">    
+                                    <form:form modelAttribute="quangCao" action="update" name="formUpdateAdvertisement" id="formUpdateAdvertisement" method="post" enctype="multipart/form-data">    
                                     <fieldset>
                                         <div class="control-group">
-                                            <label class="control-label" for="input">Vị trí</label>
+                                            <label class="control-label" for="input">Mã quảng cáo</label>
                                             <div class="controls">
-                                                <label class="control-label" for="input">${quangCao.position}</label>
-                                                <form:hidden path="position" id="inputPosition" name="inputPosition" value="${quangCao.position}"/>
+                                                <label class="control-label" for="input">${quangCao.maQuangCao}</label>
+                                                <form:hidden path="maQuangCao" id="inputMaQuangCao" name="inputMaQuangCao" value="${quangCao.maQuangCao}"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="input">Tên quảng cáo</label>
+                                            <div class="controls">
+                                                <form:input path="tenQuangCao" id="inputTenQuangCao" name="inputTenQuangCao" cssClass="input-xlarge" value="${quangCao.tenQuangCao}" disabled="disabled"/>                 
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="input">Hình ảnh</label>
                                             <div class="controls">
                                             	<ul class="thumbnails">
-                                            		<li class="span2"><a href="${quangCao.getLink()}" rel="prettyPhoto" class="thumbnail" title="Hình ảnh gốc"><img id="hinh_dai_dien" alt="" style="width:200px; height:150px" src="${quangCao.link}" /></a></li>                              	                                            
+                                            		<li class="span2"><a href="${pageContext.request.contextPath}${adImagesFolder}${quangCao.hinhAnh}" rel="prettyPhoto" class="thumbnail" title="Hình ảnh gốc"><img id="hinh_dai_dien" alt="" style="width:200px; height:150px" src="${pageContext.request.contextPath}${adImagesFolder}${quangCao.hinhAnh}" /></a></li>                              	                                            
                                             	</ul>
                                             	<br/>
-                                           		<input name="link" id="inputLink" type="text" class="input-xlarge" value="${quangCao.link}"/> 
+                                            	<input name="hinhAnh" id="inputHinhAnh" type="file" disabled="disabled"/>                                          		 
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label" for="input">Ngày hết hạn</label>
+                                            <label class="control-label" for="input">Vị trí</label>
                                             <div class="controls">
-                                            	<input type="text" id="inputExpiredDate" name="expiredDate" class="datepicker input-small" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.expiredDate}' />"/>                              	                                            
+                                                <label class="control-label" for="input"><b>${quangCao.viTri}</b></label>
+                                                <form:hidden path="viTri" id="inputViTri" name="inputViTri" value="${quangCao.viTri}"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="input">Ngày bắt đầu</label>
+                                            <div class="controls">
+                                            	<input type="text" id="inputNgayBatDau" name="batDau" class="datepicker input-small" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.batDau}' />"/>                              	                                            
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="input">Ngày kết thúc</label>
+                                            <div class="controls">
+                                            	<input type="text" id="inputNgayKetThuc" name="ketThuc" class="datepicker input-small" value="<fmt:formatDate pattern='yyyy-MM-dd' value='${quangCao.ketThuc}' />"/>                              	                                            
                                             </div>
                                         </div>                                                                                                            
                                         <div class="control-group">
-                                            <label class="control-label" for="input">Hiển thị</label>
+                                            <label class="control-label" for="input">Có hiệu lực ?</label>
                                             <div class="controls">
-                                                <c:if test="${quangCao.isShow == true}">
-                                                	<form:checkbox path="isShow" style="margin-top: 3px" value="true" name="chkHienThi" id="chkHienThi" checked="checked"/> 
+                                                <c:if test="${quangCao.coHieuLuc == true}">
+                                                	<form:checkbox path="coHieuLuc" style="margin-top: 3px" value="true" name="chkCoHieuLuc" id="chkCoHieuLuc" checked="checked"/> 
                                                 </c:if>
-                                                <c:if test="${quangCao.isShow == false}">
-                                                	<form:checkbox path="isShow" style="margin-top: 3px" value="false" name="chkHienThi" id="chkHienThi"/> 
+                                                <c:if test="${quangCao.coHieuLuc == false}">
+                                                	<form:checkbox path="coHieuLuc" style="margin-top: 3px" value="false" name="chkCoHieuLuc" id="chkCoHieuLuc"/> 
                                                 </c:if>
                                                 
                                             </div>

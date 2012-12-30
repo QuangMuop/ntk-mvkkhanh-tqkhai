@@ -14,4 +14,5 @@
   <table-filter match-name="trang_thai_don_hang"/>
   <table-filter match-name="tu_khoa_do_choi"/>
   <table-filter match-name="xuat_xu"/>
+  <table-filter match-name="quang_cao"/>
 </hibernate-reverse-engineering>

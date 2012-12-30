@@ -23,18 +23,26 @@
 		 InitDisabledState();
          $('.request-edit').click(
 			function(){
-                   $('#inputPosition').attr('disabled', !$(this).is(':checked'));
-                   $('#inputLink').attr('disabled', !$(this).is(':checked'));   
-                   $('#inputExpiredDate').attr('disabled', !$(this).is(':checked'));
-                   $('#chkHienThi').attr('disabled', !$(this).is(':checked'));                                                    
+                   $('#inputMaQuangCao').attr('disabled', !$(this).is(':checked'));
+                   $('#inputTenQuangCao').attr('disabled', !$(this).is(':checked'));   
+                   $('#inputHinhAnh').attr('disabled', !$(this).is(':checked'));
+                   $('#inputViTri').attr('disabled', !$(this).is(':checked'));
+                   $('#inputNgayBatDau').attr('disabled', !$(this).is(':checked'));
+                   $('#inputNgayKetThuc').attr('disabled', !$(this).is(':checked'));
+                   $('#chkCoHieuLuc').attr('disabled', !$(this).is(':checked'));
+                   $('#btnLuu').attr('disabled', !$(this).is(':checked'));                                                    
 			}
 		);
 }); 
 	function InitDisabledState()
     {
-        $('#inputPosition').attr('disabled', true);
-        $('#inputLink').attr('disabled', true);   
-        $('#inputExpiredDate').attr('disabled', true);
-        $('#chkHienThi').attr('disabled', true);                                                     
+		$('#inputMaQuangCao').attr('disabled', true);
+        $('#inputTenQuangCao').attr('disabled', true);   
+        $('#inputHinhAnh').attr('disabled', true);
+        $('#inputViTri').attr('disabled', true);
+        $('#inputNgayBatDau').attr('disabled', true);
+        $('#inputNgayKetThuc').attr('disabled', true);
+        $('#chkCoHieuLuc').attr('disabled', true);
+        $('#btnLuu').attr('disabled', true);                                                   
     } 
 </script>

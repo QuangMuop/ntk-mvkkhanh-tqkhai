@@ -38,7 +38,8 @@
                                  $('#inputEmail').attr('disabled', !$(this).is(':checked'));
                                  $('#inputNgayCapNhat').attr('disabled', !$(this).is(':checked'));
                                  $('#chkDaXoa').attr('disabled', !$(this).is(':checked'));
-                                 $('#chkDaBan').attr('disabled', !$(this).is(':checked'));                                                      
+                                 $('#chkDaBan').attr('disabled', !$(this).is(':checked'));
+                                 $('#btnLuu').attr('disabled',  !$(this).is(':checked'));                                                      
 			}
 		);
         });
@@ -58,6 +59,7 @@
          $('#inputEmail').attr('disabled', true);
          $('#inputNgayCapNhat').attr('disabled', true);
          $('#chkDaXoa').attr('disabled', true);
-         $('#chkDaBan').attr('disabled', true);                                           
+         $('#chkDaBan').attr('disabled', true);
+         $('#btnLuu').attr('disabled', true);                                           
     }  
 </script>
