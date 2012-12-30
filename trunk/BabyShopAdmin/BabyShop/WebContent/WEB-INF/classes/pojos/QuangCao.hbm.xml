@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 29, 2012 11:05:35 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pojos.QuangCao" table="quang_cao">
+        <id name="maQuangCao" type="long">
+            <column name="ma_quang_cao" />
+            <generator class="assigned" />
+        </id>
+        <property name="tenQuangCao" type="string">
+            <column name="ten_quang_cao" length="50" />
+        </property>
+        <property name="hinhAnh" type="string">
+            <column name="hinh_anh" length="4000" />
+        </property>
+        <property name="viTri" type="string">
+            <column name="vi_tri" length="50" />
+        </property>
+        <property name="batDau" type="date">
+            <column name="bat_dau" length="13" />
+        </property>
+        <property name="ketThuc" type="date">
+            <column name="ket_thuc" length="13" />
+        </property>
+        <property name="soLuongClick" type="java.lang.Integer">
+            <column name="so_luong_click" />
+        </property>
+        <property name="coHieuLuc" type="boolean">
+            <column name="co_hieu_luc" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

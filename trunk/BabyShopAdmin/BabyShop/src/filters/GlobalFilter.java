@@ -59,8 +59,10 @@ public class GlobalFilter implements Filter
         // Đường dẫn tới thư mục chứa hình ảnh đồ chơi và avatar
         String toyImagesFolder = _prop.getProperty("ToyImagesFolder");
         String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
+        String adImagesFolder = _prop.getProperty("AdImagesFolder");
         request.setAttribute("ToyImagesFolder", toyImagesFolder);
         request.setAttribute("AvatarImagesFolder", avatarImagesFolder);
+        request.setAttribute("AdImagesFolder", adImagesFolder);
     }
 
     private void doAfterProcessing(ServletRequest request,

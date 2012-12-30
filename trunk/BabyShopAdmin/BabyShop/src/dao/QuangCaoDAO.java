@@ -1,24 +1,21 @@
 package dao;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
+
 import java.util.List;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.XMLOutputter;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 
 import pojos.QuangCao;
-import util.DateUtil;
+import util.HibernateUtil;
 
 public class QuangCaoDAO {
-	public static List<QuangCao> layDanhSachQuangCao(InputStream mappingFilePath) throws JDOMException, IOException {
-		List<QuangCao> listQuangCao = new ArrayList<QuangCao>();
+	/*
+	public static List<QuangCaoOld> layDanhSachQuangCao(InputStream mappingFilePath) throws JDOMException, IOException {
+		List<QuangCaoOld> listQuangCao = new ArrayList<QuangCaoOld>();
     	SAXBuilder builder = new SAXBuilder();
 		
 		Document document = (Document) builder.build(mappingFilePath);
@@ -29,7 +26,7 @@ public class QuangCaoDAO {
 			String adLink = adNode.getChildText("link");
 			String adExpiredDate = adNode.getChildText("expired-date");
 			String adShow = adNode.getChildText("show");
-			QuangCao quangCao = new QuangCao();
+			QuangCaoOld quangCao = new QuangCaoOld();
 			quangCao.setPosition(adPosition);
 			quangCao.setLink(adLink);
 			quangCao.setExpiredDate(DateUtil.convertStringToDate(adExpiredDate, "yyyy-MM-dd"));
@@ -40,9 +37,9 @@ public class QuangCaoDAO {
     	return listQuangCao;
     }
 	
-	public static QuangCao layThongTinQuangCao(InputStream mappingFilePath, String position) throws JDOMException, IOException
+	public static QuangCaoOld layThongTinQuangCao(InputStream mappingFilePath, String position) throws JDOMException, IOException
 	{
-		QuangCao quangCao = new QuangCao();
+		QuangCaoOld quangCao = new QuangCaoOld();
 		SAXBuilder builder = new SAXBuilder();
 		
 		Document document = (Document) builder.build(mappingFilePath);
@@ -66,7 +63,7 @@ public class QuangCaoDAO {
 		return quangCao;
 	}
 	
-	public static Boolean capNhatQuangCao(InputStream mappingFilePath, String outputURL, String position, QuangCao quangCao) throws JDOMException, IOException
+	public static Boolean capNhatQuangCao(InputStream mappingFilePath, String outputURL, String position, QuangCaoOld quangCao) throws JDOMException, IOException
 	{
 		SAXBuilder builder = new SAXBuilder();
 		
@@ -92,4 +89,53 @@ public class QuangCaoDAO {
 		}
 		return false;
 	}
+	*/
+	@SuppressWarnings("unchecked")
+	public static List<QuangCao> layDanhSachQuangCao() {
+        List<QuangCao> ds = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql="select qc from QuangCao qc order by qc.maQuangCao asc";
+            Query query = session.createQuery(hql);
+            ds = query.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+	
+	public static QuangCao layThongTinQuangCao(Long maQuangCao) {
+        QuangCao quangCao = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+        	quangCao = (QuangCao) session.get(QuangCao.class, maQuangCao);
+        } catch (HibernateException ex) {
+        //Log the exception
+        System.err.println(ex);
+        } finally {
+        session.close();
+        }
+        return quangCao;
+    }
+	
+	public static boolean capNhatQuangCao(QuangCao qc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(qc);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
 }
