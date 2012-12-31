@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 29, 2012 11:05:35 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 31, 2012 11:48:05 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="pojos.QuangCao" table="quang_cao">
+    <class name="pojos.QuangCao" table="quang_cao" schema="public">
         <id name="maQuangCao" type="long">
             <column name="ma_quang_cao" />
             <generator class="assigned" />
@@ -28,6 +28,9 @@
         </property>
         <property name="coHieuLuc" type="boolean">
             <column name="co_hieu_luc" not-null="true" />
+        </property>
+        <property name="moTa" type="string">
+            <column name="mo_ta" length="4000" />
         </property>
     </class>
 </hibernate-mapping>

@@ -50,7 +50,7 @@ public class GlobalFilter implements Filter
     {
         if (debug)
         {
-            log("PageContentFilter:DoBeforeProcessing");
+            log("GlobalFilter:DoBeforeProcessing");
         }
 
         InputStream configStream = request
