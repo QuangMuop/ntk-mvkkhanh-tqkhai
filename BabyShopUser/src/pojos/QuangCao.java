@@ -1,6 +1,6 @@
 package pojos;
 
-// Generated Dec 29, 2012 11:05:35 PM by Hibernate Tools 3.4.0.CR1
+// Generated Dec 31, 2012 11:48:05 AM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 
@@ -18,6 +18,7 @@ public class QuangCao implements java.io.Serializable
     private Date ketThuc;
     private Integer soLuongClick;
     private boolean coHieuLuc;
+    private String moTa;
 
     public QuangCao()
     {
@@ -31,7 +32,7 @@ public class QuangCao implements java.io.Serializable
 
     public QuangCao(long maQuangCao, String tenQuangCao, String hinhAnh,
             String viTri, Date batDau, Date ketThuc, Integer soLuongClick,
-            boolean coHieuLuc)
+            boolean coHieuLuc, String moTa)
     {
         this.maQuangCao = maQuangCao;
         this.tenQuangCao = tenQuangCao;
@@ -41,6 +42,7 @@ public class QuangCao implements java.io.Serializable
         this.ketThuc = ketThuc;
         this.soLuongClick = soLuongClick;
         this.coHieuLuc = coHieuLuc;
+        this.moTa = moTa;
     }
 
     public long getMaQuangCao()
@@ -121,6 +123,16 @@ public class QuangCao implements java.io.Serializable
     public void setCoHieuLuc(boolean coHieuLuc)
     {
         this.coHieuLuc = coHieuLuc;
+    }
+
+    public String getMoTa()
+    {
+        return this.moTa;
+    }
+
+    public void setMoTa(String moTa)
+    {
+        this.moTa = moTa;
     }
 
 }

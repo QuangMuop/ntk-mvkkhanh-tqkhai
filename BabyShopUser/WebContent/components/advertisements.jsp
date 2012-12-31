@@ -14,8 +14,7 @@
 	style="width: 140px; height: 100%; position: fixed; top: 50px; left: 0px;">
 	<c:forEach var="qc" items="${dsQuangCao}">
 		<c:if test="${qc.viTri == 'left'}">
-			<a href="#" onClick="">
-				<img width="100px" alt="ads"
+			<a href="#" onClick=""> <img width="100px" alt="ads"
 				src="${pageContext.request.contextPath}${adsImagesFolder}<c:out value="${qc.hinhAnh}"/>" />
 			</a>
 		</c:if>
@@ -27,8 +26,7 @@
 	style="width: 140px; height: 100%; position: fixed; top: 50px; right: 0px;">
 	<c:forEach var="qc" items="${dsQuangCao}">
 		<c:if test="${qc.viTri == 'right'}">
-			<a href="#" onClick="">
-				<img width="100px" alt="ads"
+			<a href="#" onClick=""> <img width="100px" alt="ads"
 				src="${pageContext.request.contextPath}${adsImagesFolder}<c:out value="${qc.hinhAnh}"/>" />
 			</a>
 		</c:if>
