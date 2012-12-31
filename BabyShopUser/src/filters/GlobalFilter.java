@@ -7,6 +7,8 @@ package filters;
 import dao.BinhLuanDAO;
 import dao.LoaiDoChoiDAO;
 import dao.NhaSanXuatDAO;
+import dao.QuangCaoDAO;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -24,6 +26,7 @@ import javax.servlet.ServletResponse;
 import pojos.BinhLuan;
 import pojos.LoaiDoChoi;
 import pojos.NhaSanXuat;
+import pojos.QuangCao;
 
 /**
  * 
@@ -59,14 +62,20 @@ public class GlobalFilter implements Filter
         // Đường dẫn tới thư mục chứa hình ảnh đồ chơi và avatar
         String toyImagesFolder = _prop.getProperty("ToyImagesFolder");
         String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
+        String adsImagesFolder = _prop.getProperty("AdvertisementImagesFolder");
         request.setAttribute("ToyImagesFolder", toyImagesFolder);
         request.setAttribute("AvatarImagesFolder", avatarImagesFolder);
+        request.setAttribute("AdsImagesFolder", adsImagesFolder);
 
         // Cấu hình tên controller
         String homeController = _prop.getProperty("HomeController");
         String toysController = _prop.getProperty("ToysController");
         request.setAttribute("HomeController", homeController);
         request.setAttribute("ToysController", toysController);
+        
+        //Nạp quảng cáo
+        List<QuangCao> dsQuangCao = new QuangCaoDAO().LayDanhSachQuangCaoHienTai();
+        request.setAttribute("DSQuangCao", dsQuangCao);
     }
 
     private void doAfterProcessing(ServletRequest request,
