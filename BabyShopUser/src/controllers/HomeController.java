@@ -2,16 +2,26 @@ package controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pojos.DoChoi;
 import pojos.DoChoiQuery;
@@ -22,6 +32,7 @@ import util.PagingHelper;
 import dao.DoChoiDAO;
 import dao.LoaiDoChoiDAO;
 import dao.NhaSanXuatDAO;
+import dao.QuangCaoDAO;
 
 @Controller
 public class HomeController
@@ -76,6 +87,30 @@ public class HomeController
         modelAndView
                 .addObject("dsTopDoChoiBanChayNhat", dsTopDoChoiBanChayNhat);
         return modelAndView;
+    }
+    
+    @RequestMapping(method = RequestMethod.POST, value="/increasePromotionClicks", produces = "application/json") 
+    protected @ResponseBody String increasePromotionClicks(@RequestBody String message,
+    		HttpServletRequest arg0,
+    		HttpServletResponse arg1) throws JsonParseException, IOException
+    {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(message);
+		JsonNode quangCaoNode = rootNode.path("maQuangCao");
+		long maQuangCao = quangCaoNode.longValue();
+		
+        boolean status = new QuangCaoDAO().tangSoLuotClickQuangCao(maQuangCao);
+    	Map<String,Object> messageResult = new HashMap<String,Object>(); 
+        if(status == true)
+        {
+        	messageResult.put("result", "1");
+        }
+        else
+        {
+        	messageResult.put("result", "0");
+        }
+        return mapper.writeValueAsString(messageResult);       
     }
 
     @RequestMapping(method = GET, value = "/contact")

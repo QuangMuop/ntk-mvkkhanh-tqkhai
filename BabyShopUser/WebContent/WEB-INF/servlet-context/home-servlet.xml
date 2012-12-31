@@ -17,6 +17,7 @@
 				<prop key="/search">homeController</prop>
 				<prop key="/goAdvancedSearch">homeController</prop>
 				<prop key="/advancedSearch">homeController</prop>
+				<prop key="/increasePromotionClicks">homeController</prop>
 			</props>
 		</property>
 	</bean>

@@ -44,4 +44,16 @@ public class QuangCaoDAO extends AbstractDAO
         session.close();
         return list;
     }
+    
+    public boolean tangSoLuotClickQuangCao(long maQuangCao) {
+    	QuangCao qc = (QuangCao)this.get(maQuangCao);
+        if(qc == null)
+        {
+            return false;
+        }
+        
+        qc.setSoLuongClick(qc.getSoLuongClick() + 1);
+        this.saveOrUpdate(qc);
+        return true;
+    }
 }
