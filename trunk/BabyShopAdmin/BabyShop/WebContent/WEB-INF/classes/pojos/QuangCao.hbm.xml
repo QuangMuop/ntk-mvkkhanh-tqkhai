@@ -29,5 +29,8 @@
         <property name="coHieuLuc" type="boolean">
             <column name="co_hieu_luc" not-null="true" />
         </property>
+        <property name="moTa" type="string">
+            <column name="mo_ta" length="4000" />
+        </property>
     </class>
 </hibernate-mapping>

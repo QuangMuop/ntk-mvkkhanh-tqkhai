@@ -18,7 +18,8 @@ public class QuangCao implements java.io.Serializable
     private Date ketThuc;
     private Integer soLuongClick;
     private boolean coHieuLuc;
-
+    private String moTa;
+    
     public QuangCao()
     {
     }
@@ -31,7 +32,7 @@ public class QuangCao implements java.io.Serializable
 
     public QuangCao(long maQuangCao, String tenQuangCao, String hinhAnh,
             String viTri, Date batDau, Date ketThuc, Integer soLuongClick,
-            boolean coHieuLuc)
+            boolean coHieuLuc, String moTa)
     {
         this.maQuangCao = maQuangCao;
         this.tenQuangCao = tenQuangCao;
@@ -41,6 +42,7 @@ public class QuangCao implements java.io.Serializable
         this.ketThuc = ketThuc;
         this.soLuongClick = soLuongClick;
         this.coHieuLuc = coHieuLuc;
+        this.moTa = moTa;
     }
 
     public long getMaQuangCao()
@@ -122,5 +124,14 @@ public class QuangCao implements java.io.Serializable
     {
         this.coHieuLuc = coHieuLuc;
     }
+    
+    public String getMoTa()
+    {
+        return this.moTa;
+    }
 
+    public void setMoTa(String moTa)
+    {
+        this.moTa = moTa;
+    }
 }

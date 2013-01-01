@@ -30,6 +30,7 @@
                    $('#inputNgayBatDau').attr('disabled', !$(this).is(':checked'));
                    $('#inputNgayKetThuc').attr('disabled', !$(this).is(':checked'));
                    $('#chkCoHieuLuc').attr('disabled', !$(this).is(':checked'));
+                   $('#textareaMoTa').attr('disabled', !$(this).is(':checked'));
                    $('#btnLuu').attr('disabled', !$(this).is(':checked'));                                                    
 			}
 		);
@@ -43,6 +44,7 @@
         $('#inputNgayBatDau').attr('disabled', true);
         $('#inputNgayKetThuc').attr('disabled', true);
         $('#chkCoHieuLuc').attr('disabled', true);
+        $('#textareaMoTa').attr('disabled', true);
         $('#btnLuu').attr('disabled', true);                                                   
     } 
 </script>
