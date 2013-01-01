@@ -70,9 +70,10 @@ public class GlobalFilter implements Filter
         // Cấu hình tên controller
         String homeController = _prop.getProperty("HomeController");
         String toysController = _prop.getProperty("ToysController");
+        String accountsController = _prop.getProperty("AccountsController");
         request.setAttribute("HomeController", homeController);
         request.setAttribute("ToysController", toysController);
-        
+        request.setAttribute("AccountsController", accountsController);
         //Nạp quảng cáo
         List<QuangCao> dsQuangCao = new QuangCaoDAO().LayDanhSachQuangCaoHienTai();
         request.setAttribute("DSQuangCao", dsQuangCao);

@@ -68,4 +68,11 @@
 		<put-attribute name="title" value="Tìm kiếm nâng cao - LEGO Shop" />
 		<put-attribute name="content" value="/pages/content_advanced_search.jsp" />
 	</definition>
+	<!--PAGE: login -->
+	<definition name="login" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_login.jsp" />
+		<put-attribute name="title"
+			value="Đăng nhập - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_login.jsp" />
+	</definition>
 </tiles-definitions>

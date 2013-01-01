@@ -10,6 +10,9 @@
 <c:set var="dsNhaSanXuat" value="${requestScope.dsNhaSanXuat}" />
 <c:set var="homeController" value="${requestScope.HomeController}"/>
 <c:set var="toysController" value="${requestScope.ToysController}"/>
+<c:set var="accountsController" value="${requestScope.AccountsController}"/>
+<!-- Login Account -->
+<c:set var="account" value="${sessionScope.account}" />
 
 <!-- TOPBAR -->
 <div id="top">
@@ -105,11 +108,23 @@
             </li>
             <li> <a href="#">tài khoản<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
+                	<c:if test="${account.getMaTaiKhoan() != null}">
+                		<li><a href="${accountsController}update">thay đổi thông tin</a></li>
+                		<li><a href="${accountsController}history">lịch sử mua
+									hàng </a></li>
+						<li><a href="${accountsController}cart">giỏ hàng </a></li>
+						<li><a href="${accountsController}login">đăng xuất </a></li>
+                	</c:if>
+                	<c:if test="${account.getMaTaiKhoan() == null}">
+                		<li><a href="${accountsController}register">đăng ký </a></li>
+						<li><a href="${accountsController}login">đăng nhập </a></li>
+					</c:if>
+                	<!--
                     <li><a href="#">thanh toán</a></li>
                     <li><a href="#">hóa đơn mua hàng</a></li>
                     <li> <a href="#">đổi mật khẩu </a></li>
                     <li><a href="#">thay đổi thông tin</a></li>
-                    <a href="#"> </a>
+                    -->
                 </ul>
             </li>
             <li> <a href="${homeController}/contact">liên hệ</a></li>
