@@ -79,6 +79,18 @@
     	</init-param>
         <load-on-startup>1</load-on-startup> 
     </servlet>
+    
+    <servlet>
+        <servlet-name>account</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+        	<param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/servlet-context/account-servlet.xml</param-value>
+    	</init-param>
+        <load-on-startup>1</load-on-startup> 
+    </servlet>
     <!-- End Servlets configuration -->
     
     <!-- Servlets mapping -->
@@ -90,6 +102,11 @@
     <servlet-mapping>
         <servlet-name>toy</servlet-name>
         <url-pattern>/toy/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>account</servlet-name>
+        <url-pattern>/account/*</url-pattern>
     </servlet-mapping>
     <!-- End Servlets mapping -->
     
