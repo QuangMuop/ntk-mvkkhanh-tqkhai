@@ -49,6 +49,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label" for="input">Mô tả</label>
+                                            <div class="controls">
+                                                <textarea cols="4" rows="4" style="width: 514px; height: 138px; resize: none" class="input-xlarge" name="moTa" id="textareaMoTa" disabled="disabled"><c:out value="${quangCao.moTa}"/></textarea>                 
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label" for="input">Hình ảnh</label>
                                             <div class="controls">
                                             	<ul class="thumbnails">
