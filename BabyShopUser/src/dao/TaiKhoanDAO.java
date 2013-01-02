@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import pojos.TaiKhoan;
 import util.HibernateUtil;
@@ -46,6 +47,15 @@ public class TaiKhoanDAO extends AbstractDAO{
         }
 
         return null;
+    }
+	
+	public boolean dangKyTK(TaiKhoan taikhoan) {
+        Session session = openSession();		
+        Transaction tx = session.beginTransaction();
+        session.save(taikhoan);
+        tx.commit();
+        session.close();
+        return false;
     }
 
 }
