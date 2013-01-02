@@ -2,13 +2,19 @@ package controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -89,7 +95,7 @@ public class AccountController {
 	protected ModelAndView submitRegister(@ModelAttribute("login") Login login,
 			@ModelAttribute("taiKhoanRegister") TaiKhoanRegister taiKhoanRegister,
 			BindingResult result, HttpServletRequest arg0,
-			HttpServletResponse arg1)
+			HttpServletResponse arg1) throws IOException
 	{
 		ModelAndView modelAndView = new ModelAndView();
 		ArrayList<String> info = new ArrayList<String>();
@@ -163,16 +169,29 @@ public class AccountController {
 			info.add("Mật khẩu không chính xác!");
 			view = "register";
 		}
-
-		// Get verify code
-		String verifycode = taiKhoanRegister.getVerifycode();
-
-		// Check verify code valid
-		if (!verifycode.equals("ABC")) {
-			info.add("Mã xác nhận không chính xác!");
-			view = "register";
-		}
-
+		
+		//Verify code
+		InputStream configStream = arg0
+                .getServletContext()
+                .getResourceAsStream("/WEB-INF/config/global-config.properties");
+		Properties _prop = new Properties();
+        _prop.load(configStream);
+        String captchaPrivateKey = _prop.getProperty("CaptchaPrivateKey");
+        
+		ReCaptchaImpl reCaptcha = new ReCaptchaImpl();  
+        reCaptcha.setPrivateKey(captchaPrivateKey);  
+          
+        String remoteAddr = arg0.getRemoteAddr();  
+        String challengeField = arg0.getParameter("recaptcha_challenge_field");  
+        String responseField = arg0.getParameter("recaptcha_response_field");  
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challengeField, responseField);  
+  
+        if(!reCaptchaResponse.isValid())  
+        {  
+        	info.add("Mã xác nhận không chính xác!");
+			view = "register"; 
+        }  
+          
 		taikhoan.setNgayCapNhat(new Date());
 		taikhoan.setDaXoa(Boolean.FALSE);
 		taikhoan.setDaBan(Boolean.FALSE);
