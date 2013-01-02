@@ -4,6 +4,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dao.TaiKhoanDAO;
 
+import pojos.LoaiTaiKhoan;
 import pojos.Login;
 import pojos.Product;
 import pojos.TaiKhoan;
+import pojos.TaiKhoanRegister;
+import util.DateUtil;
 
 @SessionAttributes({ "account", "products"})
 @Controller
@@ -63,6 +67,126 @@ public class AccountController {
 		} else {
 
 			modelAndView.setViewName("login");
+			modelAndView.addObject("state", 0);
+		}
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(method = GET, value="/register")
+	protected ModelAndView register(
+			@ModelAttribute("taiKhoanRegister") TaiKhoanRegister taiKhoanRegister,
+			BindingResult result, HttpServletRequest arg0,
+			HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("register");
+		
+		return modelAndView;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value="/submit-register")
+	protected ModelAndView submitRegister(@ModelAttribute("login") Login login,
+			@ModelAttribute("taiKhoanRegister") TaiKhoanRegister taiKhoanRegister,
+			BindingResult result, HttpServletRequest arg0,
+			HttpServletResponse arg1)
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		ArrayList<String> info = new ArrayList<String>();
+		String view = "login";
+
+		TaiKhoanDAO helper = new TaiKhoanDAO();
+		TaiKhoan taikhoan = new TaiKhoan();
+		
+		String hoTen = taiKhoanRegister.getHoTen();
+		taikhoan.setHoTen(hoTen);
+		
+		int dd = Integer.parseInt(taiKhoanRegister.getDd());
+		int mm = Integer.parseInt(taiKhoanRegister.getMm());
+		int yy = Integer.parseInt(taiKhoanRegister.getYy());
+		
+		String strNgaySinh = yy + "-" + mm + "-" + dd;
+		Date ngaySinh = DateUtil.convertStringToDate(strNgaySinh, "yyyy-MM-dd");
+		taikhoan.setNgaySinh(ngaySinh);
+
+		// Get gender info
+		int gender = Integer.parseInt(taiKhoanRegister.getGioiTinh());
+		if (gender == 1) {
+			taikhoan.setGioiTinh(Boolean.TRUE);
+		} else {
+			taikhoan.setGioiTinh(Boolean.FALSE);
+		}
+
+		// Get city info
+		String place = taiKhoanRegister.getThanhPho();
+		taikhoan.setThanhPho(place);
+
+		// Get email info
+		String email = taiKhoanRegister.getEmail();
+		taikhoan.setEmail(email);
+
+		// Get phone info
+		String phone = taiKhoanRegister.getDienThoai();
+		taikhoan.setDienThoai(phone);
+
+		// Get username info
+		String username = taiKhoanRegister.getMaTaiKhoan();
+		taikhoan.setMaTaiKhoan(username);
+
+		// Check username valid
+		if((TaiKhoan)helper.get(taiKhoanRegister.getMaTaiKhoan()) != null)
+		{
+			info.add("Tên đăng nhập này đã có người sử dụng");
+			view = "register";
+		}
+		if (username.isEmpty()) {
+			info.add("Tên đăng nhập không được để trống!");
+			view = "register";
+		}
+		
+		
+		// Get password info
+		String password = taiKhoanRegister.getMatKhau();
+		taikhoan.setMatKhau(password);
+
+		// Check password valid
+		if (password.isEmpty()) {
+			info.add("Mật khẩu không được để trống!");
+			view = "register";
+		}
+
+		// Get confirm password
+		String confirm_password = taiKhoanRegister.getXacNhanMatKhau();
+
+		// Check password & confirm password same
+		if (!password.equals(confirm_password)) {
+			info.add("Mật khẩu không chính xác!");
+			view = "register";
+		}
+
+		// Get verify code
+		String verifycode = taiKhoanRegister.getVerifycode();
+
+		// Check verify code valid
+		if (!verifycode.equals("ABC")) {
+			info.add("Mã xác nhận không chính xác!");
+			view = "register";
+		}
+
+		taikhoan.setNgayCapNhat(new Date());
+		taikhoan.setDaXoa(Boolean.FALSE);
+		taikhoan.setDaBan(Boolean.FALSE);
+
+		LoaiTaiKhoan loaitaikhoan = new LoaiTaiKhoan(2);
+		taikhoan.setLoaiTaiKhoan(loaitaikhoan);
+
+		if (!view.equals("register")) {
+			helper.dangKyTK(taikhoan);
+			modelAndView.setViewName(view);
+			modelAndView.addObject("state", 1);
+		} else {
+			modelAndView.setViewName(view);
+			modelAndView.addObject("info", info);
 			modelAndView.addObject("state", 0);
 		}
 

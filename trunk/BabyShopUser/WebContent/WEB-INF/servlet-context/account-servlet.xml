@@ -11,6 +11,8 @@
 			<props>
 				<prop key="/login">accountController</prop>
 				<prop key="/submit-login">accountController</prop>
+				<prop key="/register">accountController</prop>
+				<prop key="/submit-register">accountController</prop>
 			</props>
 		</property>
 	</bean>
