@@ -74,9 +74,16 @@ public class GlobalFilter implements Filter
         request.setAttribute("HomeController", homeController);
         request.setAttribute("ToysController", toysController);
         request.setAttribute("AccountsController", accountsController);
+        
         //Nạp quảng cáo
         List<QuangCao> dsQuangCao = new QuangCaoDAO().LayDanhSachQuangCaoHienTai();
         request.setAttribute("DSQuangCao", dsQuangCao);
+        
+        //Cấu hình Captcha Public & Private Key
+        String captchaPublicKey = _prop.getProperty("CaptchaPublicKey");
+        String captchaPrivateKey = _prop.getProperty("CaptchaPrivateKey");
+        request.setAttribute("captchaPublicKey", captchaPublicKey);
+        request.setAttribute("captchaPrivateKey", captchaPrivateKey);
     }
 
     private void doAfterProcessing(ServletRequest request,

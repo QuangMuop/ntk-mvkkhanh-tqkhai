@@ -1,6 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="captcha" uri="/WEB-INF/tlds/captcha.tld" %>  
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<c:set var="captchaPublicKey" value="${requestScope.captchaPublicKey}" />
+<c:set var="captchaPrivateKey" value="${requestScope.captchaPrivateKey}" />
 
 <h2 class="highlighted-title">Đăng ký thành viên</h2>
 <h4>Những thông tin có đánh dấu (*) là bắt buộc</h4>
@@ -190,15 +195,9 @@
 					</tr>
 					<tr>
 						<td align="right">Mã kiểm tra</td>
-						<td><img border="0" style="cursor: pointer"
-							src="${pageContext.request.contextPath}/images/registers-member/captcha.png"
-							onclick="refreshImage()" title="Tạo mã xác nhận khác"></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td align="right">Nhập mã kiểm tra *</td>
-						<td><form:input path="verifycode" name="inputverifycode"
-								class="nice-textbox input280" /></td>
+						<td>
+							<captcha:captcha themeName="clean" publickey="${captchaPublicKey}" privatekey="${captchaPrivateKey}"/>
+						</td>
 						<td></td>
 					</tr>
 					<tr>
