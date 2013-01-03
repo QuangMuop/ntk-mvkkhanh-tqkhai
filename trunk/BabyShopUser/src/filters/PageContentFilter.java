@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -59,6 +60,90 @@ public class PageContentFilter implements Filter
         
         List<BinhLuan> dsBinhLuanMoiNhat = binhLuanDAO.getTopNPOJOsOrderedByField(3, "ngayBinhLuan", true);
         request.setAttribute("dsBinhLuanMoiNhat", dsBinhLuanMoiNhat);
+        
+        ArrayList<String> dsThang = new ArrayList<String>();
+		dsThang.add("Tháng một");
+		dsThang.add("Tháng hai");
+		dsThang.add("Tháng ba");
+		dsThang.add("Tháng bốn");
+		dsThang.add("Tháng năm");
+		dsThang.add("Tháng sáu");
+		dsThang.add("Tháng bảy");
+		dsThang.add("Tháng tám");
+		dsThang.add("Tháng chín");
+		dsThang.add("Tháng mười");
+		dsThang.add("Tháng mười một");
+		dsThang.add("Tháng mười hai");
+
+		request.setAttribute("monthList", dsThang);
+		
+		ArrayList<String> dsTinh = new ArrayList<String>();
+		dsTinh.add("An Giang");
+		dsTinh.add("Bà Rịa Vũng Tàu");
+		dsTinh.add("Bắc Cạn");
+		dsTinh.add("Bắc Giang");
+		dsTinh.add("Bạc Liêu");
+		dsTinh.add("Bắc Ninh");
+		dsTinh.add("Bến Tre");
+		dsTinh.add("Bình Định");
+		dsTinh.add("Bình Dương");
+		dsTinh.add("Bình Phước");
+		dsTinh.add("Bình Thuận");
+		dsTinh.add("Cà Mau");
+		dsTinh.add("Cần Thơ");
+		dsTinh.add("Cao Bằng");
+		dsTinh.add("Đà Nẵng");
+		dsTinh.add("Đăk Lăk");
+		dsTinh.add("Điện Biên");
+		dsTinh.add("Đồng Nai");
+		dsTinh.add("Đồng Tháp");
+		dsTinh.add("Gia Lai");
+		dsTinh.add("Hà Đông");
+		dsTinh.add("Hà Giang");
+		dsTinh.add("Hạ Long");
+		dsTinh.add("Hà Nam");
+		dsTinh.add("Hà Nội");
+		dsTinh.add("Hà Tây");
+		dsTinh.add("Hà Tĩnh");
+		dsTinh.add("Hải Dương");
+		dsTinh.add("Hải Phòng");
+		dsTinh.add("Hồ Chí Minh");
+		dsTinh.add("Hòa Bình");
+		dsTinh.add("Hưng Yên");
+		dsTinh.add("Khánh Hòa");
+		dsTinh.add("Kiên Giang");
+		dsTinh.add("KonTum");
+		dsTinh.add("Lai Châu");
+		dsTinh.add("Lâm Đồng");
+		dsTinh.add("Lạng Sơn");
+		dsTinh.add("Lào Cai");
+		dsTinh.add("Long An");
+		dsTinh.add("Nam Định");
+		dsTinh.add("Nghệ An");
+		dsTinh.add("Ninh Bình");
+		dsTinh.add("Ninh Thuận");
+		dsTinh.add("Phú Thọ");
+		dsTinh.add("Phú Yên");
+		dsTinh.add("Quảng Bình");
+		dsTinh.add("Quảng Nam");
+		dsTinh.add("Quảng Ngãi");
+		dsTinh.add("Quảng Ninh");
+		dsTinh.add("Quảng Trị");
+		dsTinh.add("Sóc Trăng");
+		dsTinh.add("Tây Ninh");
+		dsTinh.add("Thái Bình");
+		dsTinh.add("Thái Nguyên");
+		dsTinh.add("Thanh Hóa");
+		dsTinh.add("Thừa Thiên Huế");
+		dsTinh.add("Tiền Giang");
+		dsTinh.add("Trà Vinh");
+		dsTinh.add("Tuyên Quang");
+		dsTinh.add("Vĩnh Long");
+		dsTinh.add("Vĩnh Phúc");
+		dsTinh.add("Yên Bái");
+		dsTinh.add("Nơi Khác");
+
+		request.setAttribute("provinceList", dsTinh);
     }    
     
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
