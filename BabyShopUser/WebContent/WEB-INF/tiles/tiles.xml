@@ -82,4 +82,11 @@
 			value="Đăng ký tài khoản - Shop LEGO" />
 		<put-attribute name="content" value="/pages/content_register.jsp" />
 	</definition>
+	<!--PAGE: account_details -->
+	<definition name="account_details" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_account_details.jsp" />
+		<put-attribute name="title"
+			value="Cập nhật tài khoản - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_account_details.jsp" />
+	</definition>
 </tiles-definitions>

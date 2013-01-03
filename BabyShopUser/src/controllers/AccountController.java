@@ -2,10 +2,12 @@ package controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
@@ -16,12 +18,18 @@ import javax.servlet.http.HttpServletResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.TaiKhoanDAO;
@@ -36,6 +44,12 @@ import util.DateUtil;
 @SessionAttributes({ "account", "products"})
 @Controller
 public class AccountController {
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(byte[].class,
+				new ByteArrayMultipartFileEditor());
+	}
+	
 	@RequestMapping(method = GET, value="/login")
 	protected ModelAndView login(@ModelAttribute("login") Login login,
 			BindingResult result, HttpServletRequest arg0,
@@ -86,6 +100,9 @@ public class AccountController {
 			HttpServletResponse arg1) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("register");
+		
+		Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
+		modelAndView.addObject("currentDate", currentDate);
 		
 		return modelAndView;
 	}
@@ -208,6 +225,119 @@ public class AccountController {
 			modelAndView.addObject("info", info);
 			modelAndView.addObject("state", 0);
 		}
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(method = GET, value="/update")
+	protected ModelAndView update(
+			@ModelAttribute("login") Login login,
+			@ModelAttribute("account") TaiKhoan account,
+			@ModelAttribute("taiKhoanRegister") TaiKhoanRegister taiKhoanRegister,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (account.getHoTen() != null) {
+			modelAndView.setViewName("account_details");
+
+			TaiKhoan taiKhoan = account;
+
+			modelAndView.addObject("account", taiKhoan);
+		
+			Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
+			modelAndView.addObject("currentDate", currentDate);
+		} else {
+			TaiKhoan taiKhoan = new TaiKhoan();
+			modelAndView.addObject("account", taiKhoan);
+
+			modelAndView.setViewName("login");
+
+		}
+		return modelAndView;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(method = RequestMethod.POST, value="/submit-update")
+	public ModelAndView submitUpdate(
+			@ModelAttribute("taiKhoanRegister") TaiKhoanRegister taiKhoanRegister,
+			BindingResult result,
+			@RequestParam(value = "image", required = false) MultipartFile image,
+			@ModelAttribute("account") TaiKhoan account,
+			HttpServletRequest arg0, HttpServletResponse arg1)
+			throws IOException {
+		arg1.setContentType("text/html;charset=UTF-8");
+		arg0.setCharacterEncoding("UTF-8");
+
+		ModelAndView modelAndView = new ModelAndView();
+		TaiKhoan taikhoan = account;
+		TaiKhoanDAO helper = new TaiKhoanDAO();
+		TaiKhoan oldTaiKhoan = (TaiKhoan)helper.get(taikhoan.getMaTaiKhoan());
+
+		String fileName = "";     
+        //Nếu user có update hình
+		if(image.getSize() != 0){
+			fileName = image.getOriginalFilename();
+			
+			taikhoan.setAvatar(fileName);
+			
+			try{ 
+				File newFiles= new File(arg0.getSession().getServletContext().getRealPath("/uploads/avatars/"), fileName); 
+				FileUtils.writeByteArrayToFile(newFiles,image.getBytes());
+				} catch(IOException e){ 
+					e.printStackTrace();
+				} 
+		}
+		else
+		{
+			taikhoan.setAvatar(oldTaiKhoan.getAvatar());
+		}
+
+		String hoTen = taiKhoanRegister.getHoTen();
+		taikhoan.setHoTen(hoTen);
+
+		int dd = Integer.parseInt(taiKhoanRegister.getDd());
+		int mm = Integer.parseInt(taiKhoanRegister.getMm());
+		int yy = Integer.parseInt(taiKhoanRegister.getYy());
+
+		String strNgaySinh = yy + "-" + mm + "-" + dd;
+		Date ngaySinh = DateUtil.convertStringToDate(strNgaySinh, "yyyy-MM-dd");
+		taikhoan.setNgaySinh(ngaySinh);
+
+		// Get gender info
+		int gender = Integer.parseInt(taiKhoanRegister.getGioiTinh());
+		if (gender == 1) {
+			taikhoan.setGioiTinh(Boolean.TRUE);
+		} else {
+			taikhoan.setGioiTinh(Boolean.FALSE);
+		}
+
+		// Get city info
+		String place = taiKhoanRegister.getThanhPho();
+		taikhoan.setThanhPho(place);
+
+		// Get email info
+		String email = taiKhoanRegister.getEmail();
+		taikhoan.setEmail(email);
+
+		// Get phone info
+		String phone = taiKhoanRegister.getDienThoai();
+		taikhoan.setDienThoai(phone);
+
+		taikhoan.setNgayCapNhat(new Date());
+
+		LoaiTaiKhoan loaitaikhoan = new LoaiTaiKhoan(2);
+		taikhoan.setLoaiTaiKhoan(loaitaikhoan);
+
+		helper.saveOrUpdate(taikhoan);
+		
+		
+		
+	
+		Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
+		modelAndView.addObject("currentDate", currentDate);
+		modelAndView.addObject("account", taikhoan);
+		modelAndView.addObject("state", 1);
+		modelAndView.setViewName("account_details");
 
 		return modelAndView;
 	}
