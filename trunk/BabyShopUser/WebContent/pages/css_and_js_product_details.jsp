@@ -23,6 +23,80 @@
     $(function() {
         $( "#tabs" ).tabs();
     });
+
+    function sendComment(maDoChoi, myAvatar, myName){
+    	var strComment = $("#comment-content").val();
+
+    	var a_p = "";
+    	var curr_time = new Date();
+    	var curr_hour = curr_time.getHours();
+    	if (curr_hour < 12)
+    	   {
+    	   a_p = "AM";
+    	   }
+    	else
+    	   {
+    	   a_p = "PM";
+    	   }
+    	if (curr_hour == 0)
+    	   {
+    	   curr_hour = 12;
+    	   }
+    	if (curr_hour > 12)
+    	   {
+    	   curr_hour = curr_hour - 12;
+    	   }
+
+    	var curr_min = curr_time.getMinutes();
+
+    	curr_min = curr_min + "";
+
+    	if (curr_min.length == 1)
+    	   {
+    	   curr_min = "0" + curr_min;
+    	   }
+ 	   
+    	var curr_date = curr_time.getDate();
+
+    	var curr_month = curr_time.getMonth();
+    	curr_month++;
+    	var curr_year = curr_time.getFullYear();
+    	var myDate = curr_hour + ':' + curr_min + ' ' + curr_date + "/" + curr_month + "/" + curr_year;
+    	
+    	var message = {
+    		maDoChoi: maDoChoi,	
+    		noiDung: strComment,
+    		thoiGian: curr_time
+    	};
+    	
+    	var url = "/BabyShopUser/account/add-comment";
+    	$.ajax({
+    		type : 'POST',
+    		url : url,
+    		dataType : "json",
+    		contentType : "application/json",
+    		data : JSON.stringify(message),
+    		success : function(data) {
+    			if(data.result == "1")
+                {
+    				$("#commentlist").append('<li class="comment">'
+    	    				+ '<div class="avatar32x32"><img src="' + myAvatar + '" alt="Avatar"/></div>' 
+    	    				+ '<div class="comment-container">'
+                            + '<p> Bởi <span class="user">'+ myName + '</span> vào <span>' + myDate +'</span> : </p>'
+							+ '<div class="comment-text">'
+							+ '<p>' + strComment + '</p>'
+							+ '</div>'
+                        	+ '</div>'
+                        	+ ' <div class="clear"></div>'
+    	    				+ '</li>'
+    	    		);
+                } 			
+    		},
+    		error : function() {
+    			alert("Nhận xét thất bại!");
+    		}
+    	});
+    }
 </script>
 
 <!--END JQUERY UI-->

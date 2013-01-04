@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import pojos.BinhLuan;
@@ -26,6 +27,7 @@ import dao.HinhAnhDoChoiDAO;
 import dao.LoaiDoChoiDAO;
 import dao.NhaSanXuatDAO;
 
+@SessionAttributes({"doChoi"})
 @Controller
 public class ToyController {
 	private DoChoiDAO doChoiDAO = new DoChoiDAO();
