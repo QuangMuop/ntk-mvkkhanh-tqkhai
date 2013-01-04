@@ -13,6 +13,7 @@
 <c:set var="dsHinhAnhDoChoi" value="${dsHinhAnhDoChoi}" scope="page"/>
 <c:set var="avatarImagesFolder" value="${requestScope.AvatarImagesFolder}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
+<c:set var="account" value="${sessionScope.account}" />
 <div class="product">
     <div class="images">
         <div class="thumbnails">
@@ -60,7 +61,7 @@
             </div>
             <div id="tabs-2">
                 <div class="comment-area">
-                    <ul class="commentlist">
+                    <ul class="commentlist" id="commentlist">
                         <c:forEach var="bl" items="${dsBinhLuan}">
                             <li class="comment">
                                 <div class="avatar32x32"> <img src="${pageContext.request.contextPath}${avatarImagesFolder}<c:out value="${bl.taiKhoan.avatar}"/>" alt="Avatar"/> </div>
@@ -71,13 +72,31 @@
                                     </div>
                                     <div class="clear"></div>
                                 </div>
-                                <div class="clear"/>
-                            </li>
-                        </c:forEach>
+                                <div class="clear"></div>
+                            </li>                           
+                        </c:forEach>                      
+                    </ul>
+                    <ul class="commentlist" id="add-comment">
+                    	 <c:if test="${account.getMaTaiKhoan() != null}">
+								<li class="comment">
+									<div class="avatar32x32">
+										<img src="${pageContext.request.contextPath}${avatarImagesFolder}<c:out value="${account.avatar}"/>" alt="Avatar"/>
+									</div>
+									<div class="comment-container" style="padding: 3px;">
+										<input id="comment-content" placeholder="Nhận xét của bạn..." class="nice-textbox" style="width: 270px;" />										
+									</div>
+									<div class="clear" ></div>
+								</li>
+						</c:if>
                     </ul>
                     <p>
-                        <button class="rectangular-button" href="#">Thêm nhận xét</button>
-                    </p>
+							<c:if test="${account.getMaTaiKhoan() != null}">
+								<c:set var="myAvatar" value="${pageContext.request.contextPath}${avatarImagesFolder}${account.avatar}" />
+								<c:set var="myName" value="${account.hoTen}" />							
+								<button onclick="sendComment(${doChoi.maDoChoi}, '${myAvatar}', '${myName}')" class="rectangular-button"
+									>Thêm nhận xét</button>
+							</c:if>
+					</p>
                     <div id="review_form_wrapper" style="display: none;">
                         <div id="review_form">
                             <div id="respond">

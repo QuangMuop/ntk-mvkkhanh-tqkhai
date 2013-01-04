@@ -6,7 +6,7 @@
     <class name="pojos.BinhLuan" table="binh_luan">
         <id name="maBinhLuan" type="long">
             <column name="ma_binh_luan" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="doChoi" class="pojos.DoChoi" fetch="select" lazy="false">
             <column name="ma_do_choi" not-null="true" />

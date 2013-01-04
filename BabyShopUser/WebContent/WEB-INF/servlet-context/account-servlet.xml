@@ -15,6 +15,7 @@
 				<prop key="/submit-register">accountController</prop>
 				<prop key="/update">accountController</prop>
 				<prop key="/submit-update">accountController</prop>
+				<prop key="/add-comment">accountController</prop>
 			</props>
 		</property>
 	</bean>

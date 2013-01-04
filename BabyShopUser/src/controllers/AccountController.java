@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,16 +26,27 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dao.BinhLuanDAO;
+import dao.DoChoiDAO;
 import dao.TaiKhoanDAO;
 
+import pojos.BinhLuan;
+import pojos.DoChoi;
 import pojos.LoaiTaiKhoan;
 import pojos.Login;
 import pojos.Product;
@@ -373,5 +386,37 @@ public class AccountController {
 		}
 
 		return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/add-comment", produces = "application/json")
+	protected @ResponseBody String addComment(@ModelAttribute("account") TaiKhoan account,
+			@RequestBody String message, HttpServletRequest arg0,
+			HttpServletResponse arg1) throws JsonParseException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(message);
+		JsonNode noiDungNode = rootNode.path("noiDung");
+		JsonNode maDoChoiNode = rootNode.path("maDoChoi");
+		JsonNode thoiGianNode = rootNode.path("thoiGian");
+		long maDoChoi = maDoChoiNode.longValue();
+		String noiDung = noiDungNode.textValue();
+		String thoiGian = thoiGianNode.textValue();
+
+		BinhLuan binhLuan = new BinhLuan();
+		DoChoiDAO doChoiDAO = new DoChoiDAO();
+		DoChoi doChoi = doChoiDAO.get(maDoChoi);
+		binhLuan.setDoChoi(doChoi);
+		binhLuan.setDaXoa(false);
+		binhLuan.setKiemDuyet(false);
+		binhLuan.setNgayBinhLuan(DateUtil.convertStringToDate(thoiGian, "HH:mm yyyy-MM-dd"));
+		binhLuan.setNoiDung(noiDung);
+		binhLuan.setTaiKhoan(account);
+
+		BinhLuanDAO commentHelper = new BinhLuanDAO();
+		commentHelper.saveOrUpdate(binhLuan);
+
+		Map<String,Object> messageResult = new HashMap<String,Object>(); 
+        messageResult.put("result", "1");
+        
+        return mapper.writeValueAsString(messageResult);      
 	}
 }
