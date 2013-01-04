@@ -183,7 +183,7 @@ public class AccountController {
 
 		// Check password & confirm password same
 		if (!password.equals(confirm_password)) {
-			info.add("Mật khẩu không chính xác!");
+			info.add("Mật khẩu và xác nhận mật khẩu không trùng khớp!");
 			view = "register";
 		}
 		
@@ -269,6 +269,8 @@ public class AccountController {
 		arg0.setCharacterEncoding("UTF-8");
 
 		ModelAndView modelAndView = new ModelAndView();
+		int state = 1;
+		ArrayList<String> info = new ArrayList<String>();
 		TaiKhoan taikhoan = account;
 		TaiKhoanDAO helper = new TaiKhoanDAO();
 		TaiKhoan oldTaiKhoan = (TaiKhoan)helper.get(taikhoan.getMaTaiKhoan());
@@ -327,17 +329,48 @@ public class AccountController {
 
 		LoaiTaiKhoan loaitaikhoan = new LoaiTaiKhoan(2);
 		taikhoan.setLoaiTaiKhoan(loaitaikhoan);
+		
+		// Get password info
+		String password = taiKhoanRegister.getMatKhau();
+		// Check password valid
+		if (!password.isEmpty()) {
+			// Get confirm password
+			String confirm_password = taiKhoanRegister.getXacNhanMatKhau();
 
-		helper.saveOrUpdate(taikhoan);
+			// Check password & confirm password same
+			if (!password.equals(confirm_password)) {
+				info.add("Mật khẩu và xác nhận mật khẩu không trùng khớp!");
+				state = 0;
+			}
+			else
+			{
+				taikhoan.setMatKhau(password);
+			}
+		}
+		else
+		{
+			taikhoan.setMatKhau(oldTaiKhoan.getMatKhau());
+		}
+
 		
 		
-		
-	
-		Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
-		modelAndView.addObject("currentDate", currentDate);
-		modelAndView.addObject("account", taikhoan);
-		modelAndView.addObject("state", 1);
-		modelAndView.setViewName("account_details");
+		if(state == 0)
+		{	
+			Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
+			modelAndView.addObject("currentDate", currentDate);
+			modelAndView.addObject("state", state);
+			modelAndView.addObject("info", info);
+			modelAndView.setViewName("account_details");
+		}
+		else
+		{
+			helper.saveOrUpdate(taikhoan);	
+			Date currentDate = DateUtil.getCurrentDate("yyyy-MM-dd");
+			modelAndView.addObject("currentDate", currentDate);
+			modelAndView.addObject("account", taikhoan);
+			modelAndView.addObject("state", state);
+			modelAndView.setViewName("account_details");
+		}
 
 		return modelAndView;
 	}

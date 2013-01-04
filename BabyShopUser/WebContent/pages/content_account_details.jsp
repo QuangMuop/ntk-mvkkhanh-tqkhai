@@ -11,10 +11,19 @@
 
 <h2 class="highlighted-title">Cập nhật thông tin tài khoản</h2>
 	<div align="center" class="div-register">
-		<c:if test="${state == 1}">
+		<c:if test="${state == 0}">
+			<c:forEach var="i" items="${info}">
 				<div>
 					<p>
-						<font color="blue">Cập nhật thành công</font>
+						<font color="red">${i}</font>
+					</p>
+				</div>
+			</c:forEach>
+		</c:if>
+		<c:if test="${state == 1}">
+			<div>
+					<p>
+						<font color="blue">CẬP NHẬT THÀNH CÔNG</font>
 					</p>
 				</div>
 		</c:if>
@@ -24,7 +33,7 @@
 		<fieldset>
 			<div class="div-register">
 				<table>
-					<tr>
+				<tr>
                     <td><span class="myh3">Thông tin cá nhân</span></td>
                     <td></td>
                     <td></td>
@@ -128,6 +137,23 @@
                         </c:if>
                     <td></td>
                 </tr>
+                <tr>
+                    <td><span class="myh3">Cập nhật mật khẩu</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+						<td align="right">Mật khẩu mới</td>
+						<td><form:password path="matKhau" name="password"
+								class="nice-textbox input280" /></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td align="right">Xác nhận mật khẩu mới</td>
+						<td><form:password path="xacNhanMatKhau"
+								name="confirm_password" class="nice-textbox input280" /></td>
+						<td></td>
+					</tr>
                 <tr>
                     <td colspan="3" align="center">
                         <input type="submit" value="Cập nhật" class="rectangular-button">
