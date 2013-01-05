@@ -90,6 +90,7 @@
                         	+ ' <div class="clear"></div>'
     	    				+ '</li>'
     	    		);
+    				$("#nComments").text('Nhận xét (' + data.nComments + ')');
                 } 			
     		},
     		error : function() {
