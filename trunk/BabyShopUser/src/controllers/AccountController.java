@@ -413,10 +413,10 @@ public class AccountController {
 
 		BinhLuanDAO commentHelper = new BinhLuanDAO();
 		commentHelper.saveOrUpdate(binhLuan);
-
+		int nComments = commentHelper.demSoLuongBinhLuanTheoMaDoChoi(maDoChoi);
 		Map<String,Object> messageResult = new HashMap<String,Object>(); 
         messageResult.put("result", "1");
-        
+        messageResult.put("nComments", nComments);
         return mapper.writeValueAsString(messageResult);      
 	}
 }

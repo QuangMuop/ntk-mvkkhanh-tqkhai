@@ -48,7 +48,7 @@
         <div id="tabs">
             <ul>
                 <li> <a href="#tabs-1">Thông tin sản phẩm</a> </li>
-                <li> <a href="#tabs-2">Nhận xét (<c:out value="${dsBinhLuan.size()}"/>)</a> </li>
+                <li> <a id="nComments" href="#tabs-2">Nhận xét (<c:out value="${dsBinhLuan.size()}"/>)</a> </li>
             </ul>
             <div id="tabs-1">
                 <h2>Mô tả sản phẩm</h2>

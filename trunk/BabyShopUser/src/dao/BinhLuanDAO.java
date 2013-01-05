@@ -65,4 +65,22 @@ public class BinhLuanDAO extends AbstractDAO<BinhLuan, Long>
 
         return list;
     }
+    
+    public int demSoLuongBinhLuanTheoMaDoChoi(Long maDoChoi)
+    {
+    	int result = 0;
+        Session session = openSession();
+        try {
+            String hql = "select count(*) from BinhLuan bl where bl.doChoi.maDoChoi=:maDoChoi";
+            Query query = session.createQuery(hql);
+            query.setLong("maDoChoi", maDoChoi);
+            result = Integer.parseInt(query.uniqueResult().toString());
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return result;
+    }
 }
