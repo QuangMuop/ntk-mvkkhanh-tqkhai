@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -42,10 +43,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.BinhLuanDAO;
+import dao.ChiTietHoaDonDAO;
 import dao.DoChoiDAO;
+import dao.HoaDonDAO;
 import dao.TaiKhoanDAO;
 
 import pojos.BinhLuan;
+import pojos.ChiTietHoaDon;
 import pojos.DoChoi;
 import pojos.LoaiTaiKhoan;
 import pojos.Login;
@@ -53,6 +57,7 @@ import pojos.Product;
 import pojos.TaiKhoan;
 import pojos.TaiKhoanRegister;
 import util.DateUtil;
+import util.PagingHelper;
 
 @SessionAttributes({ "account", "products"})
 @Controller
@@ -418,5 +423,96 @@ public class AccountController {
         messageResult.put("result", "1");
         messageResult.put("nComments", nComments);
         return mapper.writeValueAsString(messageResult);      
+	}
+	
+	@RequestMapping(method = GET, value="/orders-history")
+	protected ModelAndView ordersHistory(@ModelAttribute("login") Login login,
+			@ModelAttribute("account") TaiKhoan account,
+			@RequestParam(value = "trang", required = false) String strTrang,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (account.getMaTaiKhoan() != null) {
+			modelAndView.setViewName("orders_history");
+			TaiKhoan taiKhoan = account;
+
+			HoaDonDAO hoaDonHelper = new HoaDonDAO();
+			ChiTietHoaDonDAO chiTietHoaDonHelper = new ChiTietHoaDonDAO();
+
+			ArrayList<String> ngayMua = new ArrayList<String>();
+			ArrayList<String> tenDoChoi = new ArrayList<String>();
+			ArrayList<String> donGia = new ArrayList<String>();
+			ArrayList<String> soLuong = new ArrayList<String>();
+			ArrayList<String> maDonHang = new ArrayList<String>();
+			ArrayList<String> trangThai = new ArrayList<String>();
+			ArrayList<String> maDoChoi = new ArrayList<String>();
+			
+			int trang = 1;
+			int soLuongDonHangTrenTrang = 5;
+			int soLuongKetQua = 0;
+			if(strTrang != null && strTrang != "")
+			{
+				trang = Integer.parseInt(strTrang);
+			}
+			List<ChiTietHoaDon> dsHoaDon = hoaDonHelper.layDS(taiKhoan
+					.getMaTaiKhoan(), trang, soLuongDonHangTrenTrang);
+			soLuongKetQua = hoaDonHelper.demSoLuongDonHangTheoTaiKhoan(taiKhoan.getMaTaiKhoan());
+			int soLuongTrang;
+			if (soLuongKetQua % soLuongDonHangTrenTrang != 0)
+	        {
+				soLuongTrang = 1;
+	        }
+			else
+			{
+				soLuongTrang = soLuongKetQua / soLuongDonHangTrenTrang;
+				if ((soLuongKetQua % soLuongDonHangTrenTrang) != 0)
+		        {
+					soLuongTrang++;
+		        }
+			}
+			
+			modelAndView.addObject("soLuongKetQua", soLuongKetQua);
+	        modelAndView.addObject("soLuongTrang", soLuongTrang);
+	        List<Integer> pageNumbers = PagingHelper.PagingCaculator(trang, soLuongDonHangTrenTrang, soLuongKetQua);
+	        modelAndView.addObject("pageNumbers", pageNumbers);
+			
+			
+			for (int i = 0; i < dsHoaDon.size(); i++) {
+				ChiTietHoaDon cthd = dsHoaDon.get(i);
+
+				ngayMua.add(cthd.getHoaDon().getNgayLap().toString());
+				donGia.add(cthd.getDonGia().toString());
+				soLuong.add(cthd.getSoLuong() + "");
+				maDonHang.add(cthd.getHoaDon().getMaHoaDon() + "");
+				if (cthd.getHoaDon().getDaThanhToan()) {
+					trangThai.add("Hoàn tất");
+				} else {
+					trangThai.add("Chưa hoàn tất");
+				}
+
+				tenDoChoi.add(chiTietHoaDonHelper
+						.layCTHD(cthd.getMaChiTietHoaDon()).getDoChoi()
+						.getTenDoChoi());
+				maDoChoi.add(chiTietHoaDonHelper
+						.layCTHD(cthd.getMaChiTietHoaDon()).getDoChoi()
+						.getMaDoChoi() + "");
+			}
+
+			modelAndView.addObject("ngayMua", ngayMua);
+			modelAndView.addObject("donGia", donGia);
+			modelAndView.addObject("soLuong", soLuong);
+			modelAndView.addObject("maDonHang", maDonHang);
+			modelAndView.addObject("trangThai", trangThai);
+			modelAndView.addObject("tenDoChoi", tenDoChoi);
+			modelAndView.addObject("maDoChoi", maDoChoi);
+		} else {
+			TaiKhoan taiKhoan = new TaiKhoan();
+			modelAndView.addObject("account", taiKhoan);
+
+			modelAndView.setViewName("login");
+
+		}
+
+		return modelAndView;
 	}
 }
