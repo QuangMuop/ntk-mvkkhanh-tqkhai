@@ -15,6 +15,7 @@
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}" />
 <c:set var="adsImagesFolder" value="${requestScope.AdsImagesFolder}" />
 <c:set var="dsQuangCao" value="${requestScope.DSQuangCao}" />
+<c:set var="toysController" value="${requestScope.ToysController}"/>
 
 <!--BEGIN .sidler-->
 <div class="slider_elegant group inner" id="slider">
@@ -58,7 +59,7 @@
 							<!--XUẤT TOP 10 ĐỒ CHƠI MỚI NHẤT-->
 							<c:forEach var="dcmn" items="${dsTopDoChoiMoiNhat}">
 								<li class="product"><a
-									href="/BabyShopUser/toy/detail?id=${dcmn.maDoChoi}">
+									href="${toysController}detail?id=${dcmn.maDoChoi}">
 										<div class="thumbnail">
 											<c:if test="${dcmn.giamGia > 0}">
 												<span class="on-sale"><c:out
@@ -90,7 +91,7 @@
 							<!--XUẤT TOP 10 ĐỒ CHƠI BÁN CHẠY NHẤT-->
 							<c:forEach var="dcbcn" items="${dsTopDoChoiBanChayNhat}">
 								<li class="product"><a
-									href="/BabyShopUser/toy/detail?id=${dcbcn.maDoChoi}">
+									href="${toysController}detail?id=${dcbcn.maDoChoi}">
 										<div class="thumbnail">
 											<c:if test="${dcbcn.giamGia > 0}">
 												<span class="on-sale"><c:out

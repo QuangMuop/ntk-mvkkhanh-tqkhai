@@ -110,7 +110,7 @@
                 <ul class="sub-menu">
                 	<c:if test="${account.getMaTaiKhoan() != null}">
                 		<li><a href="${accountsController}update">thay đổi thông tin</a></li>
-                		<li><a href="${accountsController}history">lịch sử mua
+                		<li><a href="${accountsController}orders-history">lịch sử mua
 									hàng </a></li>
 						<li><a href="${accountsController}cart">giỏ hàng </a></li>
 						<li><a href="${accountsController}login">đăng xuất </a></li>

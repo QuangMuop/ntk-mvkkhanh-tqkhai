@@ -89,4 +89,11 @@
 			value="Cập nhật tài khoản - Shop LEGO" />
 		<put-attribute name="content" value="/pages/content_account_details.jsp" />
 	</definition>
+	<!--PAGE: orders_history -->
+	<definition name="orders_history" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_orders_history.jsp" />
+		<put-attribute name="title"
+			value="Lịch sử mua hàng - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_orders_history.jsp" />
+	</definition>
 </tiles-definitions>
