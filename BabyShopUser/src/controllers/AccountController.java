@@ -515,4 +515,149 @@ public class AccountController {
 
 		return modelAndView;
 	}
+	
+	//Thêm đồ chơi vào giỏ hàng
+	@RequestMapping(method = RequestMethod.POST, value="/add-products")
+	protected ModelAndView addProducts(
+			@ModelAttribute("sanPham") Product product, BindingResult result,
+			@ModelAttribute("products") ArrayList<Product> products,
+			@RequestParam(value = "maDoChoi", required = false) String strMaDoChoi,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (strMaDoChoi != null && strMaDoChoi != "") {
+			long maDoChoi = Long.parseLong(strMaDoChoi);
+			DoChoiDAO doChoiDAO = new DoChoiDAO();
+			DoChoi doChoi = doChoiDAO.get(maDoChoi);
+			
+			boolean isDaCo = false;
+			for(int i = 0; i< products.size(); i++)
+			{
+				if(products.get(i).getDoChoi().getMaDoChoi() == doChoi.getMaDoChoi())
+				{
+					int soLuongMuaCu = products.get(i).getSoLuongMua();
+					int soLuongMuaMoi = soLuongMuaCu + product.getSoLuongMua();
+					products.get(i).setSoLuongMua(soLuongMuaMoi);
+					products.get(i).setTongTien(soLuongMuaMoi * doChoi.getGiaBanHienTai().intValueExact());
+					isDaCo = true;
+				}
+			}
+			if(isDaCo == false)
+			{
+				product.setDoChoi(doChoi);
+				long tongTien = doChoi.getGiaBanHienTai().intValueExact()
+						* product.getSoLuongMua();
+				product.setTongTien(tongTien);
+				products.add(product);
+			}
+			DoChoi dc = new DoChoi();
+			modelAndView.addObject("products", products);
+			modelAndView.addObject("doChoi", dc);
+
+			long thanhTien = 0;
+			for (int i = 0; i < products.size(); i++) {
+				thanhTien = thanhTien + products.get(i).getTongTien();
+			}
+
+			modelAndView.addObject("thanhTien", thanhTien);
+		}
+
+		modelAndView.setViewName("carts");
+
+		return modelAndView;
+	}
+	
+	//Xem giỏ hàng
+	@RequestMapping(method = GET, value="/carts")
+	protected ModelAndView carts(@ModelAttribute("login") Login login,
+			@ModelAttribute("account") TaiKhoan account,
+			@ModelAttribute("products") ArrayList<Product> products,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (account.getMaTaiKhoan() != null) {
+			if (products.size() != 0) {
+				modelAndView.setViewName("carts");
+				modelAndView.addObject("account", account);
+				modelAndView.addObject("products", products);
+
+				long thanhTien = 0;
+				for (int i = 0; i < products.size(); i++) {
+					thanhTien = thanhTien + products.get(i).getTongTien();
+				}
+
+				modelAndView.addObject("thanhTien", thanhTien);
+			} else {
+				modelAndView.setViewName("index");
+			}
+		} else {
+			TaiKhoan taiKhoan = new TaiKhoan();
+			modelAndView.addObject("account", taiKhoan);
+
+			modelAndView.setViewName("login");
+
+		}
+
+		return modelAndView;
+	}
+	
+	//Cập nhật giỏ hàng
+	@RequestMapping(method = RequestMethod.POST, value="/update-cart",produces = "application/json")
+	protected @ResponseBody
+	String updateCart(@ModelAttribute("products") ArrayList<Product> products,
+			@RequestBody String message, HttpServletRequest arg0,
+			HttpServletResponse arg1) throws JsonParseException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		List<JsonNode> listNode = mapper.readValue(message,
+				new TypeReference<List<JsonNode>>() {
+				});
+
+		if (products.size() == listNode.size()) {
+			for (int i = 0; i < listNode.size(); i++) {
+				JsonNode soLuongNode = listNode.get(i);
+
+				JsonNode valueNode = soLuongNode.path("soLuong");
+				String soLuong = valueNode.asText();
+
+				products.get(i).setSoLuongMua(Integer.parseInt(soLuong));
+
+				long tongTien = Integer.parseInt(soLuong)
+						* Long.parseLong(products.get(i).getDoChoi()
+								.getGiaBanHienTai()
+								+ "");
+				products.get(i).setTongTien(tongTien);
+			}
+		}
+
+		arg0.getSession().setAttribute("products", products);
+		return mapper.writeValueAsString("ABC");
+	}
+	
+	//Xóa 1 đồ chơi trong giỏ hàng
+	@RequestMapping(method = RequestMethod.POST, value = "/remove-toy", produces = "application/json")
+	protected @ResponseBody
+	String removeToy(@ModelAttribute("products") ArrayList<Product> products,
+			@RequestBody String message, HttpServletRequest arg0,
+			HttpServletResponse arg1) throws JsonParseException, IOException {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(message);
+		JsonNode doChoiNode = rootNode.path("maDoChoi");
+		long maDoChoi = doChoiNode.longValue();
+		
+		for (int j = 0; j < products.size(); j++) {
+			if (maDoChoi == products.get(j).getDoChoi().getMaDoChoi()) {
+				products.remove(j);
+			}
+		}
+		long thanhTien = 0;
+		for (int i = 0; i < products.size(); i++) {
+			thanhTien = thanhTien + products.get(i).getTongTien();
+		}
+		
+		Map<String,Object> messageResult = new HashMap<String,Object>(); 
+        messageResult.put("minicart", products.size());
+        messageResult.put("thanhTien", thanhTien);
+        return mapper.writeValueAsString(messageResult);    
+	}
 }
