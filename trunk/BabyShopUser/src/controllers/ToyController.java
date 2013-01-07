@@ -20,6 +20,7 @@ import pojos.DoChoi;
 import pojos.HinhAnhDoChoi;
 import pojos.LoaiDoChoi;
 import pojos.NhaSanXuat;
+import pojos.Product;
 import util.PagingHelper;
 import dao.BinhLuanDAO;
 import dao.DoChoiDAO;
@@ -37,6 +38,7 @@ public class ToyController {
 	@RequestMapping(method = GET, value = "/detail", params = { "id" })
 	protected ModelAndView detail(
 			@RequestParam(value = "id") String strId,
+			@ModelAttribute("sanPham") Product product,
 			HttpServletRequest arg0,
 			HttpServletResponse arg1) {
 		

@@ -13,6 +13,7 @@
 <c:set var="accountsController" value="${requestScope.AccountsController}"/>
 <!-- Login Account -->
 <c:set var="account" value="${sessionScope.account}" />
+<c:set var="products" value="${sessionScope.products}" />
 
 <!-- TOPBAR -->
 <div id="top">
@@ -26,7 +27,29 @@
         </ul>
     </div>
     <!-- .topbar-right -->
-    <div id="cart"> <a href="#"> <span class="minicart">3 sản phẩm </span> </a> </div>
+    <div id="cart"> 
+    	<a href="#"> <span class="minicart">3 sản phẩm </span> </a> 
+    </div>
+    <c:if test="${account.getMaTaiKhoan() != null}">
+			<c:if test="${products.size() != 0}">
+				<div id="cart">
+					<a href="${accountsController}carts"> <span class="minicart">${products.size()} sản phẩm </span>
+					</a>
+				</div>
+			</c:if>
+			<c:if test="${products.size() == 0}">
+				<div id="cart">
+					<a href="${homeController}index"> <span class="minicart">0 sản phẩm </span>
+					</a>
+				</div>
+			</c:if>
+		</c:if>
+		<c:if test="${account.getMaTaiKhoan() == null}">
+			<div id="cart">
+				<a href="${accountsController}login"> <span class="minicart">0 sản phẩm </span>
+				</a>
+			</div>
+	</c:if>
     <!-- #cart --> 
 
 </div>

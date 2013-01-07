@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="doChoi" value="${doChoi}" scope="page"/>
 <c:set var="dsBinhLuan" value="${dsBinhLuan}" scope="page"/>
@@ -13,7 +14,10 @@
 <c:set var="dsHinhAnhDoChoi" value="${dsHinhAnhDoChoi}" scope="page"/>
 <c:set var="avatarImagesFolder" value="${requestScope.AvatarImagesFolder}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
+<c:set var="accountsController" value="${requestScope.AccountsController}"/>
+
 <c:set var="account" value="${sessionScope.account}" />
+
 <div class="product">
     <div class="images">
         <div class="thumbnails">
@@ -40,11 +44,19 @@
         <h3 class="product-availability"> Tình trạng: <span><c:out value="${doChoi.tinhTrang}"/></span> </h3>
         <h3 class="product-views-count"> Lượt xem: <span><c:out value="${doChoi.soLuongXem}"/></span> </h3>
         <h3 class="sales"> Số lượng đã bán: <span><c:out value="${doChoi.soLuongBan}"/></span> </h3>
-        <form class="cart" method="post" action="do_choi.do?action=buy">
-            <input type="hidden" name="product-id" value="${doChoi.maDoChoi}"/>
-            <input maxlength="12" class="nice-textbox qty" size="4" value="1" name="quantity"/>
-            <button class="rectangular-button green add-to-cart" type="submit">Hốt ngay</button>
-        </form>
+       
+		<c:if test="${account.getMaTaiKhoan() != null}">
+	        <form:form modelAttribute="sanPham" class="cart" method="post"
+					action="${accountsController}add-products">
+					<fieldset>
+						<input type="hidden" name="maDoChoi" value="${doChoi.maDoChoi}" />
+						<form:input path="soLuongMua" maxlength="12"
+							class="nice-textbox qty" size="4" value="1" name="quantity" />
+						<input class="rectangular-button green add-to-cart" type="submit"
+							value="Mua ngay" />
+					</fieldset>
+				</form:form>
+        </c:if>
         <div id="tabs">
             <ul>
                 <li> <a href="#tabs-1">Thông tin sản phẩm</a> </li>
