@@ -5,6 +5,7 @@
 package dao;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import pojos.DoChoi;
@@ -168,5 +169,27 @@ public class DoChoiDAO extends AbstractDAO<DoChoi, Long>
         	crit.add(Restrictions.ge("giaBanHienTai", BigDecimal.valueOf(doChoiQuery.getGiaMin())));
         }
         crit.add(Restrictions.eq("daXoa", false));
+    }
+    
+    public List<DoChoi> layTop10DoChoiMoiNhat()
+    {	
+    	List<DoChoi> ds = null;
+        Session session = openSession();
+        try {
+        	Criteria crit = session.createCriteria(DoChoi.class);
+            crit.add(Restrictions.eq("daXoa", Boolean.FALSE));
+            crit.add(Restrictions.isNotNull("ngayTiepNhan"));
+            crit.add(Restrictions.ilike("tinhTrang", "Còn hàng"));
+            crit.addOrder(Order.desc("ngayTiepNhan"));
+            crit.setFirstResult(0);
+            crit.setMaxResults(10);
+            ds = crit.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
     }
 }

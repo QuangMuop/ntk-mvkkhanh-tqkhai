@@ -96,11 +96,18 @@
 			value="Lịch sử mua hàng - Shop LEGO" />
 		<put-attribute name="content" value="/pages/content_orders_history.jsp" />
 	</definition>
-	<!--PAGE: orders_history -->
+	<!--PAGE: carts -->
 	<definition name="carts" extends="Page">
 		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_carts.jsp" />
 		<put-attribute name="title"
 			value="Giỏ hàng - Shop LEGO" />
 		<put-attribute name="content" value="/pages/content_carts.jsp" />
+	</definition>
+	<!--PAGE: checkout -->
+	<definition name="checkout" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_checkout.jsp" />
+		<put-attribute name="title"
+			value="Thanh toán - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_checkout.jsp" />
 	</definition>
 </tiles-definitions>

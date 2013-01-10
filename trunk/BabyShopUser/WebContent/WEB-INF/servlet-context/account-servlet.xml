@@ -21,6 +21,10 @@
 				<prop key="/carts">accountController</prop>
 				<prop key="/update-cart">accountController</prop>
 				<prop key="/remove-toy">accountController</prop>
+				<prop key="/checkout">accountController</prop>
+				<prop key="/checkout-cart">accountController</prop>
+				<prop key="/checkout-paypal">accountController</prop>
+				<prop key="/checkout-result">accountController</prop>
 			</props>
 		</property>
 	</bean>

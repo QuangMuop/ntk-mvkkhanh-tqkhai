@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,15 +52,18 @@ import dao.TaiKhoanDAO;
 import pojos.BinhLuan;
 import pojos.ChiTietHoaDon;
 import pojos.DoChoi;
+import pojos.HoaDon;
 import pojos.LoaiTaiKhoan;
 import pojos.Login;
 import pojos.Product;
 import pojos.TaiKhoan;
 import pojos.TaiKhoanRegister;
+import pojos.ThanhToan;
+import pojos.TrangThaiDonHang;
 import util.DateUtil;
 import util.PagingHelper;
 
-@SessionAttributes({ "account", "products"})
+@SessionAttributes({ "account", "products", "thongTin"})
 @Controller
 public class AccountController {
 	@InitBinder
@@ -659,5 +663,211 @@ public class AccountController {
         messageResult.put("minicart", products.size());
         messageResult.put("thanhTien", thanhTien);
         return mapper.writeValueAsString(messageResult);    
+	}
+	
+	//Dắt tới trang thanh toán
+	@RequestMapping(method = GET, value="/checkout")
+	protected ModelAndView checkout(@ModelAttribute("login") Login login,
+			@ModelAttribute("thanhToan") ThanhToan thanhToan,
+			BindingResult result,
+			@ModelAttribute("products") ArrayList<Product> products,
+			@ModelAttribute("account") TaiKhoan account,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (account.getMaTaiKhoan() != null) {
+			modelAndView.setViewName("checkout");
+
+			modelAndView.addObject("account", account);
+			modelAndView.addObject("products", products);
+
+			long thanhTien = 0;
+			for (int i = 0; i < products.size(); i++) {
+				thanhTien = thanhTien + products.get(i).getTongTien();
+			}
+
+			modelAndView.addObject("thanhTien", thanhTien);
+		} else {
+			TaiKhoan taiKhoan = new TaiKhoan();
+			modelAndView.addObject("account", taiKhoan);
+
+			modelAndView.setViewName("login");
+
+		}
+
+		return modelAndView;
+	}
+	
+	//Thanh toán khi nhận hàng
+	@RequestMapping(method = RequestMethod.POST, value="/checkout-cart")
+	protected ModelAndView checkoutCart(@ModelAttribute("login") Login login,
+			@ModelAttribute("thanhToan") ThanhToan thanhToan,
+			BindingResult result,
+			@ModelAttribute("products") ArrayList<Product> products,
+			@ModelAttribute("account") TaiKhoan account,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (account.getMaTaiKhoan() != null) {
+			modelAndView.setViewName("checkout");
+			modelAndView.addObject("account", account);
+			modelAndView.addObject("products", products);
+
+			long thanhTien = 0;
+			for (int i = 0; i < products.size(); i++) {
+				thanhTien = thanhTien + products.get(i).getTongTien();
+			}
+
+			modelAndView.addObject("thanhTien", thanhTien);
+
+			HoaDon hoaDon = new HoaDon();
+			hoaDon.setDaThanhToan(false);
+			hoaDon.setDaXoa(false);
+			hoaDon.setDiaChiGiaoHang(thanhToan.getDiaChiNhanChinh());
+			hoaDon.setNgayCapNhat(new Date());
+			hoaDon.setNgayLap(new Date());
+			hoaDon.setTaiKhoan(account);
+			hoaDon.setTenKhachHang(thanhToan.getNguoiNhan());
+			hoaDon.setTongTien(BigDecimal.valueOf(thanhTien));
+			hoaDon.setTrangThaiDonHang(new TrangThaiDonHang(1, "Đã hoàn tất"));
+
+			HoaDonDAO hoaDonHelper = new HoaDonDAO();
+			ChiTietHoaDonDAO chiTietHoaDonHelper = new ChiTietHoaDonDAO();
+
+			hoaDonHelper.saveOrUpdate(hoaDon);
+
+			for (int i = 0; i < products.size(); i++) {
+				ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
+
+				chiTietHoaDon.setDaXoa(false);
+				chiTietHoaDon.setDoChoi(products.get(0).getDoChoi());
+				chiTietHoaDon.setDonGia(BigDecimal.valueOf(products.get(0)
+						.getTongTien()));
+				chiTietHoaDon.setHoaDon(hoaDon);
+				chiTietHoaDon.setNgayCapNhat(new Date());
+				chiTietHoaDon.setSoLuong(products.get(0).getSoLuongMua());
+
+				chiTietHoaDonHelper.saveOrUpdate(chiTietHoaDon);
+				
+				//Cập nhật số lượng đã bán và tồn
+				DoChoi doChoi = products.get(0).getDoChoi();
+				int oldSoLuongDaBan = doChoi.getSoLuongDaBan();
+				int oldSoLuongTon = doChoi.getSoLuongTon();
+				int newSoLuongDaBan = oldSoLuongDaBan + products.get(0).getSoLuongMua();
+				int newSoLuongTon = oldSoLuongTon - products.get(0).getSoLuongMua();
+				doChoi.setSoLuongDaBan(newSoLuongDaBan);
+				doChoi.setSoLuongTon(newSoLuongTon);
+				DoChoiDAO doChoiHelper = new DoChoiDAO();
+				doChoiHelper.saveOrUpdate(doChoi);
+			}
+			modelAndView.addObject("result", 1);
+			
+			//Xóa giỏ hàng
+			products.clear();
+			modelAndView.addObject("products", products);
+		} else {
+			TaiKhoan taiKhoan = new TaiKhoan();
+			modelAndView.addObject("account", taiKhoan);
+
+			modelAndView.setViewName("login");
+
+		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/checkout-paypal", produces = "application/json")
+	protected @ResponseBody
+	String checkoutPaypal(@ModelAttribute("account") TaiKhoan account,
+			@ModelAttribute("products") ArrayList<Product> products,
+			@RequestBody String message, HttpServletRequest arg0,
+			HttpServletResponse arg1) throws JsonParseException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = mapper.readValue(message,
+				new TypeReference<JsonNode>() {
+				});
+
+		JsonNode soLuongNode = node;
+		JsonNode valueNode = soLuongNode.path("hoTen");
+		String hoTen = valueNode.asText();
+		valueNode = soLuongNode.path("diaChi");
+		String diaChi = valueNode.asText();
+
+		ThanhToan thanhToan = new ThanhToan();
+		thanhToan.setDiaChiNhanChinh(diaChi);
+		thanhToan.setNguoiNhan(hoTen);
+
+		arg0.getSession().setAttribute("thongTin", thanhToan);
+		return mapper.writeValueAsString("ABC");
+	}
+	
+	@RequestMapping(method = GET, value="/checkout-result",params = { "state" })
+	protected ModelAndView checkoutPaypalResult(
+			@ModelAttribute("thongTin") ThanhToan thanhToan,
+			BindingResult result, @RequestParam(value = "state") String state,
+			@ModelAttribute("products") ArrayList<Product> products,
+			@ModelAttribute("account") TaiKhoan account,
+			HttpServletRequest arg0, HttpServletResponse arg1) {
+		ModelAndView modelAndView = new ModelAndView();
+		long thanhTien = 0;
+		for (int i = 0; i < products.size(); i++) {
+			thanhTien = thanhTien + products.get(i).getTongTien();
+		}
+
+		if (state.compareTo("success") == 0) {
+			HoaDon hoaDon = new HoaDon();
+			hoaDon.setDaThanhToan(true);
+			hoaDon.setDaXoa(false);
+			hoaDon.setDiaChiGiaoHang(thanhToan.getDiaChiNhanChinh());
+			hoaDon.setNgayCapNhat(new Date());
+			hoaDon.setNgayLap(new Date());
+			hoaDon.setTaiKhoan(account);
+			hoaDon.setTenKhachHang(thanhToan.getNguoiNhan());
+			hoaDon.setTongTien(BigDecimal.valueOf(thanhTien));
+			hoaDon.setTrangThaiDonHang(new TrangThaiDonHang(1, "Đã hoàn tất"));
+
+			HoaDonDAO hoaDonHelper = new HoaDonDAO();
+			ChiTietHoaDonDAO chiTietHoaDonHelper = new ChiTietHoaDonDAO();
+
+			hoaDonHelper.saveOrUpdate(hoaDon);
+
+			for (int i = 0; i < products.size(); i++) {
+				ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon();
+
+				chiTietHoaDon.setDaXoa(false);
+				chiTietHoaDon.setDoChoi(products.get(0).getDoChoi());
+				chiTietHoaDon.setDonGia(BigDecimal.valueOf(products.get(0)
+						.getTongTien()));
+				chiTietHoaDon.setHoaDon(hoaDon);
+				chiTietHoaDon.setNgayCapNhat(new Date());
+				chiTietHoaDon.setSoLuong(products.get(0).getSoLuongMua());
+
+				chiTietHoaDonHelper.saveOrUpdate(chiTietHoaDon);
+				
+				//Cập nhật số lượng đã bán và tồn
+				DoChoi doChoi = products.get(0).getDoChoi();
+				int oldSoLuongDaBan = doChoi.getSoLuongDaBan();
+				int oldSoLuongTon = doChoi.getSoLuongTon();
+				int newSoLuongDaBan = oldSoLuongDaBan + products.get(0).getSoLuongMua();
+				int newSoLuongTon = oldSoLuongTon - products.get(0).getSoLuongMua();
+				doChoi.setSoLuongDaBan(newSoLuongDaBan);
+				doChoi.setSoLuongTon(newSoLuongTon);
+				DoChoiDAO doChoiHelper = new DoChoiDAO();
+				doChoiHelper.saveOrUpdate(doChoi);
+			}
+
+			
+			//Xóa giỏ hàng
+			products.clear();
+			modelAndView.addObject("products", products);
+			modelAndView.setViewName("redirect:/home/index");
+		} else {
+
+			modelAndView.setViewName("checkout");
+			modelAndView.addObject("products", products);
+			modelAndView.addObject("thanhTien", thanhTien);
+		}
+
+		modelAndView.addObject("account", account);
+		return modelAndView;
 	}
 }
