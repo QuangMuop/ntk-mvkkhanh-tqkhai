@@ -7,7 +7,7 @@
 
 <script>
 function checkout(){
-	window.location = "/BabyShop/babyShop/checkout";
+	window.location = "checkout";
 }
 
 function update(size) {

@@ -131,7 +131,7 @@ public abstract class AbstractDAO<T, P extends Serializable>
     public List<T> getTopNPOJOsOrderedByField(int n, String field, boolean descending)
     {
         Session session = openSession();
-        String hql = String.format("select obj from %s obj where ((obj.%s != null) and (obj.daXoa = false)) order by obj.%s %s", getPOJOClass().getName(), field, field, descending ? "desc" : "");
+        String hql = String.format("select obj from %s obj where ((obj.%s IS NOT NULL) and (obj.daXoa = false)) order by obj.%s %s", getPOJOClass().getName(), field, field, descending ? "desc" : "");
         Query query = session.createQuery(hql).setMaxResults(n);
         List<T> list = query.list();
         session.close();
