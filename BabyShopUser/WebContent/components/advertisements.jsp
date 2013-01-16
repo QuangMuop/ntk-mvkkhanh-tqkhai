@@ -43,7 +43,7 @@ function increasePromotionClicks(maQuangCao)
 </script>
 
 <div id="ads-left" align="center"
-	style="width: 140px; height: 100%; position: fixed; top: 50px; left: 0px;">
+	style="width: 140px; height: 100%; position: fixed; top: 20px; left: 0px;">
 	<c:forEach var="qc" items="${dsQuangCao}">
 		<c:if test="${qc.viTri == 'left'}">
 			<a href="#" onClick="increasePromotionClicks(${qc.maQuangCao})"> <img width="100px" alt="ads"
@@ -55,7 +55,7 @@ function increasePromotionClicks(maQuangCao)
 
 
 <div id="ads-right" align="center"
-	style="width: 140px; height: 100%; position: fixed; top: 50px; right: 0px;">
+	style="width: 140px; height: 100%; position: fixed; top: 20px; right: 0px;">
 	<c:forEach var="qc" items="${dsQuangCao}">
 		<c:if test="${qc.viTri == 'right'}">
 			<a href="#" onClick="increasePromotionClicks(${qc.maQuangCao})"> <img width="100px" alt="ads"
