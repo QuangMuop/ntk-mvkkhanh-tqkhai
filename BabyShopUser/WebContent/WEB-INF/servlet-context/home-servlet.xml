@@ -14,6 +14,7 @@
 				<prop key="/paymentGuide">homeController</prop>
 				<prop key="/promotion">homeController</prop>
 				<prop key="/contact">homeController</prop>
+				<prop key="/about">homeController</prop>
 				<prop key="/search">homeController</prop>
 				<prop key="/goAdvancedSearch">homeController</prop>
 				<prop key="/advancedSearch">homeController</prop>

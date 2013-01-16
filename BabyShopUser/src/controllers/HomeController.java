@@ -123,6 +123,14 @@ public class HomeController
         return modelAndView;
     }
     
+    @RequestMapping(method = GET, value = "/about")
+    public ModelAndView about()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("about");
+        return modelAndView;
+    }
+    
     @RequestMapping(method = GET, value = "/search", params = { "trang",
             "searchText" })
     protected ModelAndView search(

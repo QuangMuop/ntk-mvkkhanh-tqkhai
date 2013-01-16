@@ -10,6 +10,7 @@
 <c:set var="dsBinhLuanMoiNhat" value="${requestScope.dsBinhLuanMoiNhat}"/>
 <c:set var="avatarImagesFolder" value="${requestScope.AvatarImagesFolder}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
+<c:set var="homeController" value="${requestScope.HomeController}"/>
 <div class="group inner footer_cols_4">
     <div class="widget">
         <h3>Bình luận mới</h3>
@@ -35,12 +36,8 @@
         <h3>Liên Kết</h3>
         <div class="menu-widget-footer-container">
             <ul class="menu" id="menu-widget-footer">
-                <li class="menu-2-cols"><a href="trang_chu.do">Trang Chủ</a></li>
-                <li class="menu-2-cols"><a href="do_choi.do?action=views_by_groups">Mua sắm</a></li>
-                <li class="menu-2-cols"><a href="#">Quy định</a></li>
-                <li class="menu-2-cols"><a href="#">Hỗ trợ</a></li>
-                <li class="menu-2-cols"><a href="#">Tin khyến mãi</a></li>
-                <li class="menu-2-cols"><a href="#">Liên hệ</a></li>
+                <li class="menu-2-cols"><a href="${homeController}about">Về chúng tôi</a></li>
+                <li class="menu-2-cols"><a href="${homeController}contact">Liên hệ & hỗ trợ</a></li>
             </ul>
         </div>
     </div>

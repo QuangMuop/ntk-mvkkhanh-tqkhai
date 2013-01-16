@@ -41,6 +41,13 @@
 			value="Liên hệ - Shop LEGO" />
 		<put-attribute name="content" value="/pages/content_contact.jsp" />
 	</definition>
+	<!--PAGE: about -->
+	<definition name="about" extends="Page">
+		<put-attribute name="additional_css_and_js" value="/pages/css_and_js_index.jsp" />
+		<put-attribute name="title"
+			value="Về chúng tôi - Shop LEGO" />
+		<put-attribute name="content" value="/pages/content_about.jsp" />
+	</definition>
 	<!--PAGE: product_details -->
 	<definition name="product_details" extends="Page">
 		<put-attribute name="additional_css_and_js"
