@@ -17,6 +17,7 @@
 
 <!-- TOPBAR -->
 <div id="top">
+	
     <div class="topbar-left">
         <p>Shop đồ chơi LEGO <a href="${homeController}/index">http://www.shoplego.vn</a> </p>
     </div>
@@ -150,7 +151,7 @@
                     -->
                 </ul>
             </li>
-            <li> <a href="${homeController}/contact">liên hệ</a></li>
+            <li> <a href="${homeController}contact">liên hệ</a></li>
         </ul>
     </div>
     <!-- END NAV --> 

@@ -69,7 +69,15 @@
                 <h3 class="product-madein"> Xuất xứ: <span><c:out value="${doChoi.xuatXu.tenXuatXu}"/></span> </h3>
                 <div class="socials">
                     <h2>Chia sẻ mạng xã hội</h2>
-                    <a href="#" class="socials facebook">facebook</a> </div>
+
+                    <!-- AddThis Button BEGIN -->
+					<div class="addthis_toolbox addthis_default_style ">
+					<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+					<a class="addthis_counter addthis_pill_style"></a>
+					</div>
+					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50f6f549007789db"></script>
+					<!-- AddThis Button END -->
+               </div>
             </div>
             <div id="tabs-2">
                 <div class="comment-area">

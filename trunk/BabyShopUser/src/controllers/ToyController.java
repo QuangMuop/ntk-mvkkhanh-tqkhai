@@ -52,6 +52,10 @@ public class ToyController {
         }
         
         DoChoi doChoi = doChoiDAO.get(maDoChoi);
+
+    	doChoi.setSoLuongXem(doChoi.getSoLuongXem() + 1);
+    	doChoiDAO.saveOrUpdate(doChoi);
+    	
         List<BinhLuan> dsBinhLuan = binhLuanDao.getDsBinhLuanTheoMaDoChoi(maDoChoi);
         List<DoChoi> dsDoChoiLienQuan = doChoiDAO.getRelatedDoChois(doChoi, 5);
         List<HinhAnhDoChoi> dsHinhAnhDoChoi = hinhAnhDoChoiDAO.getDsHinhAnhTheoMaDoChoi(maDoChoi);
