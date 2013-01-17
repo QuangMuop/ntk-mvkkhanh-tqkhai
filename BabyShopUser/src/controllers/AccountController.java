@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 
@@ -286,7 +290,7 @@ public class AccountController {
 			@RequestParam(value = "image", required = false) MultipartFile image,
 			@ModelAttribute("account") TaiKhoan account,
 			HttpServletRequest arg0, HttpServletResponse arg1)
-			throws IOException {
+			throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException {
 		arg1.setContentType("text/html;charset=UTF-8");
 		arg0.setCharacterEncoding("UTF-8");
 
@@ -300,16 +304,31 @@ public class AccountController {
 		String fileName = "";     
         //Nếu user có update hình
 		if(image.getSize() != 0){
-			fileName = image.getOriginalFilename();
 			
-			taikhoan.setAvatar(fileName);
-			
-			try{ 
-				File newFiles= new File(arg0.getSession().getServletContext().getRealPath("/uploads/avatars/"), fileName); 
-				FileUtils.writeByteArrayToFile(newFiles,image.getBytes());
-				} catch(IOException e){ 
-					e.printStackTrace();
-				} 
+			InputStream configStream = arg0
+	                .getServletContext()
+	                .getResourceAsStream("/WEB-INF/config/global-config.properties");
+	        Properties _prop = new Properties();
+	        _prop.load(configStream);
+	        String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
+	        
+			String mimeType = Magic.getMagicMatch(image.getBytes(), false).getMimeType();
+			if (mimeType.startsWith("image")) {
+				fileName = image.getOriginalFilename();
+				taikhoan.setAvatar(fileName);
+				
+				try{ 
+					File newFiles= new File(arg0.getSession().getServletContext().getRealPath(avatarImagesFolder), fileName); 
+					FileUtils.writeByteArrayToFile(newFiles,image.getBytes());
+					} catch(IOException e){ 
+						e.printStackTrace();
+					} 
+			}
+			else
+			{
+				info.add("Ảnh đại diện phải là hình: có đuôi dạng .jpg, .png, .jpeg !");
+				state = 0;
+			}
 		}
 		else
 		{

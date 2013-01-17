@@ -119,10 +119,26 @@ public class ReportProvider {
 			String reportName = reportNode.getChildText("name");
 			String reportDisplayName = reportNode.getChildText("display-name");
 			String reportLink = reportNode.getChildText("link");
+			
+			String reportParamName = reportNode.getChildText("param-name");
+			Element reportParamValues = reportNode.getChild("param-values");
+			List<Element> listParamValues = reportParamValues.getChildren("param-value");
+			List<String> params = new ArrayList<String>();
+			if(listParamValues.size() != 0)
+			{
+				for(Element paramValue: listParamValues)
+				{
+					String value = paramValue.getText();
+			        params.add(value);
+				}		
+			}
+			
 			Report report = new Report();
 			report.setName(reportName);
 			report.setLink(reportLink);
 			report.setDisplayName(reportDisplayName);
+			report.setParamName(reportParamName);
+			report.setParamValues(params);
 			listReport.add(report);
 			System.out.println(reportName);
 			System.out.println(reportLink);
@@ -142,10 +158,26 @@ public class ReportProvider {
 			if(reportName.equals(name)){
 				String reportDisplayName = reportNode.getChildText("display-name");
 				String reportLink = reportNode.getChildText("link");
+				String reportParamName = reportNode.getChildText("param-name");
+				Element reportParamValues = reportNode.getChild("param-values");
+				List<Element> listParamValues = reportParamValues.getChildren("param-value");
+				List<String> params = new ArrayList<String>();
+				if(listParamValues.size() != 0)
+				{
+					for(Element paramValue: listParamValues)
+					{
+						String value = paramValue.getText();
+				        params.add(value);
+					}		
+				}
+				
 				Report report = new Report();
 				report.setName(reportName);
 				report.setLink(reportLink);
 				report.setDisplayName(reportDisplayName);
+				report.setParamName(reportParamName);
+				report.setParamValues(params);
+
 				return report;
 			}
 		}

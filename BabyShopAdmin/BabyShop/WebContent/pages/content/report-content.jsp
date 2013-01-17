@@ -17,29 +17,32 @@
                     </header>
                     <section class="tab-content">
                         <table class="report">
-                            <tr>
-                            	<td>
-                            		<select id="selectBaoCao" name="selectBaoCao" style="margin: 0 auto">
-										<option selected="selected" value="-1">---Chọn báo cáo---</option>
-                                            <c:forEach var="report" items="${listReport}" varStatus="status">                                           
-                                                    <option value="${report.getName()}">${report.getDisplayName()}</option>
+                        	<c:forEach var="report" items="${listReport}" varStatus="status">
+                        		<tr>
+                        			<td>${report.getDisplayName()}</td>
+                        			<td>
+                        				<select id="selectThamSo_${report.getName()}" name="selectThamSo_${report.getName()}" style="margin: 0 auto">
+										<option selected="selected" value="-1">---Chọn tham số ${report.getParamName()}---</option>                                         
+                                             <c:forEach var="paramValue" items="${report.getParamValues()}" varStatus="status">                                           
+                                                    <option value="${paramValue}">${paramValue}</option>
                                             </c:forEach>
-                            		</select>
-                            	</td>
-                            	<td>
-                            		<select id="selectKieuFile" name="selectKieuFile" style="margin: 0 auto">
-										<option selected="selected" value="-1">---Chọn loại file---</option>                                         
-                                            <option value="xls">EXCEL</option>
-                                            <option value="pdf">PDF</option>
-                                            <option value="html">HTML</option>
-                                            <option value="csv">CSV</option>
-                                            <option value="rtf">RTF</option>
-                            		</select>
-                            	</td>
-                            	<td>
-                            	<a class="button" href="javascript:download()">Download</a>
-                            	</td>
-                            </tr>
+                            			</select>
+                        			</td>
+                        			<td>
+	                        			<select id="selectKieuFile_${report.getName()}" name="selectKieuFile_${report.getName()}" style="margin: 0 auto">
+											<option selected="selected" value="-1">---Chọn loại file---</option>                                         
+	                                            <option value="xls">EXCEL</option>
+	                                            <option value="pdf">PDF</option>
+	                                            <option value="html">HTML</option>
+	                                            <option value="csv">CSV</option>
+	                                            <option value="rtf">RTF</option>
+	                            		</select>
+                            		</td>
+                            		<td>
+                            			<a class="button" href="javascript:download('${report.getName()}')">Download</a>
+                            		</td>
+                        		</tr>
+                        	</c:forEach>     
                         </table>
                     </section>
                 </div>

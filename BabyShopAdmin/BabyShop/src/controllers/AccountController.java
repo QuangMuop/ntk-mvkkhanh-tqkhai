@@ -22,6 +22,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -147,7 +152,7 @@ public class AccountController{
 	
 	@RequestMapping(method = RequestMethod.POST)
 	 public ModelAndView update(@RequestParam(value="avatar",required=false) MultipartFile avatar, @ModelAttribute("taiKhoan") TaiKhoan taiKhoan, BindingResult result, HttpServletRequest arg0,
-	    		HttpServletResponse arg1) throws IOException{
+	    		HttpServletResponse arg1) throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException{
 		arg1.setContentType("text/html;charset=UTF-8");
 		arg0.setCharacterEncoding("UTF-8");
 		
@@ -160,16 +165,30 @@ public class AccountController{
         String fileName = "";     
         //Nếu user có update hình
 		if(avatar.getSize() != 0){
-			fileName = avatar.getOriginalFilename();
 			
-			taiKhoan.setAvatar(fileName);
+			InputStream configStream = arg0
+	                .getServletContext()
+	                .getResourceAsStream("/WEB-INF/config/global-config.properties");
+	        Properties _prop = new Properties();
+	        _prop.load(configStream);
+	        String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
 			
-			try{ 
-				File newFiles= new File(arg0.getSession().getServletContext().getRealPath("/uploads/avatars/"), fileName); 
-				FileUtils.writeByteArrayToFile(newFiles,avatar.getBytes());
-				} catch(IOException e){ 
-					e.printStackTrace();
-				} 
+	        String mimeType = Magic.getMagicMatch(avatar.getBytes(), false).getMimeType();
+			if (mimeType.startsWith("image")) {
+				fileName = avatar.getOriginalFilename();
+				taiKhoan.setAvatar(fileName);
+				
+				try{ 
+					File newFiles= new File(arg0.getSession().getServletContext().getRealPath(avatarImagesFolder), fileName); 
+					FileUtils.writeByteArrayToFile(newFiles,avatar.getBytes());
+					} catch(IOException e){ 
+						e.printStackTrace();
+					} 
+			}
+			else
+			{
+				taiKhoan.setAvatar(oldTaiKhoan.getAvatar());
+			}
 		}
 		else
 		{
@@ -183,7 +202,7 @@ public class AccountController{
 		{
 			taiKhoan.setNgaySinh(oldTaiKhoan.getNgaySinh());
 		}
-		
+		taiKhoan.setMatKhau(oldTaiKhoan.getMatKhau());
         boolean kq = TaiKhoanDAO.capNhatTaiKhoan(taiKhoan);
        
         
@@ -217,7 +236,7 @@ public class AccountController{
 	
 	@RequestMapping(method = RequestMethod.POST)
     public ModelAndView submit(@RequestParam(value="avatar",required=false) MultipartFile avatar, @ModelAttribute("taiKhoan") TaiKhoan taiKhoan, BindingResult result, HttpServletRequest arg0,
-    		HttpServletResponse arg1) throws IOException{
+    		HttpServletResponse arg1) throws IOException, MagicParseException, MagicMatchNotFoundException, MagicException{
 		arg1.setContentType("text/html;charset=UTF-8");
 		arg0.setCharacterEncoding("UTF-8");
 		
@@ -230,16 +249,25 @@ public class AccountController{
         
         //Nếu user có up hình
 		if(avatar.getSize() != 0){
-			fileName = avatar.getOriginalFilename();
+			InputStream configStream = arg0
+	                .getServletContext()
+	                .getResourceAsStream("/WEB-INF/config/global-config.properties");
+	        Properties _prop = new Properties();
+	        _prop.load(configStream);
+	        String avatarImagesFolder = _prop.getProperty("AvatarImagesFolder");
 			
-			taiKhoan.setAvatar(fileName);
-			
-			try{ 
-				File newFiles= new File(arg0.getSession().getServletContext().getRealPath("/uploads/avatars/"), fileName); 
-				FileUtils.writeByteArrayToFile(newFiles,avatar.getBytes());
-				} catch(IOException e){ 
-					e.printStackTrace();
-				} 
+	        String mimeType = Magic.getMagicMatch(avatar.getBytes(), false).getMimeType();
+			if (mimeType.startsWith("image")) {
+				fileName = avatar.getOriginalFilename();
+				taiKhoan.setAvatar(fileName);
+				
+				try{ 
+					File newFiles= new File(arg0.getSession().getServletContext().getRealPath(avatarImagesFolder), fileName); 
+					FileUtils.writeByteArrayToFile(newFiles,avatar.getBytes());
+					} catch(IOException e){ 
+						e.printStackTrace();
+					} 
+			}
 		}	
 		
 		taiKhoan.setDaXoa(false);
