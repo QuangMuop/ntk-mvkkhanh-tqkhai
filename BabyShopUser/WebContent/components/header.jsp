@@ -65,15 +65,15 @@
     <!-- START SEARCHFORM -->
         <div id="quick-search-form">
             <input type="text" id="search-text" name="searchText" value="" placeholder="Tên đồ chơi...">
-            <input type="button" value="" id="search-button" onclick="basicSearch()">          
+            <input type="button" value="" id="search-button" onclick="basicSearch('${homeController}')">          
         </div>
         <script>
-        	function basicSearch()
+        	function basicSearch(homeController)
         	{
             	//Initialiaze page = 1;
             	var trang = 1;
         		var searchText = $('#search-text').val();
-        		var url = 'search?searchText=' + searchText + '&trang=' + trang;
+        		var url = homeController + 'search?searchText=' + searchText + '&trang=' + trang;
         		document.location = url;
             }
         </script>

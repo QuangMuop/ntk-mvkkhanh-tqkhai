@@ -91,6 +91,7 @@
     	    				+ '</li>'
     	    		);
     				$("#nComments").text('Nhận xét (' + data.nComments + ')');
+    				$("#comment-content").val('');
                 } 			
     		},
     		error : function() {
