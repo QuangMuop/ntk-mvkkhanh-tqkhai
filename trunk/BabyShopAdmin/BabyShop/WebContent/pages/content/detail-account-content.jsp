@@ -43,14 +43,7 @@
                                                 <label class="control-label" for="input">${taiKhoan.maTaiKhoan}</label>
                                                 <form:hidden path="maTaiKhoan" id="inputMaTaiKhoan" name="inputMaTaiKhoan" value="${taiKhoan.maTaiKhoan}" disabled="disabled"/>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="input">Mật khẩu</label>
-                                            <div class="controls">
-                                            	<input type="password" value="${taiKhoan.matKhau}" class="input-xlarge" disabled="disabled" />
-                                            	<form:hidden path="matKhau" id="inputMatKhau" name="inputMatKhau" value="${taiKhoan.matKhau}" disabled="disabled"/>                                              
-                                            </div>
-                                        </div>
+                                        </div>                                              
                                         <div class="control-group">
                                             <label class="control-label" for="select">Loại tài khoản</label>
                                             <div class="controls">

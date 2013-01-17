@@ -2,12 +2,88 @@
 <reports>
 	<report>
 		<name>top_do_choi_ban_chay</name>
-		<display-name>Top 10 đồ chơi bán chạy</display-name>
+		<display-name>Top đồ chơi bán chạy</display-name>
 		<link>babyshop/top_do_choi_ban_chay</link>
+		<param-name>soluong</param-name>
+		<param-values>
+			<param-value>5</param-value>
+			<param-value>10</param-value>
+			<param-value>20</param-value>
+			<param-value>30</param-value>
+			<param-value>50</param-value>
+		</param-values>
 	</report>
 	<report>
 		<name>top_do_choi_moi_nhat</name>
-		<display-name>Top 10 đồ chơi mới nhất</display-name>
+		<display-name>Top đồ chơi mới nhất</display-name>
 		<link>babyshop/top_do_choi_moi_nhat</link>
+		<param-name>soluong</param-name>
+		<param-values>
+			<param-value>5</param-value>
+			<param-value>10</param-value>
+			<param-value>20</param-value>
+			<param-value>30</param-value>
+			<param-value>50</param-value>
+		</param-values>
+	</report>
+	<report>
+		<name>doanh_thu_thang_theo_do_tuoi_nguoi_dung</name>
+		<display-name>Doanh thu tháng theo độ tuổi người dùng</display-name>
+		<link>babyshop/doanh_thu_thang_theo_do_tuoi_nguoi_dung</link>
+		<param-name>thang</param-name>
+		<param-values>
+			<param-value>1</param-value>
+			<param-value>2</param-value>
+			<param-value>3</param-value>
+			<param-value>4</param-value>
+			<param-value>5</param-value>
+			<param-value>6</param-value>
+			<param-value>7</param-value>
+			<param-value>8</param-value>
+			<param-value>9</param-value>
+			<param-value>10</param-value>
+			<param-value>11</param-value>
+			<param-value>12</param-value>		
+		</param-values>
+	</report>
+	<report>
+		<name>doanh_thu_thang_theo_nguoi_dung</name>
+		<display-name>Doanh thu tháng theo người dùng</display-name>
+		<link>babyshop/doanh_thu_thang_theo_nguoi_dung</link>
+		<param-name>thang</param-name>
+		<param-values>
+			<param-value>1</param-value>
+			<param-value>2</param-value>
+			<param-value>3</param-value>
+			<param-value>4</param-value>
+			<param-value>5</param-value>
+			<param-value>6</param-value>
+			<param-value>7</param-value>
+			<param-value>8</param-value>
+			<param-value>9</param-value>
+			<param-value>10</param-value>
+			<param-value>11</param-value>
+			<param-value>12</param-value>		
+		</param-values>
+	</report>
+	<report>
+		<name>doanh_thu_thang_theo_tung_do_choi</name>
+		<display-name>Doanh thu tháng theo từng đồ chơi</display-name>
+		<link>babyshop/doanh_thu_thang_theo_tung_do_choi</link>
+		<param-name>thang</param-name>
+		<param-values>
+			<param-value>1</param-value>
+			<param-value>2</param-value>
+			<param-value>3</param-value>
+			<param-value>4</param-value>
+			<param-value>5</param-value>
+			<param-value>6</param-value>
+			<param-value>7</param-value>
+			<param-value>8</param-value>
+			<param-value>9</param-value>
+			<param-value>10</param-value>
+			<param-value>11</param-value>
+			<param-value>12</param-value>		
+		</param-values>
 	</report>
 </reports>

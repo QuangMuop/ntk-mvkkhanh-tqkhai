@@ -49,16 +49,19 @@ public class ReportController {
 	@RequestMapping(value = "/{reportName}", method = GET, params={"type"})
 	public void getReport(HttpServletRequest arg0, HttpServletResponse response,
 			@PathVariable("reportName") String reportName,
-			@RequestParam(value="type", required = true) String type) 
+			@RequestParam(value="type", required = true) String type,
+			@RequestParam(value="param", required = true) String paramValue) 
 			throws Exception{
 		InputStream reportMapping = arg0.getServletContext().getResourceAsStream("/resources/reportsMapping.xml");
-		HashMap<String, String> params = new HashMap();
-        params.put("page", "1");
-        params.put("soluong", "10");
-        
+
 		_report = new Report();		
 		_report = _reportProvider.getReportByName(reportName, reportMapping);
+		
+		HashMap<String, String> params = new HashMap();
+        params.put(_report.getParamName(), paramValue);
+		
 		_reportProvider.getReport(_report, type, params, response);
+
 	}
 	
 }
