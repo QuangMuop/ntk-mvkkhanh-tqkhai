@@ -49,8 +49,7 @@ public class HomeController
                 10, "ngayTiepNhan", false);
         */
         List<DoChoi> dsTopDoChoiMoiNhat = doChoiDAO.layTop10DoChoiMoiNhat();
-        List<DoChoi> dsTopDoChoiBanChayNhat = doChoiDAO
-                .getTopNPOJOsOrderedByField(10, "soLuongDaBan", false);
+        List<DoChoi> dsTopDoChoiBanChayNhat = doChoiDAO.layTop10DoChoiBanChayNhat();
 
         modelAndView.addObject("dsTopDoChoiMoiNhat", dsTopDoChoiMoiNhat);
         modelAndView
@@ -80,10 +79,8 @@ public class HomeController
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("promotion");
 
-        List<DoChoi> dsTopDoChoiMoiNhat = doChoiDAO.getTopNPOJOsOrderedByField(
-                10, "ngayTiepNhan", false);
-        List<DoChoi> dsTopDoChoiBanChayNhat = doChoiDAO
-                .getTopNPOJOsOrderedByField(10, "soLuongDaBan", false);
+        List<DoChoi> dsTopDoChoiMoiNhat = doChoiDAO.layTop10DoChoiMoiNhat();
+        List<DoChoi> dsTopDoChoiBanChayNhat = doChoiDAO.layTop10DoChoiBanChayNhat();
 
         modelAndView.addObject("dsTopDoChoiMoiNhat", dsTopDoChoiMoiNhat);
         modelAndView
@@ -164,7 +161,7 @@ public class HomeController
         }
 
         long soLuongTrang;
-        if (soLuongKetQua % soLuongDoChoiTrenTrang != 0)
+        if (soLuongKetQua <= soLuongDoChoiTrenTrang)
         {
             soLuongTrang = 1;
         }
@@ -290,7 +287,7 @@ public class HomeController
         }
 
         long soLuongTrang;
-        if (soLuongKetQua % soLuongDoChoiTrenTrang != 0)
+        if (soLuongKetQua <= soLuongDoChoiTrenTrang)
         {
             soLuongTrang = 1;
         }

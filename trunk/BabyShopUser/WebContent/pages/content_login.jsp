@@ -22,12 +22,13 @@
 					<td>
 					<input type="password" name="password" class="nice-textbox" style="width: 230px;" placeholder="Mật khẩu" />
 				</tr>
+				<!--
 				<tr>
 					<td><form:checkbox class="checkbox" path="remember"
 							name="remember" /> Ghi nhớ đăng nhập <br /> <a href="#">Quên
 							mật khẩu</a>|<a href="/BabyShop/babyShop/register">Đăng ký tài khoản</a></td>
 				</tr>
-
+				-->
 				<c:if test="${state == 0}">
 					<tr align="center">
 						<td><font color="red"><strong><b>Tên tài
