@@ -2,8 +2,11 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/shared-res/js/kendo.dataviz.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/shared-res/css/kendoui/kendo.dataviz.min.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/shared-res/js/jquery-ui-1.9.2.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/shared-res/css/blitzer/jquery-ui-1.9.2.min.css"/>
 <script>
 function f_ToptenSellingToys(){
+	waitingDialog({});
 	$.ajax({
 		type : "POST",
 		url : "chart?",
@@ -55,6 +58,7 @@ function f_ToptenSellingToys(){
 				}
 			});
 			$(".column").height($(document).height());
+			closeWaitingDialog();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('Có lỗi');
@@ -63,6 +67,7 @@ function f_ToptenSellingToys(){
 }
 
 function f_ToysSoldPerDay(){
+	waitingDialog({});
 	$.ajax({
 		type : "POST",
 		url : "chart?",
@@ -118,6 +123,7 @@ function f_ToysSoldPerDay(){
 				}
 			});
 			$(".column").height($(document).height());
+			closeWaitingDialog();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			alert('Có lỗi');
@@ -125,7 +131,37 @@ function f_ToysSoldPerDay(){
 	});
 }
 
+function waitingDialog(waiting) {
+	$("#loadingScreen").html('Please wait...');
+	$("#loadingScreen").dialog('option', 'title', 'Loading');
+	$("#loadingScreen").dialog('open');
+}
+function closeWaitingDialog() {
+	$("#loadingScreen").dialog('close');
+}
+
                 $(document).ready(function() {
+
+                	// create the loading window and set autoOpen to false
+                	$("#loadingScreen").dialog({
+                		autoOpen: false,	
+                		dialogClass: "loadingScreenWindow",
+                		closeOnEscape: false,
+                		draggable: false,
+                		width: 460,
+                		minHeight: 50,
+                		modal: true,
+                		buttons: {},
+                		resizable: false,
+                		open: function() {
+                			$('body').css('overflow','hidden');
+                		},
+                		close: function() {
+                			// reset overflow
+                			$('body').css('overflow','auto');
+                		}
+                	}); // end of dialog
+                	
                 	$("#topOfPage").click(function(){
         				$.scrollTo( 0, 500);
         				return false;
