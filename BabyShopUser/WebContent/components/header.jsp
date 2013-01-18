@@ -138,7 +138,14 @@
                 		<li><a href="${accountsController}update">thay đổi thông tin</a></li>
                 		<li><a href="${accountsController}orders-history">lịch sử mua
 									hàng </a></li>
-						<li><a href="${accountsController}cart">giỏ hàng </a></li>
+						<li>
+							<c:if test="${products.size() != 0}">
+								<a href="${accountsController}carts">giỏ hàng </a>
+							</c:if>
+							<c:if test="${products.size() == 0}">
+								<a href="#" title="Chưa có đồ chơi trong giỏ">giỏ hàng </a>
+							</c:if>
+						</li>
 						<li><a href="${accountsController}login">đăng xuất </a></li>
                 	</c:if>
                 	<c:if test="${account.getMaTaiKhoan() == null}">
