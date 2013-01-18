@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pojos.LoaiTaiKhoan;
 import pojos.QuangCao;
 import pojos.QuangCaoOld;
+import pojos.TaiKhoan;
 
 
 
@@ -127,6 +128,57 @@ public class AdvertisementController {
         if(kq == true)
         {
         	modelAndView.addObject("quangCao", quangCao);
+            modelAndView.addObject("kq", true);
+        }
+        else
+        {
+        	modelAndView.addObject("kq", false);
+        }
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(method = GET, value="/add") 
+	protected ModelAndView add(@ModelAttribute("quangCao") QuangCao quangCao, BindingResult result, HttpServletRequest arg0,
+    		HttpServletResponse arg1)
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("currentMenu", "advertisementAdd");
+        modelAndView.setViewName("add-advertisement");
+                
+        return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/submit")
+	public ModelAndView submit(@RequestParam(value="hinhAnh",required=false) MultipartFile hinhAnh, @ModelAttribute("quangCao") QuangCao quangCao, BindingResult result, HttpServletRequest arg0,
+			HttpServletResponse arg1) throws IOException, JDOMException {
+		arg1.setContentType("text/html;charset=UTF-8");
+		arg0.setCharacterEncoding("UTF-8");
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("add-advertisement");
+		modelAndView.addObject("currentMenu", "advertisementAdd");
+		
+		String fileName = "";     
+        //Nếu user có update hình
+		if(hinhAnh.getSize() != 0){
+			fileName = hinhAnh.getOriginalFilename();
+			
+			quangCao.setHinhAnh(fileName);
+			
+			try{ 
+				File newFiles= new File(arg0.getSession().getServletContext().getRealPath("/uploads/ads/"), fileName); 
+				FileUtils.writeByteArrayToFile(newFiles,hinhAnh.getBytes());
+				} catch(IOException e){ 
+					e.printStackTrace();
+				} 
+		}
+		quangCao.setSoLuongClick(0);
+		
+		boolean kq = QuangCaoDAO.themQuangCao(quangCao);
+		
+		if(kq == true)
+        {
             modelAndView.addObject("kq", true);
         }
         else

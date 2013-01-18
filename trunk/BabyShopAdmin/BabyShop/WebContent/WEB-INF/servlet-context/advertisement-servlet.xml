@@ -12,6 +12,8 @@
 				<prop key="/list">advertisementController</prop>
 				<prop key="/detail">advertisementController</prop>
 				<prop key="/update">advertisementController</prop>
+				<prop key="/add">advertisementController</prop>
+				<prop key="/submit">advertisementController</prop>
 			</props>
 		</property>
 	</bean>
