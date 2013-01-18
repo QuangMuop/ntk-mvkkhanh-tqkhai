@@ -124,7 +124,7 @@
 		<div id="payment">
 
 			<input type="radio" class="radio-button" name="pay-method"
-				onclick="show(1)" value="0" />Thanh toán trực tuyến <br /> <input
+				onclick="show(1); checkoutPaypal();" value="0" />Thanh toán trực tuyến <br /> <input
 				type="radio" class="radio-button" name="pay-method"
 				onclick="show(2)" value="0" checked="checked" />Thanh toán khi nhận
 			hàng
@@ -165,7 +165,7 @@
 					border="0" name="submit"
 					alt="PayPal - The safer, easier way to pay online!" id="online"
 					style="visibility: hidden; position: relative;"
-					onclick="checkoutPaypal()" /> <img alt="" border="0"
+					 /> <img alt="" border="0"
 					src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif"
 					width="1" height="1" />
 
