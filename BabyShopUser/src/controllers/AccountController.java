@@ -481,7 +481,7 @@ public class AccountController {
 					.getMaTaiKhoan(), trang, soLuongDonHangTrenTrang);
 			soLuongKetQua = hoaDonHelper.demSoLuongDonHangTheoTaiKhoan(taiKhoan.getMaTaiKhoan());
 			int soLuongTrang;
-			if (soLuongKetQua % soLuongDonHangTrenTrang != 0)
+			if (soLuongKetQua <= soLuongDonHangTrenTrang)
 	        {
 				soLuongTrang = 1;
 	        }

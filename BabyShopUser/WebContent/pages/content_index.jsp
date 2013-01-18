@@ -15,6 +15,7 @@
 <c:set var="adsImagesFolder" value="${requestScope.AdsImagesFolder}" />
 <c:set var="dsQuangCao" value="${requestScope.DSQuangCao}" />
 <c:set var="toysController" value="${requestScope.ToysController}"/>
+<c:set var="account" value="${sessionScope.account}" />
 
 <!--BEGIN .sidler-->
 <div class="slider_elegant group inner" id="slider">
@@ -76,7 +77,12 @@
 									</span>
 								</a>
 									<div class="buttons">
-										<a href="#" class="add-to-cart">Mua ngay</a>
+										<c:if test="${account.getMaTaiKhoan() != null}">
+											<a href="${toysController}detail?id=${dcmn.maDoChoi}" class="add-to-cart">Mua ngay</a>
+										</c:if>
+										<c:if test="${account.getMaTaiKhoan() == null}">
+											<a href="${toysController}detail?id=${dcmn.maDoChoi}" class="add-to-cart">Xem</a>
+										</c:if>
 									</div></li>
 							</c:forEach>
 						</ul>

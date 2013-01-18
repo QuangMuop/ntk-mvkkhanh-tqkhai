@@ -11,6 +11,8 @@
 <c:set var="dsNhaSanXuat" value="${requestScope.dsNhaSanXuat}"/>
 <c:set var="loaiDoChoi" value="${requestScope.loaiDoChoi}"/>
 <c:set var="nhaSanXuat" value="${requestScope.nhaSanXuat}"/>
+<c:set var="maxPrice" value="${requestScope.maxPrice}"/>
+<c:set var="minPrice" value="${requestScope.minPrice}"/>
 <c:set var="dsDoChoi" value="${requestScope.dsDoChoi}"/>
 <c:set var="soLuongKetQua" value="${soLuongKetQua}"/>
 <c:set var="soLuongDoChoiTrenTrang" value="${soLuongDoChoiTrenTrang}"/>
@@ -30,32 +32,49 @@
                 <div class="horizontal-product-list">
                     <ul>
                         <c:forEach var="doChoi" items="${dsDoChoi}">
-                            <li><a href="detail?id=${doChoi.maDoChoi}">
-                                    <div class="thumbnail">
-                                        <c:if test="${doChoi.giamGia > 0}">
-                                            <span class="on-sale"><c:out value="-${doChoi.giamGia} %"/></span>
-                                        </c:if>
-                                        <img alt="IMG" src="${pageContext.request.contextPath}${toyImagesFolder}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
-                                    <span class="product-price"><fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" /></span><span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span></a>
+                            <li>
+                           		<a href="detail?id=${doChoi.maDoChoi}">
+	                                   <div class="thumbnail">
+	                                       <c:if test="${doChoi.giamGia > 0}">
+	                                           <span class="on-sale"><c:out value="-${doChoi.giamGia} %"/></span>
+	                                       </c:if>
+	                                       <img alt="IMG" src="${pageContext.request.contextPath}${toyImagesFolder}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
+	                                   <span class="product-price">
+	                                   		<c:if test="${doChoi.tinhTrang == 'Còn hàng' }">
+	                                   			<fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" />
+	                                   		</c:if>
+	                                   		<c:if test="${doChoi.tinhTrang == 'Hết hàng'}">
+	                                   			<strike style='color:black'>
+												    <span style='color:red'><b>Hết hàng</b></span>
+												  </strike>
+	                                   		</c:if>
+	                                   		<c:if test="${doChoi.tinhTrang == 'Ngừng bán'}">
+	                                   			<strike style='color:black'>
+												    <span style='color:red'><b>Ngừng bán</b></span>
+												  </strike>
+	                                   		</c:if>
+	                                   </span>
+	                                   <span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span>
+                                 </a>
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
                 <c:if test="${soLuongTrang > 1}">
                     <div class="pagination"> 
-                        <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&trang=1">Trang đầu</a>     
+                        <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&maxPrice=${maxPrice}&minPrice=${minPrice}&trang=1">Trang đầu</a>     
                         <c:forEach var="tra" items="${pageNumbers}">
                             <c:if test="${tra == trang}">
                                 <span class="selected"><c:out value="${tra}"/></span> 
                             </c:if>
                             <c:if test="${tra != trang}">
-                                <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&trang=${tra}">
+                                <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&maxPrice=${maxPrice}&minPrice=${minPrice}&trang=${tra}">
                                     <c:out value="${tra}"/>
                                 </a> 
                             </c:if>
                         </c:forEach>
 
-                        <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&trang=${soLuongTrang}">Trang cuối</a> 
+                        <a href="list?loaiDoChoi=${loaiDoChoi.maLoaiDoChoi}&nhaSanXuat=${nhaSanXuat.maNhaSanXuat}&maxPrice=${maxPrice}&minPrice=${minPrice}&trang=${soLuongTrang}">Trang cuối</a> 
                     </div>
                 </c:if>
                 <div class="border-line"></div>

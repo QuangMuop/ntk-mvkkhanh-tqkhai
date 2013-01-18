@@ -138,7 +138,7 @@ public class DoChoiDAO extends AbstractDAO<DoChoi, Long>
     
     public void searchByInstanceCriteria(Criteria crit, DoChoiQuery doChoiQuery)
     {
-        if(doChoiQuery.getTenDoChoi() != ""){
+        if(doChoiQuery.getTenDoChoi() != "" && doChoiQuery.getTenDoChoi() != null){
         	Disjunction or = Restrictions.disjunction();
         	or.add(Restrictions.ilike("tenDoChoi", "%" + doChoiQuery.getTenDoChoi() + "%"));
         	or.add(Restrictions.ilike("tenDoChoi", doChoiQuery.getTenDoChoi() + "%"));
@@ -181,6 +181,28 @@ public class DoChoiDAO extends AbstractDAO<DoChoi, Long>
             crit.add(Restrictions.isNotNull("ngayTiepNhan"));
             crit.add(Restrictions.ilike("tinhTrang", "Còn hàng"));
             crit.addOrder(Order.desc("ngayTiepNhan"));
+            crit.setFirstResult(0);
+            crit.setMaxResults(10);
+            ds = crit.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    
+    public List<DoChoi> layTop10DoChoiBanChayNhat()
+    {	
+    	List<DoChoi> ds = null;
+        Session session = openSession();
+        try {
+        	Criteria crit = session.createCriteria(DoChoi.class);
+            crit.add(Restrictions.eq("daXoa", Boolean.FALSE));
+            crit.add(Restrictions.isNotNull("ngayTiepNhan"));
+            crit.add(Restrictions.ilike("tinhTrang", "Còn hàng"));
+            crit.addOrder(Order.desc("soLuongDaBan"));
             crit.setFirstResult(0);
             crit.setMaxResults(10);
             ds = crit.list();

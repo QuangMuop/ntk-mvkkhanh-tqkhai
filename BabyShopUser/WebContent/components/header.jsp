@@ -110,10 +110,10 @@
                     </li>
                     <li> <a href="#">giá</a>
                         <ul class="sub-menu">
-                            <li><a href="do_choi.do?action=views_by_groups?minPrice=10000&maxPrice=99000">10,000đ - 99,000đ</a></li>
-                            <li><a href="do_choi.do?action=views_by_groups?minPrice=100000&maxPrice=499000">100,000đ - 499,000đ</a></li>
-                            <li><a href="do_choi.do?action=views_by_groups?minPrice=500000&maxPrice=999000">500,000đ - 999,000đ</a></li>
-                            <li><a href="do_choi.do?action=views_by_groups?minPrice=1000000">&gt; 1,000,000đ</a></li>
+                            <li><a href="${toysController}list?minPrice=10000&maxPrice=99000">10,000đ - 99,000đ</a></li>
+                            <li><a href="${toysController}list?minPrice=100000&maxPrice=499000">100,000đ - 499,000đ</a></li>
+                            <li><a href="${toysController}list?minPrice=500000&maxPrice=999000">500,000đ - 999,000đ</a></li>
+                            <li><a href="${toysController}list?minPrice=1000000&maxPrice=-1">&gt; 1,000,000đ</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -127,7 +127,9 @@
             <li> <a href="${homeController}promotion">khuyến mãi<span class="sf-sub-indicator"> »</span></a>
                 <ul class="sub-menu">
                     <li><a href="${homeController}promotion">sản phẩm khuyến mãi</a></li>
+                    <!--
                     <li><a href="#">đăng ký nhận tin (Chưa có hoặc sẽ bỏ)</a></li>
+                    -->
                 </ul>
             </li>
             <li> <a href="#">tài khoản<span class="sf-sub-indicator"> »</span></a>

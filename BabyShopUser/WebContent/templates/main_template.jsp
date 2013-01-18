@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shared-css/reset.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shared-css/style.css"/>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.2.js"></script>
         <title>
             <tiles:insertAttribute name="title"/>
         </title>

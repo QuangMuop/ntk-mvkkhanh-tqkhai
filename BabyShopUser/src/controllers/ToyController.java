@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pojos.BinhLuan;
 import pojos.DoChoi;
+import pojos.DoChoiQuery;
 import pojos.HinhAnhDoChoi;
 import pojos.LoaiDoChoi;
 import pojos.NhaSanXuat;
@@ -73,6 +74,8 @@ public class ToyController {
 			@RequestParam(value = "loaiDoChoi", required = false) String strLoaiDoChoi,
 			@RequestParam(value = "nhaSanXuat", required = false) String strNhaSanXuat,
 			@RequestParam(value = "trang", required = false) String strTrang,
+			@RequestParam(value = "minPrice", required = false) String strMinPrice,
+			@RequestParam(value = "maxPrice", required = false) String strMaxPrice,
 			HttpServletRequest arg0,
 			HttpServletResponse arg1) {
 		
@@ -81,7 +84,7 @@ public class ToyController {
 		
 		int trang = 1;
 		int soLuongDoChoiTrenTrang = 20;
-		int soLuongKetQua = 0;
+		long soLuongKetQua = 0;
 		if(strTrang != null && strTrang != "")
 		{
 			trang = Integer.parseInt(strTrang);
@@ -110,12 +113,31 @@ public class ToyController {
             modelAndView.addObject("dsDoChoi", dsDoChoi);
 		}
 		
+		if(strMinPrice != null && strMinPrice != "" && strMaxPrice != null && strMaxPrice != "")
+		{
+			long minPrice = Long.parseLong(strMinPrice);
+			long maxPrice = Long.parseLong(strMaxPrice);
+			
+            DoChoiQuery doChoiQuery = new DoChoiQuery();
+            doChoiQuery.setGiaMax(maxPrice);
+            doChoiQuery.setGiaMin(minPrice);
+            DoChoiDAO doChoiDAO = new DoChoiDAO();
+            List<DoChoi> dsDoChoi = doChoiDAO.advancedSearchDoChoi(trang,
+                    soLuongDoChoiTrenTrang, doChoiQuery);
+
+            soLuongKetQua = doChoiDAO.countAdvancedSearchDoChoi(doChoiQuery);
+            modelAndView.addObject("dsDoChoi", dsDoChoi);
+            modelAndView.addObject("minPrice", minPrice);
+            modelAndView.addObject("maxPrice", maxPrice);
+      
+		}
+		
 		modelAndView.addObject("soLuongKetQua", soLuongKetQua);
 		modelAndView.addObject("trang", trang);
 		modelAndView.addObject("soLuongDoChoiTrenTrang", soLuongDoChoiTrenTrang);
 
-		int soLuongTrang;
-		if (soLuongKetQua % soLuongDoChoiTrenTrang != 0)
+		long soLuongTrang;
+		if (soLuongKetQua <= soLuongDoChoiTrenTrang)
         {
 			soLuongTrang = 1;
         }

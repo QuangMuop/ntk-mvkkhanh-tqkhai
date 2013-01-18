@@ -45,7 +45,7 @@
         <h3 class="product-views-count"> Lượt xem: <span><c:out value="${doChoi.soLuongXem}"/></span> </h3>
         <h3 class="sales"> Số lượng đã bán: <span><c:out value="${doChoi.soLuongDaBan}"/></span> </h3>
        
-		<c:if test="${account.getMaTaiKhoan() != null}">
+		<c:if test="${account.getMaTaiKhoan() != null && doChoi.tinhTrang == 'Còn hàng'}">
 	        <form:form modelAttribute="sanPham" class="cart" method="post"
 					action="${accountsController}add-products">
 					<fieldset>

@@ -16,9 +16,10 @@
 <c:set var="pageNumbers" value="${pageNumbers}"/>
 <c:set var="toyImagesFolder" value="${requestScope.ToyImagesFolder}"/>
 <h2>Tìm kiếm đồ chơi</h2>
-<form action="#" method="get" id="search-form">
+<form action="search" method="get" id="search-form">
     <div class="search-div">
-        <input type="hidden" name="action" value="basicSearch"/>
+        <!--<input type="hidden" name="action" value="basicSearch"/>-->
+        <input type="hidden" name="trang" value="1"/>
         <input type="text" name="searchText" placeholder="Tên đồ chơi" value="${searchText}" class="nice-textbox"/>
         <button id="btnSearch" class="rectangular-button">Tìm Kiếm</button>
         <a href="goAdvancedSearch"> Tìm kiếm nâng cao</a>
@@ -33,10 +34,11 @@
             Tìm thấy <span class="n-results"><c:out value="${soLuongKetQua}"/></span> kết quả cho từ khóa: <c:out value="${searchText}"/>
 
         </p>
+        <!--
         <p>
             Xếp theo:<a href="#"> Giá cao đến thấp</a>|<a href="#"> Giá thấp đến cao</a>|<a href="#"> Mức độ phổ biến</a>|<a href="#"> Mới nhất</a>
         </p>
-
+		-->
         <div class="horizontal-product-list">
             <ul>
                 <c:forEach var="doChoi" items="${dsDoChoiTimKiem}">
@@ -44,7 +46,22 @@
                             <div class="thumbnail">
                                 <c:if test="${doChoi.giamGia > 0}"><span class="on-sale"><c:out value="-${doChoi.giamGia} %"/></span></c:if>
                                 <img alt="IMG" src="${pageContext.request.contextPath}${toyImagesFolder}<c:out value="${doChoi.hinhAnhHienThiChinh}"/>"/></div>
-                            <span class="product-price"><fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" /></span><span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span></a>
+                            	<span class="product-price">
+                                  		<c:if test="${doChoi.tinhTrang == 'Còn hàng' }">
+                                  			<fmt:formatNumber value="${doChoi.giaBanHienTai}" pattern="#,### VNĐ" />
+                                  		</c:if>
+                                  		<c:if test="${doChoi.tinhTrang == 'Hết hàng'}">
+                                  			<strike style='color:black'>
+										    <span style='color:red'><b>Hết hàng</b></span>
+										  </strike>
+                                  		</c:if>
+                                  		<c:if test="${doChoi.tinhTrang == 'Ngừng bán'}">
+                                  			<strike style='color:black'>
+										    <span style='color:red'><b>Ngừng bán</b></span>
+										  </strike>
+                                  		</c:if>
+                                  </span>
+                            	<span class="product-name"><c:out value="${doChoi.tenDoChoi}"/></span></a>
                     </li>
                 </c:forEach>
             </ul>
