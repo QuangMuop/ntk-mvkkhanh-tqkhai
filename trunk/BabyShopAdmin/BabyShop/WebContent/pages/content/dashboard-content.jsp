@@ -14,6 +14,7 @@
                         <h2>BIỂU ĐỒ</h2>
                     </header>
                     <section class="tab-content">
+                    	<div id="loadingScreen"></div>
                     	<div id="chart" class="k-content">
 				            <div class="chart-wrapper">
 				                <div id="toysSoldPerDay"></div>
