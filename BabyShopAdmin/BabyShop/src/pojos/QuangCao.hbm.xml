@@ -6,7 +6,7 @@
     <class name="pojos.QuangCao" table="quang_cao">
         <id name="maQuangCao" type="long">
             <column name="ma_quang_cao" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="tenQuangCao" type="string">
             <column name="ten_quang_cao" length="50" />

@@ -64,10 +64,11 @@
                         <li><a href="/BabyShop/comment/list?page=1" class="${currentMenu == 'commentList'?'current':''}">Danh sách bình luận</a></li>
                     </ul>
                 </li>
-                <li class="${(currentMenu == 'advertisementList' || currentMenu == 'advertisementDetail')?'current':''}">
+                <li class="${(currentMenu == 'advertisementList' || currentMenu == 'advertisementDetail' || currentMenu == 'advertisementAdd')?'current':''}">
                		<a href="#"><span class="icon-advertisement"></span>Quản lý quảng cáo</a>
 					<ul>
                         <li><a href="/BabyShop/advertisement/list" class="${currentMenu == 'advertisementList'?'current':''}">Danh sách quảng cáo</a></li>
+                        <li><a href="/BabyShop/advertisement/add" class="${currentMenu == 'advertisementAdd'?'current':''}">Thêm quảng cáo</a></li>
                     </ul>
                 </li>
                 <li class="${(currentMenu == 'reportList')?'current':''}"><a href="/BabyShop/report/list" class="no-submenu"><span class="icon-report"></span>Báo cáo thống kê</a></li>

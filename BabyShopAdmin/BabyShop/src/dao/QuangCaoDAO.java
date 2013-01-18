@@ -138,4 +138,22 @@ public class QuangCaoDAO {
         }
         return true;
     }
+	
+	public static boolean themQuangCao(QuangCao qc) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(qc);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            //Log the exception
+            transaction.rollback();
+            System.err.println(ex);
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
+    }
 }
