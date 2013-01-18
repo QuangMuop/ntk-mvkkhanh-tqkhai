@@ -4,164 +4,168 @@
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. -->
-    <project basedir="." default="war" name="BabyShop">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../Downloads/Compressed/eclipse"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
-    <path id="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath">
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/annotations-api.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-ant.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-ha.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-tribes.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/ecj-3.7.2.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/el-api.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jasper-el.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jasper.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jsp-api.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/servlet-api.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-api.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-coyote.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-dbcp.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-es.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-fr.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-ja.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-jdbc.jar"/>
-        <pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-util.jar"/>
-    </path>
-    <path id="Web App Libraries.libraryclasspath">
-        <pathelement location="WebContent/WEB-INF/lib/antlr-2.7.7.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/commons-digester-2.0.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/commons-io-2.4.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/dom4j-1.6.1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/hibernate-commons-annotations-4.0.1.Final.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/hibernate-core-4.1.8.Final.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jackson-annotations-2.1.1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jackson-core-2.1.1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jackson-databind-2.1.1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/javassist-3.15.0-GA.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jboss-logging-3.1.0.GA.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jcl-over-slf4j-1.5.8.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jdom-2.0.4.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jersey-client-1.16.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jersey-core-1.16.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jersey-json-1.16.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jersey-server-1.16.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jersey-servlet-1.16.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jstl-api-1.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.aop-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.asm-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.aspects-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.beans-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.context-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.context.support-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.core-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.expression-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.instrument-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.instrument.tomcat-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.jdbc-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.jms-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.orm-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.oxm-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.test-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.transaction-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.web-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.web.portlet-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.web.servlet-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/org.springframework.web.struts-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/postgresql-9.1-901.jdbc4.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/slf4j-api-1.5.8.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/slf4j-jdk14-1.5.8.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/spring-security-config-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/spring-security-core-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/spring-security-crypto-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/spring-security-taglibs-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/spring-security-web-3.1.3.RELEASE.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-api-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-compat-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-core-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-jsp-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-servlet-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-servlet-wildcard-2.2.2.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/tiles-template-2.2.2.jar"/>
-    </path>
-    <path id="EAR Libraries.libraryclasspath"/>
-    <path id="jackson-2.1.1.userclasspath">
-        <pathelement location="../../JavaUserLibrary/jackson-2.1.1/jackson-annotations-2.1.1.jar"/>
-        <pathelement location="../../JavaUserLibrary/jackson-2.1.1/jackson-core-2.1.1.jar"/>
-        <pathelement location="../../JavaUserLibrary/jackson-2.1.1/jackson-databind-2.1.1.jar"/>
-    </path>
-    <path id="jdom-2.0.4.userclasspath">
-        <pathelement location="../../JavaUserLibrary/jdom-2.0.4/jdom-2.0.4.jar"/>
-    </path>
-    <path id="jersey-1.16.userclasspath">
-        <pathelement location="../../JavaUserLibrary/jersey-1.16/jersey-client-1.16.jar"/>
-        <pathelement location="../../JavaUserLibrary/jersey-1.16/jersey-core-1.16.jar"/>
-        <pathelement location="../../JavaUserLibrary/jersey-1.16/jersey-json-1.16.jar"/>
-        <pathelement location="../../JavaUserLibrary/jersey-1.16/jersey-server-1.16.jar"/>
-        <pathelement location="../../JavaUserLibrary/jersey-1.16/jersey-servlet-1.16.jar"/>
-    </path>
-    <path id="spring-3.1.3.userclasspath">
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.asm-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.beans-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.context-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.core-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.expression-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.web.servlet-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-3.1.3/org.springframework.web-3.1.3.RELEASE.jar"/>
-    </path>
-    <path id="spring-security-3.1.3.userclasspath">
-        <pathelement location="../../JavaUserLibrary/spring-security-3.1.3/spring-security-config-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-security-3.1.3/spring-security-core-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-security-3.1.3/spring-security-crypto-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-security-3.1.3/spring-security-taglibs-3.1.3.RELEASE.jar"/>
-        <pathelement location="../../JavaUserLibrary/spring-security-3.1.3/spring-security-web-3.1.3.RELEASE.jar"/>
-    </path>
-    <path id="upload.userclasspath">
-        <pathelement location="../../JavaUserLibrary/upload/commons-fileupload-1.2.2.jar"/>
-        <pathelement location="../../JavaUserLibrary/upload/commons-io-2.4.jar"/>
-    </path>
-    <path id="BabyShop.classpath">
-        <pathelement location="WebContent/WEB-INF/classes"/>
-        <path refid="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath"/>
-        <path refid="Web App Libraries.libraryclasspath"/>
-        <path refid="EAR Libraries.libraryclasspath"/>
-        <path refid="jackson-2.1.1.userclasspath"/>
-        <path refid="jdom-2.0.4.userclasspath"/>
-        <path refid="jersey-1.16.userclasspath"/>
-        <path refid="spring-3.1.3.userclasspath"/>
-        <path refid="spring-security-3.1.3.userclasspath"/>
-        <path refid="upload.userclasspath"/>
-    </path>
-    
-    <target name="clean">
-        <delete dir="dist" />
-        <delete dir="build" />
-    </target>
+<project basedir="." default="war" name="BabyShop">
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../../../Downloads/Compressed/eclipse" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+	<path id="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath">
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/annotations-api.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-ant.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-ha.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina-tribes.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/catalina.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/ecj-3.7.2.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/el-api.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jasper-el.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jasper.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/jsp-api.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/servlet-api.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-api.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-coyote.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-dbcp.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-es.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-fr.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-i18n-ja.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-jdbc.jar" />
+		<pathelement location="E:/Software/Apache Tomcat/apache-tomcat-7.0.33/lib/tomcat-util.jar" />
+	</path>
+	<path id="Web App Libraries.libraryclasspath">
+		<pathelement location="WebContent/WEB-INF/lib/antlr-2.7.7.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/commons-beanutils-1.8.0.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/commons-digester-2.0.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/commons-fileupload-1.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/commons-io-2.4.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/dom4j-1.6.1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/hibernate-commons-annotations-4.0.1.Final.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/hibernate-core-4.1.8.Final.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jackson-annotations-2.1.1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jackson-core-2.1.1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jackson-databind-2.1.1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/javassist-3.15.0-GA.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jboss-logging-3.1.0.GA.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jcl-over-slf4j-1.5.8.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jdom-2.0.4.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jersey-client-1.16.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jersey-core-1.16.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jersey-json-1.16.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jersey-server-1.16.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jersey-servlet-1.16.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jmimemagic-0.1.0.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jstl-api-1.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jstl-impl-1.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.aop-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.asm-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.aspects-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.beans-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.context-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.context.support-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.core-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.expression-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.instrument-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.instrument.tomcat-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.jdbc-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.jms-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.orm-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.oxm-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.test-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.transaction-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.web-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.web.portlet-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.web.servlet-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/org.springframework.web.struts-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/postgresql-9.1-901.jdbc4.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/slf4j-api-1.5.8.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/slf4j-jdk14-1.5.8.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/spring-security-config-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/spring-security-core-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/spring-security-crypto-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/spring-security-taglibs-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/spring-security-web-3.1.3.RELEASE.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-api-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-compat-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-core-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-jsp-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-servlet-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-servlet-wildcard-2.2.2.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/tiles-template-2.2.2.jar" />
+	</path>
+	<path id="EAR Libraries.libraryclasspath" />
+	<path id="jackson-2.1.1.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/jackson-2.1.1/jackson-annotations-2.1.1.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jackson-2.1.1/jackson-core-2.1.1.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jackson-2.1.1/jackson-databind-2.1.1.jar" />
+	</path>
+	<path id="jdom-2.0.4.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/jdom-2.0.4/jdom-2.0.4.jar" />
+	</path>
+	<path id="jersey-1.16.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/jersey-1.16/jersey-client-1.16.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jersey-1.16/jersey-core-1.16.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jersey-1.16/jersey-json-1.16.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jersey-1.16/jersey-server-1.16.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/jersey-1.16/jersey-servlet-1.16.jar" />
+	</path>
+	<path id="spring-3.1.3.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.asm-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.beans-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.context-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.core-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.expression-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.web.servlet-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-3.1.3/org.springframework.web-3.1.3.RELEASE.jar" />
+	</path>
+	<path id="spring-security-3.1.3.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-security-3.1.3/spring-security-config-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-security-3.1.3/spring-security-core-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-security-3.1.3/spring-security-crypto-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-security-3.1.3/spring-security-taglibs-3.1.3.RELEASE.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/spring-security-3.1.3/spring-security-web-3.1.3.RELEASE.jar" />
+	</path>
+	<path id="upload.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/upload/commons-fileupload-1.2.2.jar" />
+		<pathelement location="../../../../Documents/JavaUserLibrary/upload/commons-io-2.4.jar" />
+	</path>
+	<path id="jmimemagic-0.1.0.userclasspath">
+		<pathelement location="../../../../Documents/JavaUserLibrary/jmimemagic-0.1.0/jmimemagic-0.1.0.jar" />
+	</path>
+	<path id="BabyShop.classpath">
+		<pathelement location="WebContent/WEB-INF/classes" />
+		<path refid="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath" />
+		<path refid="Web App Libraries.libraryclasspath" />
+		<path refid="EAR Libraries.libraryclasspath" />
+		<path refid="jackson-2.1.1.userclasspath" />
+		<path refid="jdom-2.0.4.userclasspath" />
+		<path refid="jersey-1.16.userclasspath" />
+		<path refid="spring-3.1.3.userclasspath" />
+		<path refid="spring-security-3.1.3.userclasspath" />
+		<path refid="upload.userclasspath" />
+		<path refid="jmimemagic-0.1.0.userclasspath" />
+	</path>
+	<target name="clean">
+		<delete dir="dist" />
+		<delete dir="build" />
+	</target>
 
-    <target name="init">
-        <mkdir dir="build/classes" />
-        <mkdir dir="dist" />
-    </target>
+	<target name="init">
+		<mkdir dir="build/classes" />
+		<mkdir dir="dist" />
+	</target>
 
-    <target name="compile" depends="init">
-        <javac destdir="build/classes" debug="true" encoding="utf-8" srcdir="src" includeantruntime="false">
-            <classpath refid="BabyShop.classpath" />
-        </javac>
-    </target>
+	<target name="compile" depends="init">
+		<javac destdir="build/classes" debug="true" encoding="utf-8" srcdir="src" includeantruntime="false">
+			<classpath refid="BabyShop.classpath" />
+		</javac>
+	</target>
 
-    <target name="war" depends="compile">
-        <war destfile="dist/BabyShop.war" webxml="WebContent/WEB-INF/web.xml">
-            <fileset dir="WebContent" />
-            <lib dir="WebContent/WEB-INF/lib" />
-            <classes dir="build/classes" />
-        </war>
-    </target>
+	<target name="war" depends="compile">
+		<war destfile="dist/BabyShop.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent" />
+			<lib dir="WebContent/WEB-INF/lib" />
+			<classes dir="build/classes" />
+		</war>
+	</target>
 </project>
